@@ -1,4 +1,4 @@
-<template >
+<!-- <template >
   <v-card style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
     <v-row no-gutters>
       <v-col>
@@ -8,9 +8,22 @@
     </v-row>
 
     <v-row no-gutters>
-      <v-col>
-        <v-text-field v-model="search" solo prepend-inner-icon="mdi-magnify" style=" flex: 1;"
+      <v-col cols="9">
+        <v-text-field v-model="search" solo prepend-inner-icon="mdi-magnify"
           label="Search for category, name, keyword, etc." single-line></v-text-field>
+      </v-col>
+      <v-col>
+        <div class="my-5 ml-8">Sort by:</div>
+      </v-col>
+      <v-col class="mx-1">
+        <v-select label="Select Year" :items="[2000, 2001, 2002, 2003, 2004, 2004, 2005]" variant="solo">
+        </v-select>
+      </v-col>
+      <v-col>
+        <v-select label="Select Month"
+          :items="['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', ' September', 'October', 'November', 'December']"
+          variant="solo">
+        </v-select>
       </v-col>
     </v-row>
   </v-card>
@@ -83,10 +96,10 @@
     </template>
     <template v-slot:item.actions="{ item }">
       <v-icon size="small" class="me-2" @click="editItem(item.raw)">
-        mdi-pencil
+        mdi-square-edit-outline
       </v-icon>
-      <v-icon size="small" @click="deleteItem(item.raw)">
-        mdi-delete
+      <v-icon size="small" color="red" @click="deleteItem(item.raw)">
+        mdi-trash-can-outline
       </v-icon>
     </template>
     <template v-slot:no-data>
@@ -231,4 +244,32 @@ export default {
 .v-data-table__td.v-data-table-column--align-start.v-data-table__th.v-data-table__th {
   background-color: #F7F7FB;
 }
-</style>
+</style> -->
+
+
+<template>
+  <v-menu>
+    <template v-slot:activator="{ props }">
+      <v-btn v-bind="props" class="ma-2" variant="text" icon="mdi-account-circle-outline" align-end>
+      </v-btn>
+    </template>
+    <v-list>
+      <v-list-item v-for="(item, index) in items" :key="index" :value="index">
+        <v-list-item-title>{{ item.title }}</v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-menu>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    items: [
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me 2' },
+    ],
+  }),
+}
+</script>

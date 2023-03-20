@@ -25,13 +25,19 @@
 
   <v-app-bar>
 
-    <v-app-bar-title>{{ $route.meta.title || "Default title" }}</v-app-bar-title>
+    <v-app-bar-title>{{ $route.meta.title || "Default title" }}
+    </v-app-bar-title>
+
+    <!-- <v-btn class="ma-2" variant="text" icon="mdi-account-circle-outline" align-end @click="dropDown"></v-btn> -->
+    <profile />
+
   </v-app-bar>
 
   <v-main
     style="--v-layout-left:56px; --v-layout-right:0px; --v-layout-top:0px; --v-layout-bottom:0px; background-color: #F7F7FB;"></v-main>
 </template>
 <script setup>
+import profile from '@/components/profile.vue'
   //
 </script>
 <script>
@@ -46,6 +52,12 @@ export default {
         { title: 'SUMMARY REPORT', icon: 'mdi-poll' },
       ],
       rail: true,
+    }
+  },
+
+  methods: {
+    dropDown() {
+      alert('drop down')
     }
   },
 }

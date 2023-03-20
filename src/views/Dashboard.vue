@@ -1,15 +1,16 @@
 <template>
+    <h1 class="thisH1">Dashboard</h1>
     <v-layout>
         <v-container>
-            <v-row justify ="center">
-                    <v-col align="center">
+            <v-row justify="center">
+                <v-col align="center">
                     <v-col cols="8">
-                        
+
                         <v-card class="mb-10 pa-3">
-                            <BarGraph/>
+                            <BarGraph />
                         </v-card>
                     </v-col>
-                    
+
 
                     <v-row justify="center">
                         <v-col cols="4" class="pt-12">
@@ -37,10 +38,10 @@
                                 <ActionProvidedPieGraph />
                             </v-card>
                         </v-col>
-                        
+
                     </v-row>
                 </v-col>
-                
+
             </v-row>
         </v-container>
     </v-layout>
@@ -54,4 +55,13 @@ import ReasonForVisitPieGraph from '@/components/dashboard/ReasonForVisitPieGrap
 import ActionProvidedPieGraph from '@/components/dashboard/ActionProvidedPieGraph.vue';
 
 </script>
+
+<style>
+.thisH1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+</style>
   
