@@ -1,6 +1,6 @@
 <template >
     <h1 class="pl-10 mb-10">Client Data</h1>
-    <v-card style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
+    <v-sheet style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
         <v-row no-gutters>
             <v-col>
                 <v-toolbar-title class="text-black; text-bold " style="font-weight: bold;">What are you looking
@@ -27,7 +27,7 @@
                 </v-select>
             </v-col>
         </v-row>
-    </v-card>
+    </v-sheet>
 
     <v-data-table :search="search" v-model="selected" show-select :headers="headers" :items="data"
         class="v-table elevation-1 pt-5 ml-10 mb-5" style="border-radius: 15px; background-color:">
@@ -35,9 +35,21 @@
             <v-toolbar flat>
                 <v-toolbar-title>Client Information</v-toolbar-title>
                 <v-spacer></v-spacer>
+
+                <v-snackbar v-model="EditSnackbar" :timeout="timeout" color="info" vertical>
+                    <v-icon size="large" class="mr-2">mdi-check-circle-outline</v-icon>
+                    {{ editText }}
+
+                    <template v-slot:actions>
+                        <v-btn color="white" variant="text" @click="EditSnackbar = false">
+                            Close
+                        </v-btn>
+                    </template>
+                </v-snackbar>
+
                 <v-dialog v-model="dialog" max-width="500px">
                     <template v-slot:activator="{ props }">
-                        <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;" v-bind="props">
+                        <v-btn class="mb-2 elevation-1 " style="background-color: #3C59A6; color: white;" v-bind="props">
                             New Item
                         </v-btn>
                     </template>
@@ -53,13 +65,15 @@
                                         <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.age" label="Age"></v-text-field>
+                                        <v-text-field v-model="editedItem.age" label="Age" type="number"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.gender" label="Gender"></v-text-field>
+                                        <v-select v-model="editedItem.gender" label="Gender" :items="['Male', 'Female']">
+                                        </v-select>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.contact" label="Contact Number"></v-text-field>
+                                        <v-text-field v-model="editedItem.contact" label="Contact Number"
+                                            type="number"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
                                         <v-text-field v-model="editedItem.email" label="Email Address"></v-text-field>
@@ -73,23 +87,42 @@
 
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue-darken-1" variant="text" @click="close">
+                            <v-btn color="blue-darken-1" variant="text" @click="close" class="border-button">
                                 Cancel
                             </v-btn>
-                            <v-btn color="blue-darken-1" variant="text" @click="save">
+                            <v-btn color="blue-darken-1" variant="text" @click="save" class="border-button">
                                 Save
                             </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-                <v-dialog v-model="dialogDelete" max-width="500px">
-                    <v-card>
-                        <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
-                        <v-card-actions>
+                <v-snackbar v-model="snackbar" :timeout="timeout" color="info" vertical>
+                    <v-icon size="large" class="mr-2">mdi-check-circle-outline</v-icon>
+                    {{ text }}
+
+                    <template v-slot:actions>
+                        <v-btn color="white" variant="text" @click="snackbar = false">
+                            Close
+                        </v-btn>
+                    </template>
+                </v-snackbar>
+
+
+                <v-dialog v-model="dialogDelete" max-width="500px" color="error">
+                    <v-card class="pa-2">
+                        <v-icon size="x-large" color="#E12727">mdi-alert-circle-outline</v-icon>
+                        <v-card-title class="text-h5" style="display: flex; justify-content: center;">Are you
+                            sure?</v-card-title>
+                        <p class="text-h7" style="display: flex; justify-content: center;">Do you really want
+                            to delete this item?</p>
+                        <v-card-actions class="mt-6">
                             <v-spacer></v-spacer>
-                            <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Cancel</v-btn>
-                            <v-btn color="blue-darken-1" variant="text" @click="deleteItemConfirm">OK</v-btn>
+                            <v-btn color="#B4B2B2" class="text-capitalize px-5 color-white" rounded="xl" variant="flat"
+                                @click="closeDelete">Cancel</v-btn>
+                            <v-btn color="#E12727" class="text-capitalize px-5 color-white" rounded="xl" variant="flat"
+                                @click="deleteItemConfirm">Delete</v-btn>
                             <v-spacer></v-spacer>
+
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -113,6 +146,11 @@
 <script>
 export default {
     data: () => ({
+        EditSnackbar: false,
+        snackbar: false,
+        timeout: 1500,
+        text: 'Item deleted successfully!',
+        editText: 'Item edited successfully',
         search: '',
         selected: [],
         dialog: false,
@@ -134,7 +172,7 @@ export default {
         editedIndex: -1,
         editedItem: {
             name: '',
-            age: '',
+            age: 0,
             gender: '',
             contact: '',
             email: '',
@@ -195,6 +233,7 @@ export default {
         deleteItemConfirm() {
             this.data.splice(this.editedIndex, 1)
             this.closeDelete()
+            this.snackbar = true
         },
 
         close() {
@@ -220,12 +259,17 @@ export default {
                 this.data.push(this.editedItem)
             }
             this.close()
+            this.EditSnackbar = true
         },
     },
 }
 </script>
   
 <style>
+.border-button {
+    border-width: 1px;
+}
+
 .v-main {
     background-color: #F7F7FB;
 }
@@ -245,4 +289,25 @@ export default {
 .v-data-table__td.v-data-table-column--align-start.v-data-table__th.v-data-table__th {
     background-color: #F7F7FB;
 }
+
+/* style for snackbar */
+
+.v-icon--size-x-large {
+    font-size: calc(var(--v-icon-size-multiplier) * 5em);
+    margin: auto;
+}
+
+.color-white {
+    grid-area: content;
+    justify-content: center;
+    white-space: nowrap;
+    color: white;
+}
+
+.v-snackbar__wrapper.v-theme--light.bg-info.v-snackbar--variant-elevated {
+    display: flex;
+    flex-direction: row;
+}
+
+/* end */
 </style>

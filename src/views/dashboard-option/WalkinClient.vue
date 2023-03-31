@@ -1,5 +1,9 @@
 <template>
-    <h1 class="thisH1">Dashboard</h1>
+    <h1 class="thisH1">Walkin Client Dashboard
+        <v-btn class="text-capitalize elevation-0 mt-2 border-button" to="/dashboard"
+            prepend-icon="mdi-arrow-left-circle">Go to main
+            Dashboard</v-btn>
+    </h1>
     <v-layout>
         <v-container>
             <v-row justify="center">
@@ -59,9 +63,13 @@ import ActionProvidedPieGraph from '@/components/dashboard/ActionProvidedPieGrap
 <style>
 .thisH1 {
     display: flex;
-    justify-content: center;
+    flex-wrap: nowrap;
     align-items: center;
-    align-content: center;
+    flex-direction: column;
+}
+
+.border-button {
+    border-width: 1px;
 }
 </style>
   

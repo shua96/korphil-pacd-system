@@ -1,5 +1,5 @@
 <template >
-    <h1 class="pl-10 mb-10">Frequently Asked Questions</h1>
+    <h1 class="pl-10 mb-10">Assessment Data</h1>
     <v-sheet style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
         <v-row no-gutters>
             <v-col>
@@ -9,11 +9,23 @@
         </v-row>
 
         <v-row no-gutters>
-            <v-col cols="12">
+            <v-col cols="9">
                 <v-text-field v-model="search" solo prepend-inner-icon="mdi-magnify"
                     label="Search for category, name, keyword, etc." single-line></v-text-field>
             </v-col>
-
+            <v-col>
+                <div class="my-5 ml-8">Sort by:</div>
+            </v-col>
+            <v-col class="mx-1">
+                <v-select label="Select Year" :items="[2000, 2001, 2002, 2003, 2004, 2004, 2005]" variant="solo">
+                </v-select>
+            </v-col>
+            <v-col>
+                <v-select label="Select Month"
+                    :items="['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', ' September', 'October', 'November', 'December']"
+                    variant="solo">
+                </v-select>
+            </v-col>
         </v-row>
     </v-sheet>
 
@@ -21,7 +33,7 @@
         class="v-table elevation-1 pt-5 ml-10 mb-5" style="border-radius: 15px; background-color:">
         <template v-slot:top>
             <v-toolbar flat>
-                <v-toolbar-title>Department/s</v-toolbar-title>
+                <v-toolbar-title>Client Information</v-toolbar-title>
                 <v-spacer></v-spacer>
 
                 <v-snackbar v-model="EditSnackbar" :timeout="timeout" color="info" vertical>
@@ -30,17 +42,6 @@
 
                     <template v-slot:actions>
                         <v-btn color="white" variant="text" @click="EditSnackbar = false">
-                            Close
-                        </v-btn>
-                    </template>
-                </v-snackbar>
-
-                <v-snackbar v-model="newItemSnackBar" :timeout="timeout" color="info" vertical>
-                    <v-icon size="large" class="mr-2">mdi-check-circle-outline</v-icon>
-                    {{ newItemText }}
-
-                    <template v-slot:actions>
-                        <v-btn color="white" variant="text" @click="newItemSnackBar = false">
                             Close
                         </v-btn>
                     </template>
@@ -60,9 +61,28 @@
                         <v-card-text>
                             <v-container>
                                 <v-row>
-                                    <v-col cols="12">
-                                        <v-text-field v-model="editedItem.name"
-                                            label="New Department (Service/s)"></v-text-field>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field v-model="editedItem.age" label="Age" type="number"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-select v-model="editedItem.gender" label="Gender" :items="['Male', 'Female']">
+                                        </v-select>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field v-model="editedItem.qualification"
+                                            label="Qualification"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field v-model="editedItem.address" label="Address"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field v-model="editedItem.course" label="Course/Year"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field v-model="editedItem.school" label="School/Institution"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -70,10 +90,10 @@
 
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue-darken-1" variant="text" @click="close" class="border-button">
+                            <v-btn color="blue-darken-1" variant="text" @click="close">
                                 Cancel
                             </v-btn>
-                            <v-btn color="blue-darken-1" variant="text" @click="saveNewItem" class="border-button">
+                            <v-btn color="blue-darken-1" variant="text" @click="save">
                                 Save
                             </v-btn>
                         </v-card-actions>
@@ -129,32 +149,48 @@
 <script>
 export default {
     data: () => ({
-        newItemSnackBar: false,
         EditSnackbar: false,
         snackbar: false,
         timeout: 1500,
-        newItemText: 'New item added successfully!',
-        editText: 'Item edited successfully!',
         text: 'Item deleted successfully!',
+        editText: 'Item edited successfully',
         search: '',
         selected: [],
         dialog: false,
         dialogDelete: false,
         headers: [
             {
-                title: 'Service/s Rendered',
+                title: 'Name',
                 align: 'start',
                 key: 'name',
             },
+            { title: 'Age', key: 'age' },
+            { title: 'Gender', key: 'gender' },
+            { title: 'Qualification', key: 'qualification' },
+            { title: 'Address', key: 'address' },
+            { title: 'Course/Year', key: 'course' },
+            { title: 'School/Institution', key: 'school' },
             { title: 'Actions', key: 'actions' },
         ],
         data: [],
         editedIndex: -1,
         editedItem: {
             name: '',
+            age: 0,
+            gender: '',
+            qualification: '',
+            address: '',
+            course: '',
+            school: '',
         },
         defaultItem: {
             name: '',
+            age: '',
+            gender: '',
+            qualification: '',
+            address: '',
+            course: '',
+            school: '',
         },
     }),
 
@@ -180,10 +216,11 @@ export default {
     methods: {
         initialize() {
             this.data = [
-                { name: 'Training' },
-                { name: 'Registrar' },
-                { name: 'Certification and Assessment' },
-                { name: 'Procurement/Accounting/Admin' },
+                { name: 'John Doe' },
+                { name: 'Curtis Carpenter' },
+                { name: 'Presley Rodgers' },
+                { name: 'Diego Estrada' },
+                { name: 'Aedan Rivera' },
             ]
         },
 
@@ -218,18 +255,7 @@ export default {
             this.$nextTick(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
-
             })
-        },
-
-        saveNewItem() {
-            if (this.editedIndex > -1) {
-                Object.assign(this.data[this.editedIndex], this.editedItem)
-            } else {
-                this.data.push(this.editedItem)
-            }
-            this.close()
-            this.newItemSnackBar = true
         },
 
         save() {
@@ -246,10 +272,6 @@ export default {
 </script>
   
 <style>
-.border-button {
-    border-width: 1px;
-}
-
 .v-main {
     background-color: #F7F7FB;
 }

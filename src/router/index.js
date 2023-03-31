@@ -35,6 +35,22 @@ const routes = [
         }
       },
       {
+        path: '/walkin-dashboard',
+        name: 'Walkin Client Dashboard',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/dashboard-option/WalkinClient.vue'),
+        meta: {
+          title: 'Walkin Client Dashboard'
+        }
+      },
+      {
+        path: '/assessment-dashboard',
+        name: 'Assessment Client Dashboard',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/dashboard-option/AssessmentClient.vue'),
+        meta: {
+          title: 'Assessment Client Dashboard'
+        }
+      },
+      {
         path: '/faqlist',
         name: 'FAQ List',
         component: () => import(/* webpackChunkName: "home" */ '@/views/FaqList.vue'),
@@ -56,6 +72,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "home" */ '@/views/SummaryReport.vue'),
         meta: {
           title: 'Summary Report'
+        }
+      },
+      {
+        path: '/assessmentdata',
+        name: 'Assessment Data',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/AssessmentData'),
+        meta: {
+          title: 'Assessment Data'
         }
       },
     ],
