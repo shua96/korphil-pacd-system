@@ -10,18 +10,31 @@ const routes = [
       {
         path: '/dashboard',
         name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Dashboard.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/Dashboard.vue'),
       },
     ]
   },
+  // User-side Experiment
   {
-    path: '/home',
+    path: '/user',
+    component: () => import('@/layouts/user/User.vue'),
+    children: [
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/Dashboard.vue'),
+      },
+    ]
+  },
+  // Ends Here
+  {
+    path: '/default',
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
         path: '/home',
         name: 'Home',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/Home.vue'),
         meta: {
           title: 'Home'
         }
@@ -29,7 +42,7 @@ const routes = [
       {
         path: '/dashboard',
         name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Dashboard.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/Dashboard.vue'),
         meta: {
           title: 'Dashboard'
         }
@@ -37,7 +50,7 @@ const routes = [
       {
         path: '/walkin-dashboard',
         name: 'Walkin Client Dashboard',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/dashboard-option/WalkinClient.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/dashboard-option/WalkinClient.vue'),
         meta: {
           title: 'Walkin Client Dashboard'
         }
@@ -45,7 +58,7 @@ const routes = [
       {
         path: '/assessment-dashboard',
         name: 'Assessment Client Dashboard',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/dashboard-option/AssessmentClient.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/dashboard-option/AssessmentClient.vue'),
         meta: {
           title: 'Assessment Client Dashboard'
         }
@@ -53,7 +66,7 @@ const routes = [
       {
         path: '/faqlist',
         name: 'FAQ List',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/FaqList.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/FaqList.vue'),
         meta: {
           title: 'FAQ List'
         }
@@ -61,7 +74,7 @@ const routes = [
       {
         path: '/clientdata',
         name: 'Client Data',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/ClientData.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/ClientData.vue'),
         meta: {
           title: 'Client Data'
         }
@@ -69,7 +82,7 @@ const routes = [
       {
         path: '/summaryreport',
         name: 'Summary Report',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/SummaryReport.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/SummaryReport.vue'),
         meta: {
           title: 'Summary Report'
         }
@@ -77,7 +90,7 @@ const routes = [
       {
         path: '/assessmentdata',
         name: 'Assessment Data',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/AssessmentData'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/AssessmentData'),
         meta: {
           title: 'Assessment Data'
         }

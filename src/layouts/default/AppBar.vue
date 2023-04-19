@@ -51,8 +51,9 @@ export default {
   data() {
     return {
       admins: [
-        ['Walkin Client', 'mdi-account-multiple-outline', '/walkin-dashboard'],
-        ['Assessment Client', 'mdi-cog-outline', '/assessment-dashboard'],
+        ['Main Dashboard', 'mdi-view-dashboard-variant', '/dashboard'],
+        ['Walkin Client', 'mdi-walk', '/walkin-dashboard'],
+        ['Assessment Client', 'mdi-table-account', '/assessment-dashboard'],
       ],
       drawer: true,
       items: [

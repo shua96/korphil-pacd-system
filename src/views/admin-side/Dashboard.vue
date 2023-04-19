@@ -1,5 +1,14 @@
 <template>
-    <h1 class="thisH1">Dashboard</h1>
+    <h1 class="thisH1">Dashboard
+        <div>
+            <v-btn class="text-capitalize elevation-0 mt-2 border-button " to="/dashboard"
+                prepend-icon="mdi-arrow-left-circle">Go to main
+                Dashboard</v-btn>
+            <v-btn class="text-capitalize elevation-0 mt-2 border-button" to="/dashboard"
+                prepend-icon="mdi-arrow-left-circle">Go to main
+                Dashboard</v-btn>
+        </div>
+    </h1>
     <v-layout>
         <v-container>
             <v-row justify="center">
