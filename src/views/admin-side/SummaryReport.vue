@@ -1,4 +1,4 @@
-<template >
+<!-- <template >
     <h1 class="pl-10 mb-10">Summary Report</h1>
     <v-card style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
         <v-row no-gutters>
@@ -13,24 +13,6 @@
                 <v-text-field v-model="search" solo prepend-inner-icon="mdi-magnify"
                     label="Search for category, name, keyword, etc." single-line></v-text-field>
             </v-col>
-            <!-- <v-col>
-                <div class="my-5 ml-8">Sort by:</div>
-            </v-col>
-            <v-col class="mx-1">
-                <v-select label="Select Year" :items="[2000, 2001, 2002, 2003, 2004, 2004, 2005]" variant="solo">
-                </v-select>
-            </v-col>
-            <v-col>
-                <v-select label="Select Month"
-                    :items="['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', ' September', 'October', 'November', 'December']"
-                    variant="solo">
-                </v-select>
-            </v-col>
-            <v-col class="mx-1">
-                <v-btn class="pa-7 elevation-1" style="background-color: #3C59A6; color: white;">
-                    Generate
-                </v-btn>
-            </v-col> -->
         </v-row>
     </v-card>
 
@@ -269,5 +251,77 @@ export default {
 
 .v-btn {
     align-content: center;
+}
+</style>
+ -->
+
+<template>
+    <h1 class="text">Test Data</h1>
+    <form @submit.prevent="submit">
+        <v-text-field label="firstname" type="text" v-model="name.firstname" required></v-text-field>
+        <v-text-field label="middlename" type="text" v-model="name.middlename" required> </v-text-field>
+        <v-text-field label="lastname" type="text" v-model="name.lastname" required> </v-text-field>
+        <v-text-field label="lastname" type="text" v-model="name.gender" required> </v-text-field>
+        <v-text-field label="age" type="number" v-model="name.age" required> </v-text-field>
+        <v-text-field label="age" type="number" v-model="name.contact" required> </v-text-field>
+        <v-text-field label="email" type="text" v-model="name.email" required> </v-text-field>
+        <v-text-field label="email" type="text" v-model="name.address" required> </v-text-field>
+        <v-btn class="button" type="submit">Submit</v-btn>
+    </form>
+    <v-layout style="display: flex; justify-content: center;">
+        <v-card class="elevetaion-2" width="500" height="500" color="#808080">
+            <ul>
+                <li v-for="item in items" :key="item.id">{{ item.firstname }} {{ item.middlename }} {{ item.lastname }}</li>
+            </ul>
+        </v-card>
+
+    </v-layout>
+</template>
+  
+<script setup>
+import axios from 'axios';
+import { onMounted } from 'vue';
+import { ref } from 'vue';
+
+
+
+let items = ref([
+    { firstname: '' }
+])
+
+let name = ref({
+    firstname: '',
+    middlename: '',
+    lastname: '',
+    age: 0,
+    gender: '',
+    contact: 0,
+    email: '',
+    address: '',
+});
+
+async function submit() {
+    await axios.post("http://localhost/pacd-system-api/public/api/createclient", name.value)
+    getdata();
+}
+
+onMounted(getdata);
+
+async function getdata() {
+    let response = await axios.get("http://localhost/pacd-system-api/public/api/getclients")
+    items.value = response.items
+}
+
+</script>
+  
+<style>
+.text {
+    text-align: center;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

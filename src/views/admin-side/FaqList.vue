@@ -34,7 +34,7 @@
             <v-toolbar flat>
                 <v-toolbar-title>Department/s</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-dialog v-model="dialog" max-width="500px">
+                <v-dialog v-model="dialog" max-width="500px" persistent>
                     <template v-slot:activator="{ props }">
                         <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;" v-bind="props">
                             New Item
@@ -42,7 +42,7 @@
                     </template>
                     <v-sheet>
                         <v-card-title>
-                            <span class="text-h5">{{ getFormTitle() }}</span>
+                            <span class="text-h5">{{ formTitle }}</span>
                         </v-card-title>
 
                         <v-card-text>
@@ -119,8 +119,11 @@
 </template>
 
 <script setup>
+import { computed } from '@vue/reactivity';
 import { ref } from 'vue'
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const headers = ref([
     { title: 'Service/s Rendered', align: 'start', sortable: true, key: 'name' },
     { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
@@ -132,6 +135,8 @@ const data = ref([
     { name: 'Certification and Assessment' },
     { name: 'Procurement/Accounting/Admin' },
 ])
+
+const timeout = ref(1500)
 
 const EditSnackbar = ref(false)
 
@@ -152,9 +157,9 @@ function getSnackbarText() {
     return editedIndex.value > -1 ? 'Item saved successfully!' : 'Item edited successfully!';
 }
 
-function getFormTitle() {
-    return editedIndex.value >= 0 ? 'Edit Item' : 'New Item';
-}
+const formTitle = computed(() => {
+    return editedIndex.value === -1 ? 'New Item' : 'Edit Item'
+})
 
 function editItem(item) {
     editedIndex.value = this.data.indexOf(item)
@@ -197,7 +202,7 @@ function closeDelete() {
 }
 
 function routeTo(item) {
-    router.push(item.path);
+    router.push(item.value.path);
 }
 
 </script>
@@ -223,8 +228,24 @@ function routeTo(item) {
     border-width: 1px;
 }
 
+/* style for snackbar */
+
 .v-icon--size-x-large {
     font-size: calc(var(--v-icon-size-multiplier) * 5em);
     margin: auto;
 }
+
+.color-white {
+    grid-area: content;
+    justify-content: center;
+    white-space: nowrap;
+    color: white;
+}
+
+.v-snackbar__wrapper.v-theme--light.bg-info.v-snackbar--variant-elevated {
+    display: flex;
+    flex-direction: row;
+}
+
+/* end */
 </style>
