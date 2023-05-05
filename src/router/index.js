@@ -6,13 +6,8 @@ const routes = [
   // USER-SIDE ROUTES
   {
     path: '/',
-    component: () => import('@/layouts/user/User.vue'),
+    component: () => import('@/views/user-side/Homepage.vue'),
     children: [
-      {
-        path: '/homepage',
-        name: 'Homepage',
-        component: () => import('@/views/user-side/Homepage.vue'),
-      },
       {
         path: '/departmentslist',
         name: 'Departments List',
