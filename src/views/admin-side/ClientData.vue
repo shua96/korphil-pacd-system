@@ -17,27 +17,32 @@
                 <div class="my-5 ml-8">Sort by:</div>
             </v-col>
             <v-col class="mx-1">
-                <v-select label="Select Year" :items="[2000, 2001, 2002, 2003, 2004, 2004, 2005]" variant="solo">
-                </v-select>
+                <v-combobox label="Year" v-model="sortByYear" :items="years" variant="solo" clearable>
+                </v-combobox>
             </v-col>
             <v-col>
-                <v-select label="Select Month"
+                <v-combobox label="Month"
                     :items="['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', ' September', 'October', 'November', 'December']"
-                    variant="solo">
-                </v-select>
+                    variant="solo" clearable>
+                </v-combobox>
             </v-col>
         </v-row>
     </v-sheet>
-    <v-data-table :search="search" :headers="headers" :items="data" class="v-table elevation-1 pt-5 mx-10 mb-5"
-        style="border-radius: 15px;">
+    <v-data-table :search="search" :sortByYear="sortByYear" :headers="headers" :items="data"
+        class="v-table elevation-1 pt-5 mx-10 mb-5" style="border-radius: 15px;">
         <template v-slot:top>
             <v-toolbar flat>
                 <v-toolbar-title>Client Information</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-dialog v-model="dialog" max-width="500px" persistent>
                     <template v-slot:activator="{ props }">
-                        <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;" v-bind="props">
+                        <v-btn class="mb-2 mr-2 elevation-1" style="background-color: #3C59A6; color: white;"
+                            v-bind="props">
                             New Item
+                        </v-btn>
+                        <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;"
+                            @click="printItems()">
+                            Refresh
                         </v-btn>
                     </template>
                     <v-sheet>
@@ -61,8 +66,8 @@
                                         <v-text-field v-model="editedItem.age" type="number" label="Age"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
-                                        <v-select :items="['Male', 'Female']" v-model="editedItem.gender"
-                                            label="Gender"></v-select>
+                                        <v-select :items="['Male', 'Female']" v-model="editedItem.sex"
+                                            label="Sex"></v-select>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
                                         <v-text-field v-model="editedItem.contact" type="number"
@@ -73,6 +78,13 @@
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
                                         <v-text-field v-model="editedItem.address" label="Address"></v-text-field>
+                                    </v-col>
+
+                                </v-row>
+                                <v-row cols="12">
+                                    <v-col cols="12" sm="12" md="12">
+                                        <v-text-field v-model="editedItem.actionprovided" label="Action Provided"
+                                            class="text-caption"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -102,13 +114,41 @@
                             <v-btn class="text-capitalize px-5 border-button" style="border-color: #B4B2B2;" variant="flat"
                                 @click="closeDelete()">Cancel</v-btn>
                             <v-btn class="text-capitalize px-5 border-button" style="border-color: #E12727;" variant="flat"
-                                @click="deleteItemConfirm(editedItem)">Delete {{ editedItem.id }}</v-btn>
+                                @click="deleteItemConfirm(editedItem)">Delete {{ date }}</v-btn>
                             <v-spacer></v-spacer>
 
                         </v-card-actions>
                     </v-sheet>
                 </v-dialog>
+
+                <v-dialog v-model="showMoreDialog" max-width="500px" color="error">
+                    <v-sheet class="pa-2">
+                        <v-icon size="x-large" color="#E12727"
+                            style="display: flex; margin: auto;">mdi-alert-circle-outline</v-icon>
+                        <v-card-title class="text-h5" style="display: flex; justify-content: center;">Are you
+                            sure?</v-card-title>
+                        <p class="text-h7" style="display: flex; justify-content: center;">Do you really want
+                            to delete this item?</p>
+                        <h1>{{ data }}</h1>
+                        <v-card-actions class="mt-6">
+                            <v-spacer></v-spacer>
+                            <v-btn class="text-capitalize px-5 border-button" style="border-color: #B4B2B2;" variant="flat"
+                                @click="showMoreDialog = false">Cancel</v-btn>
+
+                        </v-card-actions>
+                    </v-sheet>
+                </v-dialog>
             </v-toolbar>
+            <v-snackbar v-model="EditSnackbar" :timeout="timeout" color="info" vertical>
+                <v-icon size="large" class="mr-2">mdi-check-circle-outline</v-icon>
+                {{ getSnackbarText() }}
+
+                <template v-slot:actions>
+                    <v-btn color="white" variant="text" @click="EditSnackbar = false">
+                        Close
+                    </v-btn>
+                </template>
+            </v-snackbar>
         </template>
 
 
@@ -117,12 +157,25 @@
             {{ item.raw.lastname }}
         </template>
 
+        <template v-slot:item._created_at="{ item }">
+            {{ moment(item.raw.created_at).format('YYYY-MM-DD') }}
+        </template>
+
+        <template v-slot:item._actionprovided="{ item }">
+            <div class="text-truncate">
+                {{ item.raw.actionprovided }}
+            </div>
+        </template>
+
         <template v-slot:item.actions="{ item }">
-            <v-icon size="small" class="me-2" @click="editItem(item.raw)">
+            <v-icon size="small" @click="editItem(item.raw)">
                 mdi-square-edit-outline
             </v-icon>
-            <v-icon size="small" @click="deleteItem(item.raw)" color="error">
+            <v-icon size="small" class="mx-2" @click="deleteItem(item.raw)" color="error">
                 mdi-trash-can-outline
+            </v-icon>
+            <v-icon size="small" @click="showMore(item.raw)">
+                mdi-plus
             </v-icon>
         </template>
         <template v-slot:no-data>
@@ -132,47 +185,57 @@
         </template>
 
     </v-data-table>
-    <v-main class="ml-14" color="primary"></v-main>
+    <v-main></v-main>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import moment from 'moment';
+import { computed } from '@vue/reactivity';
 
 onMounted(printItems);
 
 const headers = [
-    { title: 'No.', align: 'start', sortable: false, key: 'id' },
+    { title: 'Date', align: 'start', sortable: false, key: '_created_at' },
     { title: 'Name', align: 'start', sortable: true, key: 'fullname' },
     { title: 'Age', align: 'start', sortable: false, key: 'age' },
-    { title: 'Gender', align: 'start', sortable: false, key: 'gender' },
+    { title: 'Sex', align: 'start', sortable: false, key: 'sex' },
     { title: 'Contact No.', align: 'start', sortable: false, key: 'contact' },
     { title: 'Email Adr', align: 'start', sortable: false, key: 'email' },
     { title: 'Address', align: 'start', sortable: false, key: 'address' },
+    { title: 'Action Provided', align: 'start', sortable: false, key: 'actionprovided', class: 'truncate' },
     { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
 ]
 
+const EditSnackbar = ref(false)
+const showMoreDialog = ref(false)
 const data = ref([]);
-
 const search = ref('')
-
 const dialog = ref(false)
-
 const dialogDelete = ref(false)
-
 const editedIndex = ref(-1)
+const sortByYear = ref('');
+const years = computed(() => {
+    const year = new Date().getFullYear();
+    return Array.from({ length: year - 1900 }, (_, index) => 1901 + index);
+});
 
 const editedItem = ref({
     firstname: '',
     middlename: '',
     lastname: '',
-    age: 0,
-    gender: '',
-    contact: 0,
+    age: '',
+    sex: '',
+    contact: '',
     email: '',
     address: '',
 })
 
+// function getSnackbarText() {
+//     console.log(editedIndex.value)
+//     return editedIndex.value === -1 ? 'Item saved successfully!' : 'Item edited successfully!';
+// }
 
 async function printItems() {
     let response = await axios.get("http://localhost/pacd-system-api/public/api/getclients");
@@ -181,20 +244,37 @@ async function printItems() {
 
 function getFormTitle() {
     console.log(editedIndex.value)
-    return editedIndex.value === -1 ? 'Edit Item' : 'New Item';
+    return editedIndex.value === -1 ? 'New Item' : 'Edit Item';
 }
 
-async function editItem(item) {
+function showMore() {
+    showMoreDialog.value = true
+}
+
+function editItem(item) {
     editedIndex.value = this.data.indexOf(item)
     editedItem.value = Object.assign({}, item)
-    await axios.post("http://localhost/pacd-system-api/public/api/updateclient", editedItem.value);
     dialog.value = true
 }
 
+// async function saveEditItem(item) {
+//     await axios.post("http://localhost/pacd-system-api/public/api/updateclient", editedItem.value);
+//     dialog.value = false
+//     printItems();
+// }
+
 async function save() {
-    await axios.post("http://localhost/pacd-system-api/public/api/createclient", editedItem.value);
-    printItems();
-    this.close()
+    if (editedIndex.value === -1) {
+        await axios.post("http://localhost/pacd-system-api/public/api/createclient", editedItem.value);
+        printItems();
+        this.close()
+        // EditSnackbar.value = true
+    } else if (editedIndex.value >= 0) {
+        await axios.post("http://localhost/pacd-system-api/public/api/updateclient", editedItem.value);
+        dialog.value = false
+        printItems();
+        // EditSnackbar.value = true
+    }
 }
 
 function close() {
@@ -210,22 +290,9 @@ function deleteItem(item) {
 }
 
 async function deleteItemConfirm(item) {
-    // this.data.splice(this.editedIndex, 1)
-    // this.closeDelete()
-    let response = await axios.post('http://localhost/pacd-system-api/public/api/deleteClient', item);
-    console.log(response.data);
+    await axios.post('http://localhost/pacd-system-api/public/api/deleteClient', item);
     dialogDelete.value = false;
-
     printItems();
-    // axios.delete(`http://localhost/pacd-system-api/public/api/items/${id}`)
-    //     .then(response => {
-    //         // handle success
-    //         console.log(response);
-    //     })
-    //     .catch(error => {
-    //         // handle error
-    //         console.log(error);
-    //     });
 }
 
 function closeDelete() {
@@ -260,5 +327,12 @@ function closeDelete() {
 .v-icon--size-x-large {
     font-size: calc(var(--v-icon-size-multiplier) * 5em);
     margin: auto;
+}
+
+.text-truncate {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>

@@ -14,14 +14,8 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav style="color: white;">
-      <v-list-group>
-        <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props" prepend-icon="mdi-view-dashboard" title="DASHBOARD"
-            style="color: white;"></v-list-item>
-        </template>
-        <v-list-item v-for="([title, icon, path], i) in admins" :key="i" :title="title" :prepend-icon="icon"
-          :value="title" :to="path" style="color: white;"></v-list-item>
-      </v-list-group>
+      <v-list-item prepend-icon="mdi-view-dashboard" title="DASHBOARD" to="/dashboard"
+        style="color: white;"></v-list-item>
       <v-list-item prepend-icon="mdi-frequently-asked-questions" title="FAQ LIST" to="/faqlist"
         style="color: white;"></v-list-item>
       <v-list-item prepend-icon="mdi-database" title="CLIENT DATA" to="/clientdata" style="color: white;"></v-list-item>
@@ -44,28 +38,16 @@
 </template>
 <script setup>
 import profile from '@/components/profile.vue'
-  //
-</script>
-<script>
-export default {
-  data() {
-    return {
-      admins: [
-        ['Main Dashboard', 'mdi-view-dashboard-variant', '/dashboard'],
-        ['Walkin Client', 'mdi-walk', '/walkin-dashboard'],
-        ['Assessment Client', 'mdi-table-account', '/assessment-dashboard'],
-      ],
-      drawer: true,
-      items: [
-        { title: 'Home', icon: 'mdi-view-dashboard' },
-        { title: 'FAQ LIST', icon: 'mdi-frequently-asked-questions' },
-        { title: 'CLIENT DATA', icon: 'mdi-database' },
-        { title: 'SUMMARY REPORT', icon: 'mdi-poll' },
-      ],
-      rail: true,
-    }
-  },
-}
+import { ref } from 'vue';
+
+const drawer = ref(true)
+const rail = ref(true)
+const items = ref([
+  { title: 'Home', icon: 'mdi-view-dashboard' },
+  { title: 'FAQ LIST', icon: 'mdi-frequently-asked-questions' },
+  { title: 'CLIENT DATA', icon: 'mdi-database' },
+  { title: 'SUMMARY REPORT', icon: 'mdi-poll' },
+])
 </script>
 
 

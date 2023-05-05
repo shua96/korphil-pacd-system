@@ -3,30 +3,42 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
 
+  // USER-SIDE ROUTES
   {
     path: '/',
+    component: () => import('@/layouts/user/User.vue'),
+    children: [
+      {
+        path: '/homepage',
+        name: 'Homepage',
+        component: () => import('@/views/user-side/Homepage.vue'),
+      },
+      {
+        path: '/departmentslist',
+        name: 'Departments List',
+        component: () => import('@/views/user-side/DepartmentsListPage.vue'),
+      },
+      {
+        path: '/QuestionsListPage',
+        name: 'Questions List',
+        component: () => import('@/views/user-side/QuestionsListPage'),
+      },
+    ]
+  },
+  // USER-SIDE ROUTES ENDS HERE
+
+  {
+    path: '/login',
     component: () => import('@/layouts/login/Login.vue'),
     children: [
       {
         path: '/dashboard',
         name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/Dashboard.vue'),
+        component: () => import('@/views/admin-side/Dashboard.vue'),
       },
     ]
   },
-  // User-side Experiment
-  {
-    path: '/user',
-    component: () => import('@/layouts/user/User.vue'),
-    children: [
-      {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/Dashboard.vue'),
-      },
-    ]
-  },
-  // Ends Here
+
   {
     path: '/default',
     component: () => import('@/layouts/default/Default.vue'),
@@ -34,7 +46,7 @@ const routes = [
       {
         path: '/home',
         name: 'Home',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/Home.vue'),
+        component: () => import('@/views/admin-side/Home.vue'),
         meta: {
           title: 'Home'
         }
@@ -42,7 +54,7 @@ const routes = [
       {
         path: '/dashboard',
         name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/Dashboard.vue'),
+        component: () => import('@/views/admin-side/Dashboard.vue'),
         meta: {
           title: 'Dashboard'
         }
@@ -50,7 +62,7 @@ const routes = [
       {
         path: '/walkin-dashboard',
         name: 'Walkin Client Dashboard',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/dashboard-option/WalkinClient.vue'),
+        component: () => import('@/views/admin-side/dashboard-option/WalkinClient.vue'),
         meta: {
           title: 'Walkin Client Dashboard'
         }
@@ -58,7 +70,7 @@ const routes = [
       {
         path: '/assessment-dashboard',
         name: 'Assessment Client Dashboard',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/dashboard-option/AssessmentClient.vue'),
+        component: () => import('@/views/admin-side/dashboard-option/AssessmentClient.vue'),
         meta: {
           title: 'Assessment Client Dashboard'
         }
@@ -66,15 +78,25 @@ const routes = [
       {
         path: '/faqlist',
         name: 'FAQ List',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/FaqList.vue'),
+        component: () => import('@/views/admin-side/FaqList.vue'),
         meta: {
           title: 'FAQ List'
         }
       },
+      // FAQ List route
+      {
+        path: '/faqs',
+        name: '',
+        component: () => import('@/views/admin-side/faqlist-option/Faqs.vue'),
+        meta: {
+          title: `FAQ List/`
+        }
+      },
+      // Ends Here
       {
         path: '/clientdata',
         name: 'Client Data',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/ClientData.vue'),
+        component: () => import('@/views/admin-side/ClientData.vue'),
         meta: {
           title: 'Client Data'
         }
@@ -82,7 +104,7 @@ const routes = [
       {
         path: '/summaryreport',
         name: 'Summary Report',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/SummaryReport.vue'),
+        component: () => import('@/views/admin-side/SummaryReport.vue'),
         meta: {
           title: 'Summary Report'
         }
@@ -90,7 +112,7 @@ const routes = [
       {
         path: '/assessmentdata',
         name: 'Assessment Data',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/admin-side/AssessmentData'),
+        component: () => import('@/views/admin-side/AssessmentData'),
         meta: {
           title: 'Assessment Data'
         }

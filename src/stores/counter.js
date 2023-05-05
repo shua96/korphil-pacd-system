@@ -8,8 +8,10 @@ export const useAppStore = defineStore('appStore', {
         }
     },
     actions: {
-        alertThis() {
-            alert('It Works!')
+        deleteItem(item) {
+            this.editedIndex = this.data.indexOf(item)
+            this.editedItem = Object.assign({}, item)
+            this.dialogDelete = true
         },
     },
 })

@@ -7,31 +7,27 @@
 
 <script setup>
 import Chart from 'chart.js/auto';
+import { onMounted } from 'vue';
 
-</script>
-
-<script>
-export default {
-    mounted() {
-        const ctx = document.getElementById('myChart');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Very Satisfactory', 'Satisfactory', 'Poor'],
-                datasets: [{
-                    label: 'Number of Feedback',
-                    data: [12, 19, 3],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+onMounted(() => {
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Very Satisfactory', 'Satisfactory', 'Poor'],
+            datasets: [{
+                label: 'Number of Feedback',
+                data: [12, 19, 3],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
-    }
-}
+        }
+    });
+})
 </script>

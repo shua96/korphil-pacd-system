@@ -1,5 +1,4 @@
 <template>
-    <h1 class="pl-10 mb-10 ">FAQ List</h1>
     <v-sheet style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
         <v-row no-gutters>
             <v-col>
@@ -17,14 +16,14 @@
                 <div class="my-5 ml-8">Sort by:</div>
             </v-col>
             <v-col class="mx-1">
-                <v-combobox label="Year" v-model="sortByYear" :items="years" variant="solo" clearable>
-                </v-combobox>
+                <v-select label="Year" v-model="sortByYear" :items="years" variant="solo" clearable>
+                </v-select>
             </v-col>
             <v-col>
-                <v-combobox label="Month"
+                <v-select label="Select Month"
                     :items="['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', ' September', 'October', 'November', 'December']"
-                    variant="solo" clearable>
-                </v-combobox>
+                    variant="solo">
+                </v-select>
             </v-col>
         </v-row>
     </v-sheet>
@@ -32,7 +31,7 @@
         style="border-radius: 15px;">
         <template v-slot:top>
             <v-toolbar flat>
-                <v-toolbar-title>Department/s</v-toolbar-title>
+                <v-toolbar-title>{{ $route.name }} FAQ</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-dialog v-model="dialog" max-width="500px" persistent>
                     <template v-slot:activator="{ props }">
@@ -49,8 +48,12 @@
                             <v-container>
                                 <v-row>
                                     <v-col cols="12">
-                                        <v-text-field v-model="editedItem.name"
-                                            label="New Department(Service/s)"></v-text-field>
+                                        <v-text-field v-model="editedItem.question" label="Question"></v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="12">
+                                        <v-text-field v-model="editedItem.answer" label="Answer"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -67,7 +70,7 @@
                         </v-card-actions>
                     </v-sheet>
                 </v-dialog>
-                <v-dialog v-model="dialogDelete" max-width="500px" color="error">
+                <v-dialog v-model="dialogDelete" max-width="500px" color="error" persistent>
                     <v-sheet class="pa-2">
                         <v-icon size="x-large" color="#E12727"
                             style="display: flex; margin: auto;">mdi-alert-circle-outline</v-icon>
@@ -105,9 +108,7 @@
             <v-icon size="small" @click="deleteItem(item.raw)" color="error">
                 mdi-trash-can-outline
             </v-icon>
-            <v-icon size="small" @click="routeTo(item)" class="ml-2">
-                mdi-arrow-right-circle-outline
-            </v-icon>
+
         </template>
         <template v-slot:no-data>
             <v-btn color="primary" @click="initialize">
@@ -119,21 +120,11 @@
 </template>
 
 <script setup>
-import { computed } from '@vue/reactivity';
-import axios from 'axios';
-import { onMounted } from 'vue';
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-onMounted(printItems);
-const headers = ref([
-    { title: 'Service/s Rendered', align: 'start', sortable: true, key: 'name' },
-    { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
-])
-
 const data = ref([])
-
 const timeout = ref(1500)
 const EditSnackbar = ref(false)
 const search = ref('')
@@ -145,16 +136,23 @@ const years = computed(() => {
     const year = new Date().getFullYear();
     return Array.from({ length: year - 1900 }, (_, index) => 1901 + index);
 });
+
+const headers = ref([
+    { title: 'Question', align: 'start', sortable: true, key: 'question' },
+    { title: 'Answer', align: 'start', sortable: true, key: 'answer' },
+    { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
+])
 const editedItem = ref({
-    name: '',
+    question: '',
+    answer: '',
 })
 
 function getSnackbarText() {
-    console.log(editedIndex.value)
-    return editedIndex.value > -1 ? 'Item saved successfully!' : 'Item edited successfully!';
+    return editedIndex.value >= 0 ? 'Item edited successfully!' : 'Item saved successfully!';
 }
 
 const formTitle = computed(() => {
+    console.log(editedIndex.value)
     return editedIndex.value === -1 ? 'New Item' : 'Edit Item'
 })
 
@@ -164,36 +162,20 @@ function editItem(item) {
     dialog.value = true
 }
 
-// async function save() {
-//     await axios.post("http://localhost/pacd-system-api/public/api/updatefaq", editedItem.value)
-//     this.close()
-//     this.EditSnackbar = true
-// }
-
-async function printItems() {
-    let response = await axios.get("http://localhost/pacd-system-api/public/api/getfaq");
-    console.log(response)
-    data.value = response.data;
-}
-
-async function save() {
-    if (editedIndex.value === -1) {
-        await axios.post("http://localhost/pacd-system-api/public/api/createfaq", editedItem.value);
-        printItems();
-        this.close()
-    } else if (editedIndex.value >= 0) {
-        await axios.post("http://localhost/pacd-system-api/public/api/updatefaq", editedItem.value);
-        dialog.value = false
-        printItems();
+function save() {
+    if (this.editedIndex > -1) {
+        Object.assign(this.data[this.editedIndex], this.editedItem)
+    } else {
+        this.data.push(this.editedItem)
     }
+    this.close()
+    this.EditSnackbar = true
 }
 
 function close() {
     this.dialog = false
     this.editedItem = Object.assign({}, this.defaultItem)
-    this.editedIndex = -1
 }
-
 
 function deleteItem(item) {
     this.editedIndex = this.data.indexOf(item)
@@ -202,7 +184,7 @@ function deleteItem(item) {
 }
 
 function deleteItemConfirm() {
-    this.item.splice(this.editedIndex, 1)
+    this.data.splice(this.editedIndex, 1)
     this.closeDelete()
 }
 
@@ -213,10 +195,10 @@ function closeDelete() {
 }
 
 function routeTo(item) {
-    router.push('faqs');
+    router.push(item.value.path);
 }
-
 </script>
+
 
 <style>
 .v-main {

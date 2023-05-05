@@ -1,14 +1,15 @@
 <template>
     <h1 class="thisH1">Dashboard
-        <div>
-            <v-btn class="text-capitalize elevation-0 mt-2 border-button " to="/dashboard"
-                prepend-icon="mdi-arrow-left-circle">Go to main
-                Dashboard</v-btn>
-            <v-btn class="text-capitalize elevation-0 mt-2 border-button" to="/dashboard"
-                prepend-icon="mdi-arrow-left-circle">Go to main
-                Dashboard</v-btn>
-        </div>
+
     </h1>
+    <div style="display: flex; justify-content: center;">
+        <v-btn class="text-capitalize elevation-0 mt-2 mr-5 border-button " to="/walkin-dashboard"
+            prepend-icon="mdi-arrow-left-circle">Go to Walkin Client
+            Dashboard</v-btn>
+        <v-btn class="text-capitalize elevation-0 mt-2 border-button" to="/assessment-dashboard"
+            prepend-icon="mdi-arrow-left-circle">Go to Assessment Client
+            Dashboard</v-btn>
+    </div>
     <v-layout>
         <v-container>
             <v-row justify="center">
@@ -71,6 +72,10 @@ import ActionProvidedPieGraph from '@/components/dashboard/ActionProvidedPieGrap
     justify-content: center;
     align-items: center;
     align-content: center;
+}
+
+.border-button {
+    border-width: 1px;
 }
 </style>
   
