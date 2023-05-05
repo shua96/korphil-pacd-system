@@ -7,18 +7,14 @@ const routes = [
   {
     path: '/',
     component: () => import('@/views/user-side/Homepage.vue'),
-    children: [
-      {
-        path: '/departmentslist',
-        name: 'Departments List',
-        component: () => import('@/views/user-side/DepartmentsListPage.vue'),
-      },
-      {
-        path: '/QuestionsListPage',
-        name: 'Questions List',
-        component: () => import('@/views/user-side/QuestionsListPage'),
-      },
-    ]
+  },
+  {
+    path: '/departments-list',
+    component: () => import('@/views/user-side/DepartmentsListPage.vue'),
+  },
+  {
+    path: '/questions-list',
+    component: () => import('@/views/user-side/QuestionsListPage'),
   },
   // USER-SIDE ROUTES ENDS HERE
 
