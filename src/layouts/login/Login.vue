@@ -46,8 +46,8 @@ export default {
             if (this.checkForms()) {
                 this.$router.push("/dashboard");
             }
-            else if(!this.lastNameRules(value)) {
-                alert ("Required") 
+            else if (!this.lastNameRules(value)) {
+                alert("Required")
             }
         },
         checkForms() {
