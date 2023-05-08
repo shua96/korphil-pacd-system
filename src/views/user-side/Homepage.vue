@@ -65,6 +65,7 @@ const items = ref([
     {
         title: 'FAQ',
         disabled: false,
+        href: '/questions-list'
     },
 ])
 
