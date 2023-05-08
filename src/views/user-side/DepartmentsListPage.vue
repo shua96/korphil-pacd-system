@@ -51,7 +51,8 @@
         <v-row justify="center mb-4" style="margin: -250px;">
 
             <v-col cols="3" class="ml-16" align="right">
-                <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="350" height="350">
+                <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="350" height="350"
+                    to="questions-list">
                     <v-img height="200" src="@/assets/training.jpeg" style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Training</h2>
                 </v-card>
@@ -125,7 +126,7 @@ const items = ref([
     {
         title: 'FAQ',
         disabled: false,
-        href: '/questions-list'
+        href: '/departments-list'
     },
 ])
 
