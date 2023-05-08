@@ -22,23 +22,21 @@
                         Edit Account
                     </v-btn>
                     <v-divider class="my-3"></v-divider>
-                    <v-btn rounded variant="text" to="/">
-                        Log Out
-                    </v-btn>
+                    <v-btn @click="app.logout()">Logout</v-btn>
+
                 </div>
             </v-card-text>
         </v-card>
     </v-menu>
 </template>
 
-<script>
-export default {
-    data: () => ({
-        user: {
-            initials: 'JD',
-            fullName: 'John Doe',
-            email: 'john.doe@doe.com',
-        },
-    }),
-}
+<script setup>
+import { ref } from 'vue';
+import { useAppStore } from '@/stores/app';
+let app = useAppStore();
+const user = ref({
+    initials: 'JD',
+    fullName: 'John Doe',
+    email: 'john.doe@doe.com',
+})
 </script>
