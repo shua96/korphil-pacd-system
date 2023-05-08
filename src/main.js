@@ -5,7 +5,11 @@
  */
 
 // Components
+import axios from 'axios'
 import App from './App.vue'
+
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://localhost/pacd-system-api/public/';
 
 // Composables
 import { createApp } from 'vue'
