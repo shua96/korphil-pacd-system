@@ -4,10 +4,13 @@
             <v-avatar size="110" class="ml-16">
                 <v-img src="@/assets/rtc1.png"> </v-img>
             </v-avatar>
+
             <v-breadcrumbs :items="items" style="margin-left:auto; color: white">
                 <template v-slot:divider>
                 </template>
+
             </v-breadcrumbs>
+
             <v-btn size="large" style="background-color: white; color: #2C96F8">Feedback</v-btn>
         </v-app-bar>
 
@@ -53,6 +56,7 @@ const items = ref([
     {
         title: 'Home',
         disabled: false,
+        href: '/'
     },
     {
         title: 'About',

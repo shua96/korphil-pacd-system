@@ -20,7 +20,7 @@
                         <div class="text-h4 mb-3 font-weight-medium" style="color: white; text-align: center;">
                             How can we help you?
                         </div>
-                        <div class="text-h5 mb-3" style="color: white; text-align: center;">
+                        <div class="text-h5 mb-3 sm-6" style="color: white; text-align: center;">
                             Explore our FAQ knowledge base page to find answers to your inquiries.
                         </div>
                     </div>
@@ -44,54 +44,58 @@
 
 
 
-    <v-layout class="pa-5">
-        <v-row justify="center">
+    <v-layout class="pa-10">
+        <v-row justify="center mb-4" style="margin: -250px;">
 
-            <v-col cols="3" class="ml-16">
-
-                <v-card style="background-color: #E3E3E3; border-radius: 25px;" width="350" height="390">
-                    <v-img class="align-end text-white" height="200" src="@/assets/training.jpeg"
-                        style="margin: 15px;"></v-img>
+            <v-col cols="3" class="ml-16" align="right">
+                <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="350" height="350">
+                    <v-img height="200" src="@/assets/training.jpeg" style="margin: 15px;"></v-img>
+                    <h2 class="mt-10" style="text-align: center;">Training</h2>
                 </v-card>
             </v-col>
             <!-- line here -->
-            <v-col cols="3" class="ml-16">
+            <v-col cols="3" align="center">
 
-                <v-card style="background-color: #E3E3E3; border-radius: 25px;" width="350" height="390">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350">
                     <v-img class="align-end text-white" height="200" src="@/assets/registrar.jpeg"
                         style="margin: 15px;"></v-img>
+                    <h2 class="mt-10" style="text-align: center;">Registrar</h2>
                 </v-card>
             </v-col>
             <!-- line here -->
-            <v-col cols="3" class="ml-16">
+            <v-col cols="3" class="mr-16" align="left">
 
-                <v-card style="background-color: #E3E3E3; border-radius: 25px;" width="350" height="400">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px; " width="350" height="350">
                     <v-img class="align-end text-white" height="200" src="@/assets/certification.jpeg"
                         style="margin: 15px;"></v-img>
+                    <h2 class="mt-10" style="text-align: center;">Certification & Assessment</h2>
                 </v-card>
             </v-col>
             <!-- line here -->
-            <v-col cols="3" class="ml-16">
+            <v-col cols="3" class="ml-16" align="right">
 
-                <v-card style="background-color: #E3E3E3; border-radius: 25px;" width="350" height="400">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350">
                     <v-img class="align-end text-white" height="200" src="@/assets/procurement.jpeg"
                         style="margin: 15px;"></v-img>
+                    <h2 class="mt-10" style="text-align: center;">Procurement</h2>
                 </v-card>
             </v-col>
             <!-- line here -->
-            <v-col cols="3" class="ml-16">
+            <v-col cols="3" align="center">
 
-                <v-card style="background-color: #E3E3E3; border-radius: 25px;" width="350" height="400">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350">
                     <v-img class="align-end text-white" height="200" src="@/assets/accounting.jpeg"
                         style="margin: 15px;"></v-img>
+                    <h2 class="mt-10" style="text-align: center;">Accounting</h2>
                 </v-card>
             </v-col>
             <!-- line here -->
-            <v-col cols="3" class="ml-16">
+            <v-col cols="3" class="mr-16" align="left">
 
-                <v-card style="background-color: #E3E3E3; border-radius: 25px;" width="350" height="400">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350">
                     <v-img class="align-end text-white" height="200" src="@/assets/admin.jpeg"
                         style="margin: 15px;"></v-img>
+                    <h2 class="mt-10" style="text-align: center;">Admin</h2>
                 </v-card>
             </v-col>
 
@@ -103,10 +107,13 @@
 <script setup>
 import { ref } from 'vue';
 
+
 const items = ref([
     {
         title: 'Home',
         disabled: false,
+        href: '/'
+
     },
     {
         title: 'About',

@@ -16,6 +16,10 @@ const routes = [
     path: '/questions-list',
     component: () => import('@/views/user-side/QuestionsListPage'),
   },
+  {
+    path: '/Home',
+    component: () => import('@/views/user-side/DepartmentListPage'),
+  },
   // USER-SIDE ROUTES ENDS HERE
 
   {
