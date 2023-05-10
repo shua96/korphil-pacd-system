@@ -80,9 +80,49 @@ const routes = [
       },
       // FAQ List route
       {
-        path: '/faqs',
-        name: '',
-        component: () => import('@/views/admin-side/faqlist-option/Faqs.vue'),
+        path: '/training',
+        name: 'Training',
+        component: () => import('@/views/admin-side/faqlist-option/Training.vue'),
+        meta: {
+          title: `FAQ List/`
+        }
+      },
+      {
+        path: '/registrar',
+        name: 'Registrar',
+        component: () => import('@/views/admin-side/faqlist-option/Registrar.vue'),
+        meta: {
+          title: `FAQ List/`
+        }
+      },
+      {
+        path: '/certificationassessment',
+        name: 'Certification & Assessment',
+        component: () => import('@/views/admin-side/faqlist-option/CertificationAssessment.vue'),
+        meta: {
+          title: `FAQ List/`
+        }
+      },
+      {
+        path: '/procurement',
+        name: 'Procurement',
+        component: () => import('@/views/admin-side/faqlist-option/Procurement.vue'),
+        meta: {
+          title: `FAQ List/`
+        }
+      },
+      {
+        path: '/accounting',
+        name: 'Accounting',
+        component: () => import('@/views/admin-side/faqlist-option/Accounting.vue'),
+        meta: {
+          title: `FAQ List/`
+        }
+      },
+      {
+        path: '/admin',
+        name: 'Admin',
+        component: () => import('@/views/admin-side/faqlist-option/Admin.vue'),
         meta: {
           title: `FAQ List/`
         }
