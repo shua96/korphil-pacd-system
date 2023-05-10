@@ -121,20 +121,46 @@
                     </v-sheet>
                 </v-dialog>
 
-                <v-dialog v-model="showMoreDialog" max-width="500px" color="error">
-                    <v-sheet class="pa-2">
-                        <v-icon size="x-large" color="#E12727"
-                            style="display: flex; margin: auto;">mdi-alert-circle-outline</v-icon>
-                        <v-card-title class="text-h5" style="display: flex; justify-content: center;">Are you
-                            sure?</v-card-title>
-                        <p class="text-h7" style="display: flex; justify-content: center;">Do you really want
-                            to delete this item?</p>
-                        <h1>{{ data }}</h1>
-                        <v-card-actions class="mt-6">
-                            <v-spacer></v-spacer>
-                            <v-btn class="text-capitalize px-5 border-button" style="border-color: #B4B2B2;" variant="flat"
-                                @click="showMoreDialog = false">Cancel</v-btn>
+                <v-dialog v-model="showMoreDialog" max-width="500px" persistent>
+                    <v-sheet>
+                        <v-card-title>
+                            <span class="text-h5">{{ 'Client Information' }}</span>
+                        </v-card-title>
 
+                        <v-card-text>
+                            First Name: {{ editedItem.firstname }}
+                        </v-card-text>
+                        <v-card-text>
+                            Middle Name: {{ editedItem.middlename }}
+                        </v-card-text>
+                        <v-card-text>
+                            Last Name: {{ editedItem.lastname }}
+                        </v-card-text>
+                        <v-card-text>
+                            Age: {{ editedItem.age }}
+                        </v-card-text>
+                        <v-card-text>
+                            Sex: {{ editedItem.sex }}
+                        </v-card-text>
+                        <v-card-text>
+                            Qualification: {{ editedItem.qualification }}
+                        </v-card-text>
+                        <v-card-text>
+                            Course/Year: {{ editedItem.course_year }}
+                        </v-card-text>
+                        <v-card-text>
+                            Address: {{ editedItem.address }}
+                        </v-card-text>
+                        <v-card-text>
+                            Action Provided: {{ editedItem.actionprovided }}
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue-darken-1" variant="text" class="border-button"
+                                @click="showMoreDialog = false">
+                                Close
+                            </v-btn>
                         </v-card-actions>
                     </v-sheet>
                 </v-dialog>
@@ -201,10 +227,12 @@ const headers = [
     { title: 'Firstname', align: 'start', sortable: true, key: 'firstname' },
     { title: 'Middlename', align: 'start', sortable: false, key: 'middlename' },
     { title: 'Lastname', align: 'start', sortable: false, key: 'lastname' },
+    { title: 'Age', align: 'start', sortable: false, key: 'age' },
+    { title: 'Sex', align: 'start', sortable: false, key: 'sex' },
     { title: 'Qualification', align: 'start', sortable: false, key: 'qualification' },
     { title: 'Course/Year', align: 'start', sortable: false, key: 'course_year' },
     { title: 'Address', align: 'start', sortable: false, key: 'address' },
-    { title: 'Actionprovided', align: 'start', sortable: false, key: 'actionprovided' },
+    { title: 'Action Provided', align: 'start', sortable: false, key: 'actionprovided' },
     { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
 
 ]
@@ -233,10 +261,10 @@ const editedItem = ref({
     address: '',
 })
 
-// function getSnackbarText() {
-//     console.log(editedIndex.value)
-//     return editedIndex.value === -1 ? 'Item saved successfully!' : 'Item edited successfully!';
-// }
+function getSnackbarText() {
+    console.log(editedIndex.value)
+    return editedIndex.value === -1 ? 'Item saved successfully!' : 'Item edited successfully!';
+}
 
 async function printItems() {
     let response = await axios.get("http://localhost/pacd-system-api/public/api/get-assessmentclients");
@@ -248,7 +276,9 @@ function getFormTitle() {
     return editedIndex.value === -1 ? 'New Item' : 'Edit Item';
 }
 
-function showMore() {
+function showMore(item) {
+    editedIndex.value = this.data.indexOf(item)
+    editedItem.value = Object.assign({}, item)
     showMoreDialog.value = true
 }
 
@@ -258,23 +288,17 @@ function editItem(item) {
     dialog.value = true
 }
 
-// async function saveEditItem(item) {
-//     await axios.post("http://localhost/pacd-system-api/public/api/updateclient", editedItem.value);
-//     dialog.value = false
-//     printItems();
-// }
-
 async function save() {
     if (editedIndex.value === -1) {
         await axios.post("http://localhost/pacd-system-api/public/api/createassessmentclient", editedItem.value);
         printItems();
         this.close()
-        // EditSnackbar.value = true
+        EditSnackbar.value = true
     } else if (editedIndex.value >= 0) {
         await axios.post("http://localhost/pacd-system-api/public/api/update-assessmentclient", editedItem.value);
         dialog.value = false
         printItems();
-        // EditSnackbar.value = true
+        EditSnackbar.value = true
     }
 }
 

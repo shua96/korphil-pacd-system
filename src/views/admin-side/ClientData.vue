@@ -121,20 +121,46 @@
                     </v-sheet>
                 </v-dialog>
 
-                <v-dialog v-model="showMoreDialog" max-width="500px" color="error">
-                    <v-sheet class="pa-2">
-                        <v-icon size="x-large" color="#E12727"
-                            style="display: flex; margin: auto;">mdi-alert-circle-outline</v-icon>
-                        <v-card-title class="text-h5" style="display: flex; justify-content: center;">Are you
-                            sure?</v-card-title>
-                        <p class="text-h7" style="display: flex; justify-content: center;">Do you really want
-                            to delete this item?</p>
-                        <h1>{{ data }}</h1>
-                        <v-card-actions class="mt-6">
-                            <v-spacer></v-spacer>
-                            <v-btn class="text-capitalize px-5 border-button" style="border-color: #B4B2B2;" variant="flat"
-                                @click="showMoreDialog = false">Cancel</v-btn>
+                <v-dialog v-model="showMoreDialog" max-width="500px" persistent>
+                    <v-sheet>
+                        <v-card-title>
+                            <span class="text-h5">{{ 'Client Information' }}</span>
+                        </v-card-title>
 
+                        <v-card-text>
+                            First Name: {{ editedItem.firstname }}
+                        </v-card-text>
+                        <v-card-text>
+                            Middle Name: {{ editedItem.middlename }}
+                        </v-card-text>
+                        <v-card-text>
+                            Last Name: {{ editedItem.lastname }}
+                        </v-card-text>
+                        <v-card-text>
+                            Age: {{ editedItem.age }}
+                        </v-card-text>
+                        <v-card-text>
+                            Sex: {{ editedItem.sex }}
+                        </v-card-text>
+                        <v-card-text>
+                            Contact: {{ editedItem.contact }}
+                        </v-card-text>
+                        <v-card-text>
+                            Email: {{ editedItem.email }}
+                        </v-card-text>
+                        <v-card-text>
+                            Address: {{ editedItem.address }}
+                        </v-card-text>
+                        <v-card-text>
+                            Action Provided: {{ editedItem.actionprovided }}
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue-darken-1" variant="text" class="border-button"
+                                @click="showMoreDialog = false">
+                                Close
+                            </v-btn>
                         </v-card-actions>
                     </v-sheet>
                 </v-dialog>
@@ -204,7 +230,7 @@ const headers = [
     { title: 'Contact No.', align: 'start', sortable: false, key: 'contact' },
     { title: 'Email Adr', align: 'start', sortable: false, key: 'email' },
     { title: 'Address', align: 'start', sortable: false, key: 'address' },
-    { title: 'Action Provided', align: 'start', sortable: false, key: 'actionprovided', class: 'truncate' },
+    { title: 'Action Provided', align: 'start', sortable: false, key: 'actionprovided' },
     { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
 ]
 
@@ -247,7 +273,9 @@ function getFormTitle() {
     return editedIndex.value === -1 ? 'New Item' : 'Edit Item';
 }
 
-function showMore() {
+function showMore(item) {
+    editedIndex.value = this.data.indexOf(item)
+    editedItem.value = Object.assign({}, item)
     showMoreDialog.value = true
 }
 
