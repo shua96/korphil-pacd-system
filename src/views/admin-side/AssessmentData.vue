@@ -70,11 +70,11 @@
                                             label="Sex"></v-select>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.contact" type="number"
-                                            label="Contact No."></v-text-field>
+                                        <v-text-field v-model="editedItem.qualification"
+                                            label="Qualification"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.email" label="Email Address"></v-text-field>
+                                        <v-text-field v-model="editedItem.course_year" label="Course/Year"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
                                         <v-text-field v-model="editedItem.address" label="Address"></v-text-field>
@@ -198,14 +198,15 @@ onMounted(printItems);
 
 const headers = [
     { title: 'Date', align: 'start', sortable: false, key: '_created_at' },
-    { title: 'Name', align: 'start', sortable: true, key: 'fullname' },
-    { title: 'Age', align: 'start', sortable: false, key: 'age' },
-    { title: 'Sex', align: 'start', sortable: false, key: 'sex' },
-    { title: 'Contact No.', align: 'start', sortable: false, key: 'contact' },
-    { title: 'Email Adr', align: 'start', sortable: false, key: 'email' },
+    { title: 'Firstname', align: 'start', sortable: true, key: 'firstname' },
+    { title: 'Middlename', align: 'start', sortable: false, key: 'middlename' },
+    { title: 'Lastname', align: 'start', sortable: false, key: 'lastname' },
+    { title: 'Qualification', align: 'start', sortable: false, key: 'qualification' },
+    { title: 'Course/Year', align: 'start', sortable: false, key: 'course_year' },
     { title: 'Address', align: 'start', sortable: false, key: 'address' },
-    { title: 'Action Provided', align: 'start', sortable: false, key: 'actionprovided', class: 'truncate' },
+    { title: 'Actionprovided', align: 'start', sortable: false, key: 'actionprovided' },
     { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
+
 ]
 
 const EditSnackbar = ref(false)
@@ -227,8 +228,8 @@ const editedItem = ref({
     lastname: '',
     age: '',
     sex: '',
-    contact: '',
-    email: '',
+    qualification: '',
+    course_year: '',
     address: '',
 })
 
