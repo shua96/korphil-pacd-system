@@ -17,14 +17,14 @@
                 <div class="my-5 ml-8">Sort by:</div>
             </v-col>
             <v-col class="mx-1">
-                <v-combobox label="Year" v-model="sortByYear" :items="years" variant="solo" clearable>
-                </v-combobox>
+                <v-select label="Select Year" :items="[2000, 2001, 2002, 2003, 2004, 2004, 2005]" variant="solo">
+                </v-select>
             </v-col>
             <v-col>
-                <v-combobox label="Month"
+                <v-select label="Select Month"
                     :items="['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', ' September', 'October', 'November', 'December']"
-                    variant="solo" clearable>
-                </v-combobox>
+                    variant="solo">
+                </v-select>
             </v-col>
         </v-row>
     </v-sheet>
@@ -120,31 +120,36 @@
 
 <script setup>
 import { computed } from '@vue/reactivity';
-import axios from 'axios';
-import { onMounted } from 'vue';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-onMounted(printItems);
 const headers = ref([
     { title: 'Service/s Rendered', align: 'start', sortable: true, key: 'name' },
     { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
 ])
 
-const data = ref([])
+const data = ref([
+    { name: 'Training', path: '/training' },
+    { name: 'Registrar', path: '/registrar' },
+    { name: 'Certification and Assessment', path: '/certificationassessment' },
+    { name: 'Procurement', path: '/procurement' },
+    { name: 'Accounting', path: '/accounting' },
+    { name: 'Admin', path: '/admin' },
+])
 
 const timeout = ref(1500)
+
 const EditSnackbar = ref(false)
+
 const search = ref('')
+
 const dialog = ref(false)
+
 const dialogDelete = ref(false)
+
 const editedIndex = ref(-1)
-const sortByYear = ref('');
-const years = computed(() => {
-    const year = new Date().getFullYear();
-    return Array.from({ length: year - 1900 }, (_, index) => 1901 + index);
-});
+
 const editedItem = ref({
     name: '',
 })
@@ -164,28 +169,14 @@ function editItem(item) {
     dialog.value = true
 }
 
-// async function save() {
-//     await axios.post("http://localhost/pacd-system-api/public/api/updatefaq", editedItem.value)
-//     this.close()
-//     this.EditSnackbar = true
-// }
-
-async function printItems() {
-    let response = await axios.get("http://localhost/pacd-system-api/public/api/getfaq");
-    console.log(response)
-    data.value = response.data;
-}
-
-async function save() {
-    if (editedIndex.value === -1) {
-        await axios.post("http://localhost/pacd-system-api/public/api/createfaq", editedItem.value);
-        printItems();
-        this.close()
-    } else if (editedIndex.value >= 0) {
-        await axios.post("http://localhost/pacd-system-api/public/api/updatefaq", editedItem.value);
-        dialog.value = false
-        printItems();
+function save() {
+    if (this.editedIndex > -1) {
+        Object.assign(this.data[this.editedIndex], this.editedItem)
+    } else {
+        this.data.push(this.editedItem)
     }
+    this.close()
+    this.EditSnackbar = true
 }
 
 function close() {
@@ -202,7 +193,7 @@ function deleteItem(item) {
 }
 
 function deleteItemConfirm() {
-    this.item.splice(this.editedIndex, 1)
+    this.data.splice(this.editedIndex, 1)
     this.closeDelete()
 }
 
@@ -213,7 +204,7 @@ function closeDelete() {
 }
 
 function routeTo(item) {
-    router.push('faqs');
+    router.push(item.value.path);
 }
 
 </script>
