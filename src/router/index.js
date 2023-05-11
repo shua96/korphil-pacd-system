@@ -20,6 +20,11 @@ const routes = [
     path: '/faq',
     component: () => import('@/views/user-side/DepartmentListPage'),
   },
+  {
+    path: '/feedback',
+    component: () => import('@/views/user-side/feedback'),
+  },
+
   // USER-SIDE ROUTES ENDS HERE
 
   {

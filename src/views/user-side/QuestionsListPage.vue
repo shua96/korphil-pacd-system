@@ -9,7 +9,7 @@
                 <template v-slot:divider>
                 </template>
             </v-breadcrumbs>
-            <v-btn size="large" style="background-color: white; color: #2C96F8">Feedback</v-btn>
+            <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback">Feedback</v-btn>
         </v-app-bar>
 
 
@@ -31,25 +31,66 @@
                 </v-col>
             </v-row>
 
+            <!-- line here -->
+
             <v-row justify="center" style="margin-right: 100px;">
 
                 <v-col cols="3" class="ma-10">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <v-card class="ma-3" style="background-color: #2279C9; border-radius: 20px; " width="90"
-                            height="90">
-                            <v-icon class="ma-5" icon="mdi-frequently-asked-questions" color="white"></v-icon>
-                        </v-card>
+                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117"
+                        @click="dialog = true">
 
+                        <h3 class="ml-7 mt-7">What are the current programs offered? Diploma and Short Term Courses</h3>
+                        <div class="text-center">
+                            <v-dialog v-model="dialog" width="auto">
+
+                                <v-card>
+                                    <v-card-text>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua.
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-btn color="primary" block @click="dialog = false">Close</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                        </div>
                     </v-card>
+                </v-col>
 
+
+
+                <v-col cols="3" class="ma-10 ">
+                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
+                        <h3 class="mt-11" style="text-align:center">Are there tuition fees?</h3>
+                    </v-card>
+                </v-col>
+            </v-row>
+
+            <!-- line here -->
+            <v-row justify="center" style="margin-right: 100px;">
+                <v-col cols="3" class="ma-10 ">
+                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
+                        <h3 class="mt-11" style="text-align:center">Claim Competency Assessment Result</h3>
+                    </v-card>
                 </v-col>
 
                 <v-col cols="3" class="ma-10 ">
                     <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <v-card class="ma-3" style="background-color: #2279C9; border-radius: 20px; " width="90"
-                            height="90">
-                            <v-icon class="ma-5" icon="mdi-frequently-asked-questions" color="white"></v-icon>
-                        </v-card>
+                        <h3 class="mt-11" style="text-align:center">How long are the trainings for specific courses?</h3>
+                    </v-card>
+                </v-col>
+            </v-row>
+            <!-- line here -->
+            <v-row justify="center" style="margin-right: 100px;">
+                <v-col cols="3" class="ma-10">
+                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
+                        <h3 class="mt-11" style="text-align:center">Claim TOR/other documents available in registrar</h3>
+                    </v-card>
+                </v-col>
+
+                <v-col cols="3" class="ma-10 ">
+                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
+                        <h3 class="mt-11" style="text-align:center">Schedule of Competency Assessment </h3>
                     </v-card>
                 </v-col>
             </v-row>
@@ -57,45 +98,21 @@
             <v-row justify="center" style="margin-right: 100px;">
                 <v-col cols="3" class="ma-10 ">
                     <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <v-card class="ma-3" style="background-color: #2279C9; border-radius: 20px; " width="90"
-                            height="90">
-                            <v-icon class="ma-5" icon="mdi-frequently-asked-questions" color="white"></v-icon>
-                        </v-card>
-
+                        <h3 class="ml-7 mt-7">Filing Up and Submission Comptency Assessment Application Form</h3>
                     </v-card>
                 </v-col>
 
                 <v-col cols="3" class="ma-10 ">
                     <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <v-card class="ma-3" style="background-color: #2279C9; border-radius: 20px; " width="90"
-                            height="90">
-                            <v-icon class="ma-5" icon="mdi-frequently-asked-questions" color="white"></v-icon>
-                        </v-card>
-                    </v-card>
-                </v-col>
-            </v-row>
-            <!-- line here -->
-            <v-row justify="center" style="margin-right: 100px;">
-                <v-col cols="3" class="ma-10 ">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <v-card class="ma-3" style="background-color: #2279C9; border-radius: 20px; " width="90"
-                            height="90">
-                            <v-icon class="ma-5" icon="mdi-frequently-asked-questions" color="white"></v-icon>
-                        </v-card>
-                    </v-card>
-                </v-col>
-
-                <v-col cols="3" class="ma-10 ">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <v-card class="ma-3" style="background-color: #2279C9; border-radius: 20px; " width="90"
-                            height="90">
-                            <v-icon class="ma-5" icon="mdi-frequently-asked-questions" color="white"></v-icon>
-                        </v-card>
+                        <h3 class="mt-11" style="text-align:center">Schedule of Competency Assessment </h3>
                     </v-card>
                 </v-col>
             </v-row>
 
-            <v-btn icon="mdi-arrow-left" color="white" style="margin-left: 940px;" to="/departments-list"></v-btn>
+
+            <v-btn icon="mdi-arrow-left" color="white" style="margin-left: 907px; margin-bottom: 40px"
+                to="/departments-list"></v-btn>
+
         </v-parallax>
     </v-layout>
 </template>
@@ -122,7 +139,25 @@ const items = ref([
     },
 ])
 
+const dialog = ref(false)
 
+const dialogs = document.querySelectorAll('.dialog');
+const overlay = document.querySelector('.dialog-overlay');
+
+dialogs.forEach(dialog => {
+    const openButton = dialog.querySelector('.open-button');
+    const closeButton = dialog.querySelector('.close-button');
+
+    openButton.addEventListener('click', () => {
+        dialog.classList.add('open');
+        overlay.style.display = 'block';
+    });
+
+    closeButton.addEventListener('click', () => {
+        dialog.classList.remove('open');
+        overlay.style.display = 'none';
+    });
+});
 
 </script>
 
