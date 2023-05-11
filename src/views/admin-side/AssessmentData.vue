@@ -1,5 +1,5 @@
 <template>
-    <h1 class="pl-10 mb-10 ">Assessment Client Data !!YOU SHOULD HAVE THIS CODES!!</h1>
+    <h1 class="pl-10 mb-10 ">Assessment Client Data</h1>
     <v-sheet style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
         <v-row no-gutters>
             <v-col>
@@ -334,6 +334,17 @@ function closeDelete() {
 </script>
 
 <style>
+.underline {
+    text-decoration: underline;
+    font-size: 18px;
+
+}
+
+.color {
+    background-color: #F0F0F0;
+    padding: 8px;
+}
+
 .v-main {
     background-color: #F7F7FB;
 }
