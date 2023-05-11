@@ -1,19 +1,21 @@
 <template>
     <v-layout class="container">
-        <v-card class="size">
-            <v-table class="table">
+        <v-sheet class="elevation-1 ">
+            <h1 style="text-align: center;">This is Header</h1>
+            <v-table class="table fixed-table">
                 <thead>
                     <tr>
-                        <th style="font-weight: 900; " colspan="2" class="mb-1">
+
+                        <th style="font-weight: 900;height: 100px;">
                             A. Total Number of Clients Server by Gender
                         </th>
-
+                        <th></th>
                     </tr>
                     <tr>
-                        <th class="text-center divider">
+                        <th style="font-weight: bold;" class="text-center divider">
                             Gender
                         </th>
-                        <th class="text-center">
+                        <th style="font-weight: bold;" class="text-center">
                             No. of Clients
                         </th>
                     </tr>
@@ -29,43 +31,91 @@
                         </th>
                         <td>{{ app.items.total }}</td>
                     </tr>
+                    <th></th>
                 </tbody>
             </v-table>
-        </v-card>
+        </v-sheet>
+    </v-layout>
+
+    <v-layout class="container">
+        <v-sheet class="elevation-1 ">
+            <h1 style="text-align: center; margin-top: 50px;">This is Header </h1>
+            <v-table class="table fixed-table">
+                <thead>
+
+                    <tr>
+
+                        <th style="font-weight: 900;height: 100px;">
+                            B. Total Number of Clients Server by Gender
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th style="font-weight: bold;" class="text-center divider">
+                            Gender
+                        </th>
+                        <th style="font-weight: bold;" class="text-center">
+                            No. of Clients
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="text">
+                    <tr v-for="item in app.items" :key="item.name">
+                        <td class="text-center divider">{{ item.name }}</td>
+                        <td>{{ item.calories }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center divider">
+                            Total
+                        </th>
+                        <td>{{ app.items.total }}</td>
+                    </tr>
+                    <th></th>
+                </tbody>
+            </v-table>
+        </v-sheet>
     </v-layout>
 </template>
-
-
+  
 <script setup>
 import { useAppStore } from '@/stores/app';
 let app = useAppStore();
 </script>
-
+  
 <style>
-.texthead {
-    margin-top: 50px;
-}
-
 .text {
     text-align: center;
 }
 
-.size {
-    margin-left: 500px;
-    margin-right: 550px;
 
-}
 
 .table {
-    margin-top: 200px;
-
+    margin-top: 190px;
 }
 
 .container {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 0 auto;
+
+}
+
+.container>.v-sheet {
+    flex: 1;
+    max-width: 80%;
+}
+
+.fixed-table {
+    table-layout: fixed;
+}
+
+.fixed-table th,
+.fixed-table td {
+    width: 50%;
+    word-wrap: break-word;
 }
 
 .divider {
@@ -85,3 +135,4 @@ let app = useAppStore();
     }
 }
 </style>
+  

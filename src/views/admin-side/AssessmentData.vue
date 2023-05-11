@@ -127,32 +127,37 @@
                             <span class="text-h5">{{ 'Client Information' }}</span>
                         </v-card-title>
 
-                        <v-card-text>
-                            First Name: {{ editedItem.firstname }}
+                        <v-card-text style="font-size:18px">
+                            Middle Name
+                            <p class="color" style="margin-left: 15px;">{{ editedItem.middlename }}</p>
                         </v-card-text>
-                        <v-card-text>
-                            Middle Name: {{ editedItem.middlename }}
+                        <v-card-text style="font-size:18px">
+                            Last Name
+                            <p class="color" style="margin-left: 15px;">{{ editedItem.lastname }}</p>
                         </v-card-text>
-                        <v-card-text>
-                            Last Name: {{ editedItem.lastname }}
+                        <v-card-text style="font-size:18px">
+                            Age
+                            <p class="color" style=" margin-left: 15px;">{{ editedItem.age }}</p>
                         </v-card-text>
-                        <v-card-text>
-                            Age: {{ editedItem.age }}
+                        <v-card-text style="font-size:18px">
+                            Sex
+                            <p class="color" style="margin-left: -15;"> {{ editedItem.sex }}</p>
                         </v-card-text>
-                        <v-card-text>
-                            Sex: {{ editedItem.sex }}
+                        <v-card-text style="font-size:18px">
+                            Qualification
+                            <p class="color" style="margin-left: 15px ">{{ editedItem.qualification }}</p>
                         </v-card-text>
-                        <v-card-text>
-                            Qualification: {{ editedItem.qualification }}
+                        <v-card-text style="font-size:18px">
+                            Course/Year
+                            <p class="color" style="margin-left: 15px"> {{ editedItem.course_year }}</p>
                         </v-card-text>
-                        <v-card-text>
-                            Course/Year: {{ editedItem.course_year }}
+                        <v-card-text style="font-size:18px">
+                            Address
+                            <p class="color" style=" margin-left: 15px">{{ editedItem.address }}</p>
                         </v-card-text>
-                        <v-card-text>
-                            Address: {{ editedItem.address }}
-                        </v-card-text>
-                        <v-card-text>
-                            Action Provided: {{ editedItem.actionprovided }}
+                        <v-card-text style="font-size:18px">
+                            Action Provided
+                            <p class="color" style="margin-left: 15px">{{ editedItem.actionprovided }}</p>
                         </v-card-text>
 
                         <v-card-actions>
@@ -360,4 +365,9 @@ function closeDelete() {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* .label-bold {
+    font-weight: bold;
+    color: red;
+} */
 </style>

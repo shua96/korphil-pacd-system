@@ -28,6 +28,26 @@ export const useAppStore = defineStore('app', {
                 name: 'Cupcake',
                 calories: 305,
             },
+            {
+                name: 'Cupcake',
+                calories: 305,
+            },
+            {
+                name: 'Cupcake',
+                calories: 305,
+            },
+            {
+                name: 'Cupcake',
+                calories: 305,
+            },
+            {
+                name: 'Cupcake',
+                calories: 305,
+            },
+            {
+                name: 'ian',
+                calories: 305,
+            },
         ],
     }),
 
