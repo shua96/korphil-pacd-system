@@ -7,9 +7,48 @@ export const useAppStore = defineStore('app', {
         name: '',
         user: null,
         credentials: {
-            email: 'admin',
-            password: 'admin',
-        }
+            email: '',
+            password: '',
+        },
+
+        items: [
+            {
+                name: 'Frozen Yogurt',
+                calories: 159,
+            },
+            {
+                name: 'Ice cream sandwich',
+                calories: 237,
+            },
+            {
+                name: 'Eclair',
+                calories: 262,
+            },
+            {
+                name: 'Cupcake',
+                calories: 305,
+            },
+            {
+                name: 'Cupcake',
+                calories: 305,
+            },
+            {
+                name: 'Cupcake',
+                calories: 305,
+            },
+            {
+                name: 'Cupcake',
+                calories: 305,
+            },
+            {
+                name: 'Cupcake',
+                calories: 305,
+            },
+            {
+                name: 'ian',
+                calories: 305,
+            },
+        ],
     }),
 
     actions: {
