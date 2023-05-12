@@ -1,5 +1,5 @@
 <template>
-    <span class="ma-3">Howdy, Admin?</span>
+    <span class="ma-3">Howdy, {{ app.user?.firstname.charAt(0).toUpperCase() + app.user?.firstname.substring(1) }}?</span>
     <v-menu min-width="200px" rounded>
         <template v-slot:activator="{ props }">
             <v-btn icon v-bind="props">
@@ -8,14 +8,14 @@
                 </v-avatar>
             </v-btn>
         </template>
-        <v-card>
+        <v-sheet :height="250" :width="250">
             <v-card-text>
                 <div class="mx-auto text-center">
                     <v-avatar color="brown" icon="mdi-account-circle-outline">
                     </v-avatar>
-                    <h3>{{ user.fullName }}</h3>
+                    <h3>{{ app.user?.firstname.charAt(0).toUpperCase() + app.user?.firstname.substring(1) }}</h3>
                     <p class="text-caption mt-1">
-                        {{ user.email }}
+                        Access: {{ app.user?.access }}
                     </p>
                     <v-divider class="my-3"></v-divider>
                     <v-btn rounded variant="text">
@@ -26,17 +26,11 @@
 
                 </div>
             </v-card-text>
-        </v-card>
+        </v-sheet>
     </v-menu>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { useAppStore } from '@/stores/app';
 let app = useAppStore();
-const user = ref({
-    initials: 'JD',
-    fullName: 'John Doe',
-    email: 'john.doe@doe.com',
-})
 </script>
