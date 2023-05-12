@@ -11,12 +11,12 @@
                 <template v-slot:divider>
                 </template>
             </v-breadcrumbs>
-            <v-btn size="large" style="background-color: white; color: #2C96F8">Feedback</v-btn>
+            <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback">Feedback</v-btn>
 
         </v-app-bar>
 
         <v-parallax src="@/assets/PARALLAX.svg" height="750">
-            <v-row>
+            <v-row style=" display: flex; flex-wrap: wrap; flex: 1 1 auto; margin: 30px;">
                 <v-col cols="8" style="margin-left: 300px; margin-top: 200px">
 
 
@@ -132,14 +132,7 @@ const items = ref([
 ])
 
 
-
 </script>
 
-<style>
-.v-row {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1 1 auto;
-    margin: 30px;
-}
-</style>
+ 
+
