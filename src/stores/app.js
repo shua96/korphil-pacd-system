@@ -4,13 +4,14 @@ import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore('app', {
     state: () => ({
-        name: 'Ayan',
+        name: '',
         user: null,
         credentials: {
             email: 'admin',
             password: 'admin',
         }
     }),
+
     actions: {
         async login() {
             await axios.get('/sanctum/csrf-cookie');

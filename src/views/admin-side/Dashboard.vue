@@ -63,6 +63,7 @@ import GenderPieGraph from '@/components/dashboard/GenderPieGraph.vue';
 import AgePieGraph from '@/components/dashboard/AgePieGraph.vue';
 import ReasonForVisitPieGraph from '@/components/dashboard/ReasonForVisitPieGraph.vue';
 import ActionProvidedPieGraph from '@/components/dashboard/ActionProvidedPieGraph.vue';
+import axios from 'axios';
 
 </script>
 

@@ -121,20 +121,57 @@
                     </v-sheet>
                 </v-dialog>
 
-                <v-dialog v-model="showMoreDialog" max-width="500px" color="error">
-                    <v-sheet class="pa-2">
-                        <v-icon size="x-large" color="#E12727"
-                            style="display: flex; margin: auto;">mdi-alert-circle-outline</v-icon>
-                        <v-card-title class="text-h5" style="display: flex; justify-content: center;">Are you
-                            sure?</v-card-title>
-                        <p class="text-h7" style="display: flex; justify-content: center;">Do you really want
-                            to delete this item?</p>
-                        <h1>{{ data }}</h1>
-                        <v-card-actions class="mt-6">
-                            <v-spacer></v-spacer>
-                            <v-btn class="text-capitalize px-5 border-button" style="border-color: #B4B2B2;" variant="flat"
-                                @click="showMoreDialog = false">Cancel</v-btn>
+                <v-dialog v-model="showMoreDialog" max-width="500px" persistent>
+                    <v-sheet>
+                        <v-card-title>
+                            <span class="text-h5">{{ 'Client Information' }}</span>
+                        </v-card-title>
 
+                        <v-card-text style="font-size:18px">
+                            Firstname
+                            <p class="color  " style=" margin-left: 15px; "> {{ editedItem.firstname }}
+                            </p>
+                        </v-card-text>
+
+                        <v-card-text style="font-size:18px">
+                            Middle Name
+                            <p class="color" style="margin-left: 15px;">{{ editedItem.middlename }}</p>
+                        </v-card-text>
+                        <v-card-text style="font-size:18px">
+                            Last Name
+                            <p class="color" style="margin-left: 15px;">{{ editedItem.lastname }}</p>
+                        </v-card-text>
+                        <v-card-text style="font-size:18px">
+                            Age
+                            <p class="color" style=" margin-left: 15px;">{{ editedItem.age }}</p>
+                        </v-card-text>
+                        <v-card-text style="font-size:18px">
+                            Sex
+                            <p class="color" style="margin-left: -15;"> {{ editedItem.sex }}</p>
+                        </v-card-text>
+                        <v-card-text style="font-size:18px">
+                            Contact
+                            <p class="color" style="margin-left: 15px ">{{ editedItem.contact }}</p>
+                        </v-card-text>
+                        <v-card-text style="font-size:18px">
+                            Email
+                            <p class="color" style="margin-left: 15px"> {{ editedItem.email }}</p>
+                        </v-card-text>
+                        <v-card-text style="font-size:18px">
+                            Address
+                            <p class="color" style=" margin-left: 15px">{{ editedItem.address }}</p>
+                        </v-card-text>
+                        <v-card-text style="font-size:18px">
+                            Action Provided
+                            <p class="color" style="margin-left: 15px">{{ editedItem.actionprovided }}</p>
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue-darken-1" variant="text" class="border-button"
+                                @click="showMoreDialog = false">
+                                Close
+                            </v-btn>
                         </v-card-actions>
                     </v-sheet>
                 </v-dialog>
@@ -204,7 +241,7 @@ const headers = [
     { title: 'Contact No.', align: 'start', sortable: false, key: 'contact' },
     { title: 'Email Adr', align: 'start', sortable: false, key: 'email' },
     { title: 'Address', align: 'start', sortable: false, key: 'address' },
-    { title: 'Action Provided', align: 'start', sortable: false, key: 'actionprovided', class: 'truncate' },
+    { title: 'Action Provided', align: 'start', sortable: false, key: 'actionprovided' },
     { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
 ]
 
@@ -247,7 +284,9 @@ function getFormTitle() {
     return editedIndex.value === -1 ? 'New Item' : 'Edit Item';
 }
 
-function showMore() {
+function showMore(item) {
+    editedIndex.value = this.data.indexOf(item)
+    editedItem.value = Object.assign({}, item)
     showMoreDialog.value = true
 }
 
@@ -304,6 +343,17 @@ function closeDelete() {
 </script>
 
 <style>
+.underline {
+    text-decoration: underline;
+    font-size: 18px;
+
+}
+
+.color {
+    background-color: #F0F0F0;
+    padding: 8px;
+}
+
 .v-main {
     background-color: #F7F7FB;
 }

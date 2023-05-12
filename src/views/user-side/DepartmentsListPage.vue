@@ -1,7 +1,8 @@
 <template>
     <v-layout>
 
-        <v-app-bar :elevation="0" color="transparent" class="mt-7 pa-6">
+        <v-app-bar :elevation="0" color="teal-darken-4" class=" pa-6 py-10" scroll-behavior="collapse"
+            image="src/assets/PARALLAX.svg">
             <v-avatar size="110" class="ml-16">
                 <v-img src="@/assets/rtc1.png"> </v-img>
             </v-avatar>
