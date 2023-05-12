@@ -192,12 +192,6 @@
             {{ moment(item.raw.created_at).format('YYYY-MM-DD') }}
         </template>
 
-        <template v-slot:item._actionprovided="{ item }">
-            <div class="text-truncate">
-                {{ item.raw.actionprovided }}
-            </div>
-        </template>
-
         <template v-slot:item.actions="{ item }">
             <v-icon size="small" @click="editItem(item.raw)">
                 mdi-square-edit-outline

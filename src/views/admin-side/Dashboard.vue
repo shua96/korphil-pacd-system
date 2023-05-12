@@ -1,7 +1,5 @@
 <template>
-    <h1 class="thisH1">Dashboard
-
-    </h1>
+    <h1 class="thisH1">Dashboard</h1>
     <div style="display: flex; justify-content: center;">
         <v-btn class="text-capitalize elevation-0 mt-2 mr-5 border-button " to="/walkin-dashboard"
             prepend-icon="mdi-arrow-left-circle">Go to Walkin Client
@@ -63,7 +61,6 @@ import GenderPieGraph from '@/components/dashboard/GenderPieGraph.vue';
 import AgePieGraph from '@/components/dashboard/AgePieGraph.vue';
 import ReasonForVisitPieGraph from '@/components/dashboard/ReasonForVisitPieGraph.vue';
 import ActionProvidedPieGraph from '@/components/dashboard/ActionProvidedPieGraph.vue';
-import axios from 'axios';
 
 </script>
 

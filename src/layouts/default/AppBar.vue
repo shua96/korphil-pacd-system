@@ -21,6 +21,8 @@
       <v-list-item prepend-icon="mdi-database" title="CLIENT DATA" to="/clientdata" style="color: white;"></v-list-item>
       <v-list-item prepend-icon="mdi-folder-account-outline" title="ASSESSMENT DATA" to="/assessmentdata"
         style="color: white;"></v-list-item>
+      <v-list-item v-if="app.user.access?.indexOf('superadmin') >= 0" prepend-icon="mdi-account-multiple-plus"
+        title="MANAGE ACCOUNTS" to="/manageaccount" style="color: white;"></v-list-item>
       <v-list-item prepend-icon="mdi-poll" title="SUMMARY REPORT" to="/summaryreport" style="color: white;"></v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -38,7 +40,10 @@
 </template>
 <script setup>
 import profile from '@/components/profile.vue'
+import { useAppStore } from '@/stores/app';
 import { ref } from 'vue';
+
+let app = useAppStore()
 
 const drawer = ref(true)
 const rail = ref(true)

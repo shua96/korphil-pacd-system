@@ -139,6 +139,14 @@ const routes = [
         }
       },
       {
+        path: '/manageaccount',
+        name: 'Manage Accounts',
+        component: () => import('@/views/admin-side/ManageAccounts.vue'),
+        meta: {
+          title: 'Manage Accounts'
+        }
+      },
+      {
         path: '/summaryreport',
         name: 'Summary Report',
         component: () => import('@/views/admin-side/SummaryReport.vue'),
