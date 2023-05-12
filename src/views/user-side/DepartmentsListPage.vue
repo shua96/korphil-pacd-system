@@ -1,6 +1,5 @@
 <template>
     <v-layout>
-
         <v-app-bar :elevation="0" color="teal-darken-4" class=" pa-6 py-10" scroll-behavior="collapse"
             image="src/assets/PARALLAX.svg">
             <v-avatar size="110" class="ml-16">

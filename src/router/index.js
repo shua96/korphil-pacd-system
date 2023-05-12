@@ -1,4 +1,5 @@
 // Composables
+import { useAppStore } from '@/stores/app';
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -15,10 +16,6 @@ const routes = [
   {
     path: '/questions-list',
     component: () => import('@/views/user-side/QuestionsListPage'),
-  },
-  {
-    path: '/faq',
-    component: () => import('@/views/user-side/DepartmentListPage'),
   },
   {
     path: '/feedback',
@@ -165,5 +162,34 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })
+
+router.beforeEach(routeGuard);
+
+async function routeGuard(to) {
+  let app = useAppStore();
+  if (to.href == '/login') {
+    return true;
+  }
+
+  // if (to.href == '/') {
+  //   return true;
+  // }
+
+  switch (to.href) {
+    case '/':
+    case '/departments-list':
+    case '/questions-list':
+    case '/feedback':
+      return true;
+      break;
+  }
+
+  await app.loginCheck();
+  if (app.user) {
+    return true;
+  }
+
+  router.push('/login');
+}
 
 export default router

@@ -34,28 +34,22 @@
             <!-- line here -->
 
             <v-row justify="center" style="margin-right: 100px;">
-
                 <v-col cols="3" class="ma-10">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117"
-                        @click="dialog = true">
 
+                    <v-list v-model:opened="open">
+                        <v-list-item prepend-icon="mdi-home" title="Home"></v-list-item>
+                    </v-list>
+                    <v-list-group value="Users">
+                        <template v-slot:activator="{ props }">
+                            <v-list-item v-bind="props" prepend-icon="mdi-account-circle" title="Users"></v-list-item>
+                        </template>
+                    </v-list-group>
+
+                    <!-- <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
                         <h3 class="ml-7 mt-7">What are the current programs offered? Diploma and Short Term Courses</h3>
-                        <div class="text-center">
-                            <v-dialog v-model="dialog" width="auto">
-
-                                <v-card>
-                                    <v-card-text>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.
-                                    </v-card-text>
-                                    <v-card-actions>
-                                        <v-btn color="primary" block @click="dialog = false">Close</v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-dialog>
-                        </div>
-                    </v-card>
+                    </v-card> -->
                 </v-col>
+
 
 
 
@@ -139,25 +133,7 @@ const items = ref([
     },
 ])
 
-const dialog = ref(false)
 
-const dialogs = document.querySelectorAll('.dialog');
-const overlay = document.querySelector('.dialog-overlay');
-
-dialogs.forEach(dialog => {
-    const openButton = dialog.querySelector('.open-button');
-    const closeButton = dialog.querySelector('.close-button');
-
-    openButton.addEventListener('click', () => {
-        dialog.classList.add('open');
-        overlay.style.display = 'block';
-    });
-
-    closeButton.addEventListener('click', () => {
-        dialog.classList.remove('open');
-        overlay.style.display = 'none';
-    });
-});
 
 </script>
 
