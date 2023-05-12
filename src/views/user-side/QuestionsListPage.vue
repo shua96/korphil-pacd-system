@@ -1,6 +1,7 @@
 <template>
     <v-layout>
-        <v-app-bar :elevation="0" color="transparent" class="mt-7 pa-6">
+        <v-app-bar :elevation="0" color="teal-darken-4" class=" pa-6 py-10" scroll-behavior="collapse"
+            image="src/assets/PARALLAX.svg">
             <v-avatar size="110" class="ml-16">
                 <v-img src="@/assets/rtc1.png"> </v-img>
             </v-avatar>
@@ -10,7 +11,9 @@
                 </template>
             </v-breadcrumbs>
             <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback">Feedback</v-btn>
+
         </v-app-bar>
+
 
 
         <v-parallax src="@/assets/PARALLAX.svg" max-width="100%">
@@ -33,79 +36,87 @@
 
             <!-- line here -->
 
-            <v-row justify="center" style="margin-right: 100px;">
-                <v-col cols="3" class="ma-10">
+            <v-row justify="center" style="margin-right: 50px;">
+                <v-col cols="4" class="mt-4 mb-2">
 
-                    <v-list v-model:opened="open">
-                        <v-list-item prepend-icon="mdi-home" title="Home"></v-list-item>
-                    </v-list>
-                    <v-list-group value="Users">
-                        <template v-slot:activator="{ props }">
-                            <v-list-item v-bind="props" prepend-icon="mdi-account-circle" title="Users"></v-list-item>
-                        </template>
-                    </v-list-group>
-
-                    <!-- <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <h3 class="ml-7 mt-7">What are the current programs offered? Diploma and Short Term Courses</h3>
-                    </v-card> -->
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="What are the current programs offered?"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
                 </v-col>
 
+                <v-col cols="4" class="mt-4 mb-2 ">
 
-
-
-                <v-col cols="3" class="ma-10 ">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <h3 class="mt-11" style="text-align:center">Are there tuition fees?</h3>
-                    </v-card>
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i"
+                            title="Filling Up and Submission Comptency Assessment Application Form"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
                 </v-col>
             </v-row>
 
             <!-- line here -->
-            <v-row justify="center" style="margin-right: 100px;">
-                <v-col cols="3" class="ma-10 ">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <h3 class="mt-11" style="text-align:center">Claim Competency Assessment Result</h3>
-                    </v-card>
+            <v-row justify="center" style="margin-right: 50px;">
+                <v-col cols="4" class="mt-4 mb-2 ">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="Claim Competency Assessment Result"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
                 </v-col>
 
-                <v-col cols="3" class="ma-10 ">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <h3 class="mt-11" style="text-align:center">How long are the trainings for specific courses?</h3>
-                    </v-card>
+
+                <v-col cols="4" class="mt-4 mb-2 ">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="How long are the trainings for specific courses?"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
+                </v-col>
+            </v-row>
+
+            <!-- line here -->
+            <v-row justify="center" style="margin-right: 50px;">
+                <v-col cols="4" class="mt-4 mb-2">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="Claim TOR/other documents available in registrar"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
+                </v-col>
+
+                <v-col cols="4" class="mt-4 mb-2 ">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title=" Schedule of Competency Assessment"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
                 </v-col>
             </v-row>
             <!-- line here -->
-            <v-row justify="center" style="margin-right: 100px;">
-                <v-col cols="3" class="ma-10">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <h3 class="mt-11" style="text-align:center">Claim TOR/other documents available in registrar</h3>
-                    </v-card>
+            <v-row justify="center" style="margin-right: 50px;">
+                <v-col cols="4" class="mt-4 mb-2 ">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="Are there tuition fees?"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
                 </v-col>
 
-                <v-col cols="3" class="ma-10 ">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <h3 class="mt-11" style="text-align:center">Schedule of Competency Assessment </h3>
-                    </v-card>
-                </v-col>
-            </v-row>
-            <!-- line here -->
-            <v-row justify="center" style="margin-right: 100px;">
-                <v-col cols="3" class="ma-10 ">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <h3 class="ml-7 mt-7">Filing Up and Submission Comptency Assessment Application Form</h3>
-                    </v-card>
-                </v-col>
-
-                <v-col cols="3" class="ma-10 ">
-                    <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="500" height="117">
-                        <h3 class="mt-11" style="text-align:center">Schedule of Competency Assessment </h3>
-                    </v-card>
+                <v-col cols="4" class="mt-4 mb-2 ">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="Schedule of Competency Assessment"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
                 </v-col>
             </v-row>
 
-
-            <v-btn icon="mdi-arrow-left" color="white" style="margin-left: 907px; margin-bottom: 40px"
+            <v-btn icon="mdi-arrow-left" color="white" style="margin-left: 900px; margin-top: 40px"
                 to="/departments-list"></v-btn>
+
 
         </v-parallax>
     </v-layout>
