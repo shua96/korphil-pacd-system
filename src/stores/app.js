@@ -15,7 +15,7 @@ export const useAppStore = defineStore('app', {
     actions: {
         async login() {
             await axios.get('/sanctum/csrf-cookie');
-            let response = await axios.post('api/login', this.credentials);
+            let response = await axios.post('/api/login', this.credentials);
             router.push('/dashboard')
             this.user = await response.data
         },
