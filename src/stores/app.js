@@ -53,16 +53,31 @@ export const useAppStore = defineStore('app', {
 
     actions: {
         async login() {
-            await axios.get('/sanctum/csrf-cookie');
-            let response = await axios.post('/api/login', this.credentials);
-            router.push('/dashboard')
-            this.user = await response.data
+            try {
+                let response = await axios.post('/api/login', this.credentials);
+                this.user = await response.data;
+                console.log(this.user);
+                router.push('/dashboard');
+            } catch (error) {
+                console.log(error);
+                alert("Oops! Invalid credentials");
+            }
         },
 
         async logout() {
             await axios.post('/api/logout',);
             this.user = null;
             router.push('/login')
+        },
+
+        async loginCheck() {
+            try {
+                await axios.get('/sanctum/csrf-cookie');
+                let response = await axios.get('/api/user');
+                this.user = await response.data;
+            } catch (error) {
+                this.user = null;
+            }
         }
     }
 
