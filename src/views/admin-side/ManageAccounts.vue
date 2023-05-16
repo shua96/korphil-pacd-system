@@ -55,7 +55,8 @@
                                         <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
                                     </v-col> -->
                                     <v-col cols="4">
-                                        <v-text-field v-model="editedItem.contact" label="Contact No."></v-text-field>
+                                        <v-text-field v-model="editedItem.contact" maxlength="11" label="Contact No."
+                                            placeholder="09xx xxx xxxx"></v-text-field>
                                     </v-col>
                                     <v-col cols="4">
                                         <v-select :items="['admin']" v-model="editedItem.access" label="Access"></v-select>
