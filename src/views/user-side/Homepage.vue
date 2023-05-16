@@ -10,6 +10,7 @@
                 </template>
 
             </v-breadcrumbs>
+            <v-btn class="mr-2 ml-n3" variant="text" icon="mdi-account-outline" color="white" to="/login"></v-btn>
 
             <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback">Feedback</v-btn>
         </v-app-bar>
