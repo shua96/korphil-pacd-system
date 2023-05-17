@@ -2,6 +2,7 @@
     <v-layout style=" background-color: #3C59A6; height: 100vh;
 background-size: cover;
 ">
+        <v-btn class="mr-2 ml-n3" variant="text" icon="mdi-arrow-left-circle" color="white" to="/"></v-btn>
 
 
         <body>
@@ -32,14 +33,13 @@ background-size: cover;
                             <v-text-field label="Password" type="password" v-model="app.credentials.password"
                                 outlined></v-text-field>
                         </v-card-text>
-                        <v-card-actions class="justify-center">
-                            <v-btn type="submit" color="primary">Login</v-btn>
-                        </v-card-actions>
+                        <v-btn type="submit" color="primary" block>Login</v-btn>
                     </v-form>
                 </v-col>
             </v-row>
         </v-card>
         <!-- <v-img src="@/assets/ARA-01.svg" class="ara"></v-img> -->
+
     </v-layout>
 </template>
 
