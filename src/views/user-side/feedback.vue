@@ -1,100 +1,210 @@
 <template>
     <v-row>
-        <v-layout>
-            <v-navigation-drawer color="primary" permanent width="600" image="src/assets/PARALLAX.svg">
-                <v-row class="mt-11">
-                    <v-col cols="4">
-                        <v-avatar size="85" class="ml-16">
+        <v-col>
+            <v-layout>
+                <v-app-bar :elevation="0" color="primary" height="120" class="px-16">
+                    <template v-slot:prepend>
+                        <v-avatar size="80">
                             <v-img src="@/assets/rtc1.png"> </v-img>
                         </v-avatar>
-                    </v-col>
-                    <v-col cols="6">
+                    </template>
+                    <template v-slot:append>
                         <v-breadcrumbs :items="items" style="margin-left:auto; color: white">
                             <template v-slot:divider>
                             </template>
-                            <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback"
-                                class="ml-1">Feedback</v-btn>
+
                         </v-breadcrumbs>
+                        <v-menu :close-on-content-click="false" transition="scale-transition">
+                            <template v-slot:activator="{ props }">
+                                <v-btn color="white" v-bind="props" icon="mdi-account-outline">
+                                </v-btn>
+                            </template>
 
-                    </v-col>
-                </v-row>
+                            <v-form @submit.prevent="app.login()">
+
+                                <v-sheet min-width="300">
+                                    <v-card-title style="display: flex; justify-content: center;">
+                                        <v-icon icon="mdi-account-outline" size="x-large" />
+
+                                    </v-card-title>
+                                    <v-card-title style="display: flex; justify-content: center;">Login as
+                                        Admin</v-card-title>
+                                    <v-list>
+
+                                        <v-list>
+                                            <v-list-item>
+                                                <v-text-field label="Username"
+                                                    v-model="app.credentials.email"></v-text-field>
+                                            </v-list-item>
+
+                                            <v-list-item>
+                                                <v-text-field label="Password" v-model="app.credentials.password"
+                                                    type="password"></v-text-field>
+                                            </v-list-item>
+                                        </v-list>
+
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+
+                                            <v-btn variant="text" @click="menu = false">
+                                                Cancel
+                                            </v-btn>
+                                            <v-btn color="primary" variant="text" type="submit">
+                                                Login
+                                            </v-btn>
+                                        </v-card-actions>
+                                    </v-list>
+                                </v-sheet>
+                            </v-form>
+                        </v-menu>
+
+                        <v-btn size="large" color="white" to="/feedback">Feedback</v-btn>
+                    </template>
+                </v-app-bar>
+            </v-layout>
+            <v-carousel hide-delimiters cycle height="100vh" class="mb-n10" :show-arrows="false" overflow="hidden"
+                style=" width:100%; top:0;">
+                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
+
+                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
+
+                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
+            </v-carousel>
+        </v-col>
+        <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
+            <h1 class="mb-5 mx-auto">Customer Feedback Form
+            </h1>
+
+            <v-tabs v-model="tab" variant="outlined" class="elevation-0">
+                <v-tab value="one">Walkin Form</v-tab>
+                <v-tab value="two">Assessment Form</v-tab>
+            </v-tabs>
+
+            <v-card-text>
+                <v-window v-model="tab">
+                    <v-window-item value="one">
+                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
+                            border rounded height="400">
+                            <v-form class="ml-15 mt-5">
+                                <v-row>
+                                    <v-col cols="7">
+                                        <v-text-field label="Pangalan(Optional)" variant="outlined"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-text-field label="Edad" variant="outlined" type="number"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-select clearable label="Kasarian" :items="['Lalaki', 'Babae']"
+                                            variant="outlined">
+                                        </v-select>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="11">
+                                        <v-text-field label="Tirahan/Tanggapan" variant="outlined"></v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="4">
+                                        <v-text-field label="Telepono/CP #" variant="outlined" type="number"
+                                            maxlength="11"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="4">
+                                        <v-text-field label="Email Address" variant="outlined"></v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row style="display: flex; justify-self: ;">
+                                    <v-pagination :length="5" class="text-center"></v-pagination>
+
+                                </v-row>
+                            </v-form>
+
+                        </v-sheet>
+                    </v-window-item>
 
 
+                    <v-window-item value="two">
+                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
+                            border rounded height="400">
+                            <v-form class="ml-15 mt-5">
+                                <v-row>
+                                    <v-col cols="7">
+                                        <v-text-field label="Pangalan(Optional)" variant="outlined"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-text-field label="Edad" variant="outlined" type="number"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-select clearable label="Kasarian" :items="['Lalaki', 'Babae']"
+                                            variant="outlined">
+                                        </v-select>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="2">
 
-            </v-navigation-drawer>
+                                        <v-text-field label="Kurso/Taon" variant="outlined"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="3">
 
-        </v-layout>
-        <v-card style=" padding : 60px; margin-left: 60px; margin-right: 205px; margin-top: 10px;  width: 50%">
-            <h2 class="mb-7" style="text-align:center; color: #003B74;">CUSTOMER FEEDBACK FORM</h2>
-            <v-form>
-                <v-container>
-                    <v-row>
-                        <v-col cols="12" sm="6">
-                            <v-text-field label="Name" variant="outlined"></v-text-field>
-                        </v-col>
+                                        <v-text-field label="Qualification" variant="outlined"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="6">
 
-                        <v-col cols="12" sm="6">
-                            <v-select clearable label="Gender" :items="['Male', 'Female']">
-                                <v-text-field label="Gender" variant="outlined"></v-text-field>
-                            </v-select>
-                        </v-col>
+                                        <v-text-field label="Paaralan/Institusyon" variant="outlined"></v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="11">
+                                        <v-text-field label="Tirahan/Tanggapan" variant="outlined"></v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                </v-row>
+                            </v-form>
+                        </v-sheet>
+                    </v-window-item>
+                </v-window>
+            </v-card-text>
 
-                        <v-col cols="12" sm="6">
-                            <v-text-field label="Age" variant="outlined"></v-text-field>
-                        </v-col>
 
-                        <v-col cols="12" sm="6">
-                            <v-text-field label="Contact no." variant="outlined"></v-text-field>
-                        </v-col>
-
-                        <v-col cols="12" sm="12">
-                            <v-text-field label="Email Address" variant="outlined"></v-text-field>
-                        </v-col>
-
-                        <v-col cols="12" sm="12">
-                            <v-text-field label="Address" variant="outlined"></v-text-field>
-                        </v-col>
-
-                    </v-row>
-                    <v-card-item class="text-subtitle-1 mb-1 font-italic">
-                        Irerekomenda nyo po ba ang TESDA sa inyong kamag-anak at kaibigan?
-                    </v-card-item>
-
-                    <v-row>
-                        <v-col cols="6">
-                            <v-card-actions>
-                                <v-checkbox label="YES"></v-checkbox>
-                                <v-checkbox label="NO"></v-checkbox>
-                            </v-card-actions>
-                        </v-col>
-                    </v-row>
-
-                    <v-card-item class="h7">
-                        Mahalaga sa amin ang inyong suhestyon. Paki fill-out lamang po sa patlang.
-                    </v-card-item>
-                    <v-textarea clearable class="mt-5" variant="outlined"></v-textarea>
-                    <v-checkbox
-                        label="Ang mga impormasyon na aking inilahad sa from na ito ay tama at totoo. 
-                        Boluntaryo kong pinagkaloob ang mga hinihinging impormasyon ng form na ito. 
-                        Pinapayagan ko ang TESDA na isama sa kanilang database bilang bahagi ng kanilang records ant monitoring ang mga detalyeng ito. ">
-                    </v-checkbox>
-
-                    <v-row class="mt-3" align="center" justify="center">
-                        <v-col cols="auto">
-                            <v-btn style="background-color: #0963B9; color: white;"> SEND FORM </v-btn>
-                        </v-col>
-                    </v-row>
-
-                </v-container>
-            </v-form>
-        </v-card>
+        </v-col>
     </v-row>
 </template>
-
-
 <script setup>
+import { useAppStore } from '@/stores/app';
 import { ref } from 'vue';
 
+let rating = ref(false)
+const icons = [
+    'mdi-emoticon-happy-outline',
+    'mdi-emoticon-neutral-outline',
+    'mdi-emoticon-sad-outline',
+];
+
+function isSelected(index) {
+    return rating.value !== null && rating.value === index;
+}
+
+function selectIcon(index) {
+    rating.value = index;
+}
+
+function getFilledIcon(icon) {
+    if (icon === 'mdi-emoticon-sad-outline') {
+        return 'mdi-emoticon-sad';
+    }
+    if (icon === 'mdi-emoticon-happy-outline') {
+        return 'mdi-emoticon-happy';
+    }
+    if (icon === 'mdi-emoticon-neutral-outline') {
+        return 'mdi-emoticon-neutral';
+    }
+    return icon;
+}
+let app = useAppStore()
+
+const tab = ref(null)
 
 const items = ref([
     {
@@ -114,3 +224,59 @@ const items = ref([
 ])
 
 </script>
+
+<!-- <template>
+    <v-btn color="primary">
+        Open Dialog
+
+        <v-dialog v-model="dialog" activator="parent" width="500" class="elevation-0">
+            <v-card class="elevation-0">
+
+                <div class="text-center">
+                    <v-icon v-for="(icon, index) in icons" :key="icon" :color="isSelected(index) ? 'black' : ''"
+                        @click="selectIcon(index)" size="50px">
+                        {{ isSelected(index) ? getFilledIcon(icon) : icon }}
+                    </v-icon>
+                </div>
+                <v-card-actions>
+                    <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </v-btn>
+</template>
+<script setup>
+import { ref } from 'vue';
+
+let dialog = ref(false)
+
+let rating = ref(false);
+
+const icons = [
+    'mdi-emoticon-happy-outline',
+    'mdi-emoticon-neutral-outline',
+    'mdi-emoticon-sad-outline',
+];
+
+function isSelected(index) {
+    return rating.value !== null && rating.value === index;
+}
+
+function selectIcon(index) {
+    rating.value = index;
+}
+
+function getFilledIcon(icon) {
+    if (icon === 'mdi-emoticon-sad-outline') {
+        return 'mdi-emoticon-sad';
+    }
+    if (icon === 'mdi-emoticon-happy-outline') {
+        return 'mdi-emoticon-happy';
+    }
+    if (icon === 'mdi-emoticon-neutral-outline') {
+        return 'mdi-emoticon-neutral';
+    }
+    return icon;
+}
+</script>
+   -->

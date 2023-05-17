@@ -60,14 +60,14 @@ export const useAppStore = defineStore('app', {
                 router.push('/dashboard');
             } catch (error) {
                 console.log(error);
-                alert("Oops! Invalid credentials");
+                alert("Invalid credentials");
             }
         },
 
         async logout() {
             await axios.post('/api/logout',);
             this.user = null;
-            router.push('/login')
+            router.push('/')
         },
 
         async loginCheck() {
