@@ -307,6 +307,7 @@
     </v-row>
 </template>
 <script setup>
+import router from '@/router';
 import { useAppStore } from '@/stores/app';
 import axios from 'axios';
 import { ref } from 'vue';
@@ -314,6 +315,7 @@ import { ref } from 'vue';
 
 async function save() {
     await axios.post("http://localhost/pacd-system-api/public/api/createclient", editedItem.value);
+    router.push('/feedback');
 }
 
 let page = ref(1)
