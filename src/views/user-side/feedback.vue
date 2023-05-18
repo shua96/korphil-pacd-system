@@ -310,12 +310,6 @@ import { useAppStore } from '@/stores/app';
 import axios from 'axios';
 import { ref } from 'vue';
 
-let rating = ref(false)
-const icons = [
-    'mdi-emoticon-happy-outline',
-    'mdi-emoticon-neutral-outline',
-    'mdi-emoticon-sad-outline',
-];
 
 async function save() {
     await axios.post("http://localhost/pacd-system-api/public/api/createclient", editedItem.value);
@@ -323,7 +317,6 @@ async function save() {
 
 let page = ref(1)
 let aformPage = ref(1)
-let rating = ref(null)
 let rating1 = ref(null)
 let rating2 = ref(null)
 let rating3 = ref(null)
