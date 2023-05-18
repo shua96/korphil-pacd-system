@@ -1,5 +1,4 @@
 <template>
-    <h1>Hello</h1>
     <v-row>
         <v-col>
             <v-layout>
@@ -360,62 +359,3 @@ const items = ref([
     display: none;
 }
 </style>
-
-
-
-
-<!-- <template>
-    <v-btn color="primary">
-        Open Dialog
-
-        <v-dialog v-model="dialog" activator="parent" width="500" class="elevation-0">
-            <v-card class="elevation-0">
-
-                <div class="text-center">
-                    <v-icon v-for="(icon, index) in icons" :key="icon" :color="isSelected(index) ? 'black' : ''"
-                        @click="selectIcon(index)" size="50px">
-                        {{ isSelected(index) ? getFilledIcon(icon) : icon }}
-                    </v-icon>
-                </div>
-                <v-card-actions>
-                    <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
-    </v-btn>
-</template>
-<script setup>
-import { ref } from 'vue';
-
-let dialog = ref(false)
-
-let rating = ref(false);
-
-const icons = [
-    'mdi-emoticon-happy-outline',
-    'mdi-emoticon-neutral-outline',
-    'mdi-emoticon-sad-outline',
-];
-
-function isSelected(index) {
-    return rating.value !== null && rating.value === index;
-}
-
-function selectIcon(index) {
-    rating.value = index;
-}
-
-function getFilledIcon(icon) {
-    if (icon === 'mdi-emoticon-sad-outline') {
-        return 'mdi-emoticon-sad';
-    }
-    if (icon === 'mdi-emoticon-happy-outline') {
-        return 'mdi-emoticon-happy';
-    }
-    if (icon === 'mdi-emoticon-neutral-outline') {
-        return 'mdi-emoticon-neutral';
-    }
-    return icon;
-}
-</script>
-   -->
