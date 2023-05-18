@@ -92,36 +92,36 @@
                                 <v-row>
                                     <v-col cols="7">
                                         <v-text-field label="Pangalan(Optional)" variant="outlined"
-                                            v-model="editedItem.name"></v-text-field>
+                                            v-model="walkinItem.name"></v-text-field>
                                     </v-col>
                                     <v-col cols="2">
                                         <v-text-field label="Edad" variant="outlined" type="number"
-                                            v-model="editedItem.age"></v-text-field>
+                                            v-model="walkinItem.age"></v-text-field>
                                     </v-col>
                                     <v-col cols="2">
                                         <v-select label="Kasarian" :items="['Lalaki', 'Babae']" variant="outlined"
-                                            v-model="editedItem.sex">
+                                            v-model="walkinItem.sex">
                                         </v-select>
                                     </v-col>
                                 </v-row>
                                 <v-row>
                                     <v-col cols="11">
                                         <v-text-field label="Tirahan/Tanggapan" variant="outlined"
-                                            v-model="editedItem.address"></v-text-field>
+                                            v-model="walkinItem.address"></v-text-field>
                                     </v-col>
                                 </v-row>
                                 <v-row>
                                     <v-col cols="4">
                                         <v-text-field label="Telepono/CP #" variant="outlined" type="number" maxlength="11"
-                                            v-model="editedItem.contact"></v-text-field>
+                                            v-model="walkinItem.contact"></v-text-field>
                                     </v-col>
                                     <v-col cols="4">
                                         <v-text-field label="Email Address" variant="outlined"
-                                            v-model="editedItem.email"></v-text-field>
+                                            v-model="walkinItem.email"></v-text-field>
                                     </v-col>
                                     <v-col cols="3">
                                         <v-text-field label="Action/Service" variant="outlined"
-                                            v-model="editedItem.actionprovided"></v-text-field>
+                                            v-model="walkinItem.actionprovided"></v-text-field>
                                     </v-col>
                                 </v-row>
                                 <v-row style="display: flex; justify-content: center;">
@@ -233,7 +233,7 @@
                             </div>
                         </v-sheet>
                         <div class="text-center">
-                            <v-btn variant="outlined" color="primary" @click="save()">Submit</v-btn>
+                            <v-btn variant="outlined" color="primary" @click="saveWalkin()">Submit</v-btn>
                         </div>
                         <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
                             next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
@@ -248,34 +248,47 @@
                             <v-form class="ml-15 mt-5">
                                 <v-row>
                                     <v-col cols="7">
-                                        <v-text-field label="Pangalan(Optional)" variant="outlined"></v-text-field>
+                                        <v-text-field label="Pangalan(Optional)" variant="outlined"
+                                            v-model="assessmentItem.name"></v-text-field>
                                     </v-col>
                                     <v-col cols="2">
-                                        <v-text-field label="Edad" variant="outlined" type="number"></v-text-field>
+                                        <v-text-field label="Edad" variant="outlined" type="number"
+                                            v-model="assessmentItem.age"></v-text-field>
                                     </v-col>
                                     <v-col cols="2">
-                                        <v-select clearable label="Kasarian" :items="['Lalaki', 'Babae']"
-                                            variant="outlined">
+                                        <v-select clearable label="Kasarian" :items="['Lalaki', 'Babae']" variant="outlined"
+                                            v-model="assessmentItem.sex">
                                         </v-select>
                                     </v-col>
                                 </v-row>
                                 <v-row>
-                                    <v-col cols="2">
+                                    <v-col cols="5">
 
-                                        <v-text-field label="Kurso/Taon" variant="outlined"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="3">
-
-                                        <v-text-field label="Qualification" variant="outlined"></v-text-field>
+                                        <v-text-field label="Kurso/Taon" variant="outlined"
+                                            v-model="assessmentItem.course_year"></v-text-field>
                                     </v-col>
                                     <v-col cols="6">
 
-                                        <v-text-field label="Paaralan/Institusyon" variant="outlined"></v-text-field>
+                                        <v-text-field label="Qualification" variant="outlined"
+                                            v-model="assessmentItem.qualification"></v-text-field>
                                     </v-col>
                                 </v-row>
                                 <v-row>
+
                                     <v-col cols="11">
-                                        <v-text-field label="Tirahan/Tanggapan" variant="outlined"></v-text-field>
+
+                                        <v-text-field label="Paaralan/Institusyon" variant="outlined"
+                                            v-model="assessmentItem.school"></v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="8">
+                                        <v-text-field label="Tirahan/Tanggapan" variant="outlined"
+                                            v-model="assessmentItem.address"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="3">
+                                        <v-text-field label="Action/Service" variant="outlined"
+                                            v-model="assessmentItem.actionprovided"></v-text-field>
                                     </v-col>
                                 </v-row>
                                 <v-row>
@@ -393,6 +406,9 @@
                                 </v-radio-group>
                             </div>
                         </v-sheet>
+                        <div class="text-center">
+                            <v-btn variant="outlined" color="primary" @click="saveAssessment()">Submit</v-btn>
+                        </div>
                         <v-pagination v-if="value === two" v-model="aformPage" :length="9" class="hide-numbers"
                             next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
                         </v-pagination>
@@ -410,7 +426,7 @@ import { useAppStore } from '@/stores/app';
 import axios from 'axios';
 import { ref } from 'vue';
 
-const editedItem = ref({
+const walkinItem = ref({
     name: '',
     age: '',
     sex: '',
@@ -418,9 +434,24 @@ const editedItem = ref({
     email: '',
     address: '',
 })
+const assessmentItem = ref({
+    name: '',
+    age: '',
+    sex: '',
+    course_year: '',
+    qualification: '',
+    school: '',
+    address: '',
+    actionprovided: '',
+})
 
-async function save() {
-    await axios.post("http://localhost/pacd-system-api/public/api/createclient", editedItem.value);
+async function saveWalkin() {
+    await axios.post("/api/createclient", walkinItem.value);
+    router.push('/feedback');
+}
+
+async function saveAssessment() {
+    await axios.post("/api/createassessmentclient", assessmentItem.value);
     router.push('/feedback');
 }
 
