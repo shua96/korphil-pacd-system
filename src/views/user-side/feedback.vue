@@ -113,16 +113,26 @@
                                         <v-text-field label="Email Address" variant="outlined"></v-text-field>
                                     </v-col>
                                 </v-row>
-                                <v-row style="display: flex; justify-self: ;">
-                                    <v-pagination :length="5" class="text-center"></v-pagination>
 
-                                </v-row>
                             </v-form>
-
                         </v-sheet>
+
+                        <v-form v-if="currentFormIndex === 1" class="ml-15 mt-5">
+                            <v-row>
+                                <v-col cols="6">
+                                    <v-text-field label="Field 1" variant="outlined"></v-text-field>
+                                </v-col>
+                                <v-col cols="6">
+                                    <v-text-field label="Field 2" variant="outlined"></v-text-field>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col cols="12">
+                                    <v-text-field label="Field 3" variant="outlined"></v-text-field>
+                                </v-col>
+                            </v-row>
+                        </v-form>
                     </v-window-item>
-
-
                     <v-window-item value="two">
                         <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
                             border rounded height="400">
@@ -175,6 +185,8 @@
 import { useAppStore } from '@/stores/app';
 import { ref } from 'vue';
 
+
+
 let rating = ref(false)
 const icons = [
     'mdi-emoticon-happy-outline',
@@ -222,7 +234,6 @@ const items = ref([
         href: '/departments-list'
     },
 ])
-
 </script>
 
 <!-- <template>
