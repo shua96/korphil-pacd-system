@@ -37,7 +37,32 @@
                             <span class="text-h5">{{ formTitle }}</span>
                         </v-card-title>
 
+
                         <v-card-text>
+                            <v-container>
+                                <v-row>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field v-model="editedItem.firstname" label="First Name"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field v-model="editedItem.middlename" label="Middle Name"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field v-model="editedItem.lastname" label="Last Name"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="4">
+                                        <v-text-field v-model="editedItem.contact" maxlength="11" label="Contact No."
+                                            placeholder="09xx xxx xxxx"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="4">
+                                        <v-select :items="['admin']" v-model="editedItem.access" label="Access"></v-select>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
+
+
+                        <!-- <v-card-text>
                             <v-container>
                                 <v-row>
                                     <v-col cols="4">
@@ -51,9 +76,7 @@
                                     </v-col>
                                 </v-row>
                                 <v-row>
-                                    <!-- <v-col cols="4">
-                                        <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
-                                    </v-col> -->
+                                    
                                     <v-col cols="4">
                                         <v-text-field v-model="editedItem.contact" maxlength="11" label="Contact No."
                                             placeholder="09xx xxx xxxx"></v-text-field>
@@ -61,14 +84,12 @@
                                     <v-col cols="4">
                                         <v-select :items="['admin']" v-model="editedItem.access" label="Access"></v-select>
                                     </v-col>
-                                    <!-- <v-col cols="4">
-                                        <v-text-field v-model="editedItem.password" label="Password"></v-text-field>
-                                    </v-col> -->
+                                    
                                 </v-row>
                             </v-container>
-                        </v-card-text>
+                        </v-card-text> -->
 
-                        <v-card-actions>
+                        <!-- <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn color="blue-darken-1" variant="text" class="border-button" @click="close()">
                                 Cancel
@@ -94,11 +115,42 @@
                             <v-btn class="text-capitalize px-5 border-button" style="border-color: #E12727;" variant="flat"
                                 @click="deleteItemConfirm">Delete</v-btn>
                             <v-spacer></v-spacer>
+                        </v-card-actions>
 
+                    </v-sheet>
+                </v-dialog> -->
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue-darken-1" variant="text" class="border-button" @click="close()">
+                                Cancel
+                            </v-btn>
+                            <v-btn color="blue-darken-1" variant="text" class="border-button" @click="save()">
+                                Save
+                            </v-btn>
+                        </v-card-actions>
+                    </v-sheet>
+                </v-dialog>
+                <v-dialog v-model="dialogDelete" max-width="500px" color="error">
+                    <v-sheet class="pa-2">
+                        <v-icon size="x-large" color="#E12727"
+                            style="display: flex; margin: auto;">mdi-alert-circle-outline</v-icon>
+                        <v-card-title class="text-h5" style="display: flex; justify-content: center;">Are you
+                            sure?</v-card-title>
+                        <p class="text-h7" style="display: flex; justify-content: center;">Do you really want
+                            to delete this item?</p>
+                        <v-card-actions class="mt-6">
+                            <v-spacer></v-spacer>
+                            <v-btn class="text-capitalize px-5 border-button" style="border-color: #B4B2B2;" variant="flat"
+                                @click="closeDelete()">Cancel</v-btn>
+                            <v-btn class="text-capitalize px-5 border-button" style="border-color: #E12727;" variant="flat"
+                                @click="deleteItemConfirm(editedItem)">Delete {{ date }}</v-btn>
+                            <v-spacer></v-spacer>
                         </v-card-actions>
                     </v-sheet>
                 </v-dialog>
             </v-toolbar>
+
             <v-snackbar v-model="EditSnackbar" :timeout="timeout" color="info" vertical>
                 <v-icon size="large" class="mr-2">mdi-check-circle-outline</v-icon>
                 {{ getSnackbarText() }}
@@ -128,9 +180,6 @@
             </v-icon>
             <v-icon size="small" @click="deleteItem(item.raw)" color="error">
                 mdi-trash-can-outline
-            </v-icon>
-            <v-icon size="small" @click="routeTo(item)" class="ml-2">
-                mdi-arrow-right-circle-outline
             </v-icon>
         </template>
         <template v-slot:no-data>
@@ -221,7 +270,7 @@ async function save() {
         this.close()
         // EditSnackbar.value = true
     } else if (editedIndex.value >= 0) {
-        await axios.post("/api/updatetrainingfaqs", editedItem.value);
+        await axios.post("/api/updateaccount", editedItem.value);
         dialog.value = false
         printItems();
         // EditSnackbar.value = true
@@ -235,15 +284,18 @@ function close() {
 }
 
 
+
+
 function deleteItem(item) {
     this.editedIndex = this.data.indexOf(item)
     this.editedItem = Object.assign({}, item)
     this.dialogDelete = true
 }
 
-function deleteItemConfirm() {
-    this.data.splice(this.editedIndex, 1)
-    this.closeDelete()
+async function deleteItemConfirm(item) {
+    await axios.post('/api/deleteaccount', item);
+    dialogDelete.value = false;
+    printItems();
 }
 
 function closeDelete() {
