@@ -36,10 +36,10 @@
                 <v-spacer></v-spacer>
                 <v-dialog v-model="dialog" max-width="500px" persistent>
                     <template v-slot:activator="{ props }">
-                        <v-btn class="mb-2 mr-2 elevation-1" style="background-color: #3C59A6; color: white;"
+                        <!-- <v-btn class="mb-2 mr-2 elevation-1" style="background-color: #3C59A6; color: white;"
                             v-bind="props">
                             New Item
-                        </v-btn>
+                        </v-btn> -->
                         <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;"
                             @click="printItems()">
                             Refresh
@@ -177,12 +177,12 @@
         </template>
 
         <template v-slot:item.actions="{ item }">
-            <v-icon size="small" @click="editItem(item.raw)">
+            <!-- <v-icon size="small" @click="editItem(item.raw)">
                 mdi-square-edit-outline
             </v-icon>
             <v-icon size="small" class="mx-2" @click="deleteItem(item.raw)" color="error">
                 mdi-trash-can-outline
-            </v-icon>
+            </v-icon> -->
             <v-icon size="small" @click="showMore(item.raw)">
                 mdi-plus
             </v-icon>

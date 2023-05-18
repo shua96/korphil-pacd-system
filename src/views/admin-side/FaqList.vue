@@ -99,12 +99,12 @@
             </v-snackbar>
         </template>
         <template v-slot:item.actions="{ item }">
-            <v-icon size="small" class="me-2" @click="editItem(item.raw)">
+            <!-- <v-icon size="small" class="me-2" @click="editItem(item.raw)">
                 mdi-square-edit-outline
             </v-icon>
             <v-icon size="small" @click="deleteItem(item.raw)" color="error">
                 mdi-trash-can-outline
-            </v-icon>
+            </v-icon> -->
             <v-icon size="small" @click="routeTo(item)" class="ml-2">
                 mdi-arrow-right-circle-outline
             </v-icon>
