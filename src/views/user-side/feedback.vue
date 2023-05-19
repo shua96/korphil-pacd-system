@@ -233,7 +233,7 @@
                             </div>
                         </v-sheet>
                         <div class="text-center">
-                            <v-btn variant="outlined" color="primary" @click="saveWalkin()">Submit</v-btn>
+                            <v-btn variant="outlined" color="primary" @click="dialog = true">Submit</v-btn>
                         </div>
                         <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
                             next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
@@ -419,6 +419,40 @@
 
         </v-col>
     </v-row>
+    <v-dialog v-model="dialog" persistent width="auto">
+        <v-form @submit.prevent="saveWalkin()">
+            <v-card height="450" width="400">
+                <v-icon>mdi-information-variant-box</v-icon>
+                <v-card-title class="text-h5 mb-10 mt-5 ma-5">
+                    PACD Survey Consent Form
+                </v-card-title>
+
+                <v-checkbox-btn v-model="enabled" class="pe-2 mt-10 ma-5">
+                    <template v-slot:label>
+                        Ang mga impormasyon na aking inilahad sa form na ito ay tama at totoo. Boluntaryo kong
+                        pinagkaloob ang mga hinihinging impormasyon ng
+                        form na ito. Pinapayagan ko ang TESDA na isama sa kanilang database bilang bahagi ng
+                        kanilang records at monitoring ang mga detalyeng ito.
+                    </template></v-checkbox-btn>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="green-darken-1" variant="text" type="submit" :disabled="!enabled">
+                        Agree
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-form>
+    </v-dialog>
+    <v-dialog v-model="snackbar" style="display: flex; flex-direction: column; align-items: center;" :timeout="timeout">
+        <v-card max-width="500">
+            <v-img height="325" width="485" src="@/assets/thanks.jpeg"></v-img>
+        </v-card>
+        <v-card-actions>
+
+            <v-btn to="/">Okay</v-btn>
+        </v-card-actions>
+
+    </v-dialog>
 </template>
 <script setup>
 import router from '@/router';
@@ -426,6 +460,10 @@ import { useAppStore } from '@/stores/app';
 import axios from 'axios';
 import { ref } from 'vue';
 
+let timeout = ref(1500)
+let enabled = ref(false)
+let dialog = ref(false)
+let snackbar = ref(false)
 const walkinItem = ref({
     name: '',
     age: '',
@@ -447,7 +485,8 @@ const assessmentItem = ref({
 
 async function saveWalkin() {
     await axios.post("/api/createclient", walkinItem.value);
-    router.push('/feedback');
+    this.dialog = false;
+    this.snackbar = true;
 }
 
 async function saveAssessment() {
