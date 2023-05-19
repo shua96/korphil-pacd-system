@@ -36,10 +36,10 @@
                 <v-spacer></v-spacer>
                 <v-dialog v-model="dialog" max-width="500px" persistent>
                     <template v-slot:activator="{ props }">
-                        <v-btn class="mb-2 mr-2 elevation-1" style="background-color: #3C59A6; color: white;"
+                        <!-- <v-btn class="mb-2 mr-2 elevation-1" style="background-color: #3C59A6; color: white;"
                             v-bind="props">
                             New Item
-                        </v-btn>
+                        </v-btn> -->
                         <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;"
                             @click="printItems()">
                             Refresh
@@ -54,13 +54,7 @@
                             <v-container>
                                 <v-row>
                                     <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.firstname" label="First Name"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.middlename" label="Middle Name"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.lastname" label="Last Name"></v-text-field>
+                                        <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
                                         <v-text-field v-model="editedItem.age" type="number" label="Age"></v-text-field>
@@ -128,18 +122,8 @@
                         </v-card-title>
 
                         <v-card-text style="font-size:18px">
-                            Firstname
-                            <p class="color  " style=" margin-left: 15px; "> {{ editedItem.firstname }}
-                            </p>
-                        </v-card-text>
-
-                        <v-card-text style="font-size:18px">
-                            Middle Name
-                            <p class="color" style="margin-left: 15px;">{{ editedItem.middlename }}</p>
-                        </v-card-text>
-                        <v-card-text style="font-size:18px">
-                            Last Name
-                            <p class="color" style="margin-left: 15px;">{{ editedItem.lastname }}</p>
+                            Name
+                            <p class="color" style="margin-left: 15px;">{{ editedItem.name }}</p>
                         </v-card-text>
                         <v-card-text style="font-size:18px">
                             Age
@@ -150,16 +134,16 @@
                             <p class="color" style="margin-left: -15;"> {{ editedItem.sex }}</p>
                         </v-card-text>
                         <v-card-text style="font-size:18px">
+                            Address
+                            <p class="color" style=" margin-left: 15px">{{ editedItem.address }}</p>
+                        </v-card-text>
+                        <v-card-text style="font-size:18px">
                             Contact
                             <p class="color" style="margin-left: 15px ">{{ editedItem.contact }}</p>
                         </v-card-text>
                         <v-card-text style="font-size:18px">
                             Email
                             <p class="color" style="margin-left: 15px"> {{ editedItem.email }}</p>
-                        </v-card-text>
-                        <v-card-text style="font-size:18px">
-                            Address
-                            <p class="color" style=" margin-left: 15px">{{ editedItem.address }}</p>
                         </v-card-text>
                         <v-card-text style="font-size:18px">
                             Action Provided
@@ -188,23 +172,17 @@
             </v-snackbar>
         </template>
 
-
-        <template v-slot:item.fullname="{ item }">
-            {{ item.raw.firstname }}
-            {{ item.raw.lastname }}
-        </template>
-
         <template v-slot:item._created_at="{ item }">
             {{ moment(item.raw.created_at).format('YYYY-MM-DD') }}
         </template>
 
         <template v-slot:item.actions="{ item }">
-            <v-icon size="small" @click="editItem(item.raw)">
+            <!-- <v-icon size="small" @click="editItem(item.raw)">
                 mdi-square-edit-outline
             </v-icon>
             <v-icon size="small" class="mx-2" @click="deleteItem(item.raw)" color="error">
                 mdi-trash-can-outline
-            </v-icon>
+            </v-icon> -->
             <v-icon size="small" @click="showMore(item.raw)">
                 mdi-plus
             </v-icon>
@@ -229,12 +207,12 @@ onMounted(printItems);
 
 const headers = [
     { title: 'Date', align: 'start', sortable: false, key: '_created_at' },
-    { title: 'Name', align: 'start', sortable: true, key: 'fullname' },
+    { title: 'Name', align: 'start', sortable: true, key: 'name' },
     { title: 'Age', align: 'start', sortable: false, key: 'age' },
     { title: 'Sex', align: 'start', sortable: false, key: 'sex' },
+    { title: 'Address', align: 'start', sortable: false, key: 'address' },
     { title: 'Contact No.', align: 'start', sortable: false, key: 'contact' },
     { title: 'Email Adr', align: 'start', sortable: false, key: 'email' },
-    { title: 'Address', align: 'start', sortable: false, key: 'address' },
     { title: 'Action Provided', align: 'start', sortable: false, key: 'actionprovided' },
     { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
 ]
@@ -253,9 +231,7 @@ const years = computed(() => {
 });
 
 const editedItem = ref({
-    firstname: '',
-    middlename: '',
-    lastname: '',
+    name: '',
     age: '',
     sex: '',
     contact: '',

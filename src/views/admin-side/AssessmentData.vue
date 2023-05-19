@@ -34,7 +34,10 @@
             <v-toolbar flat>
                 <v-toolbar-title>Client Information</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-dialog v-model="dialog" max-width="500px" persistent>
+                <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;" @click="printItems()">
+                    Refresh
+                </v-btn>
+                <!-- <v-dialog v-model="dialog" max-width="500px" persistent>
                     <template v-slot:activator="{ props }">
                         <v-btn class="mb-2 mr-2 elevation-1" style="background-color: #3C59A6; color: white;"
                             v-bind="props">
@@ -100,8 +103,8 @@
                             </v-btn>
                         </v-card-actions>
                     </v-sheet>
-                </v-dialog>
-                <v-dialog v-model="dialogDelete" max-width="500px" color="error">
+                </v-dialog> -->
+                <!-- <v-dialog v-model="dialogDelete" max-width="500px" color="error">
                     <v-sheet class="pa-2">
                         <v-icon size="x-large" color="#E12727"
                             style="display: flex; margin: auto;">mdi-alert-circle-outline</v-icon>
@@ -119,7 +122,7 @@
 
                         </v-card-actions>
                     </v-sheet>
-                </v-dialog>
+                </v-dialog> -->
 
                 <v-dialog v-model="showMoreDialog" max-width="500px" persistent>
                     <v-sheet>
@@ -170,7 +173,7 @@
                     </v-sheet>
                 </v-dialog>
             </v-toolbar>
-            <v-snackbar v-model="EditSnackbar" :timeout="timeout" color="info" vertical>
+            <!-- <v-snackbar v-model="EditSnackbar" :timeout="timeout" color="info" vertical>
                 <v-icon size="large" class="mr-2">mdi-check-circle-outline</v-icon>
                 {{ getSnackbarText() }}
 
@@ -179,29 +182,29 @@
                         Close
                     </v-btn>
                 </template>
-            </v-snackbar>
+            </v-snackbar> -->
         </template>
 
 
-        <template v-slot:item.fullname="{ item }">
+        <!-- <template v-slot:item.fullname="{ item }">
             {{ item.raw.firstname }}
             {{ item.raw.lastname }}
-        </template>
+        </template> -->
 
         <template v-slot:item._created_at="{ item }">
             {{ moment(item.raw.created_at).format('YYYY-MM-DD') }}
         </template>
 
         <template v-slot:item.actions="{ item }">
-            <v-icon size="small" @click="editItem(item.raw)">
+            <!-- <v-icon size="small" @click="editItem(item.raw)">
                 mdi-square-edit-outline
             </v-icon>
             <v-icon size="small" class="mx-2" @click="deleteItem(item.raw)" color="error">
                 mdi-trash-can-outline
-            </v-icon>
-            <v-icon size="small" @click="showMore(item.raw)">
-                mdi-plus
-            </v-icon>
+            </v-icon> -->
+            <v-btn size="small" @click="showMore(item.raw)" variant="outlined" color="primary">
+                Show More
+            </v-btn>
         </template>
         <template v-slot:no-data>
             <v-btn color="primary" @click="initialize">
@@ -223,13 +226,12 @@ onMounted(printItems);
 
 const headers = [
     { title: 'Date', align: 'start', sortable: false, key: '_created_at' },
-    { title: 'Firstname', align: 'start', sortable: true, key: 'firstname' },
-    { title: 'Middlename', align: 'start', sortable: false, key: 'middlename' },
-    { title: 'Lastname', align: 'start', sortable: false, key: 'lastname' },
+    { title: 'Name', align: 'start', sortable: false, key: 'name' },
     { title: 'Age', align: 'start', sortable: false, key: 'age' },
     { title: 'Sex', align: 'start', sortable: false, key: 'sex' },
-    { title: 'Qualification', align: 'start', sortable: false, key: 'qualification' },
     { title: 'Course/Year', align: 'start', sortable: false, key: 'course_year' },
+    { title: 'Qualification', align: 'start', sortable: false, key: 'qualification' },
+    { title: 'School/Institution', align: 'start', sortable: false, key: 'school' },
     { title: 'Address', align: 'start', sortable: false, key: 'address' },
     { title: 'Action Provided', align: 'start', sortable: false, key: 'actionprovided' },
     { title: 'Actions', align: 'start', sortable: false, key: 'actions' },
@@ -250,14 +252,14 @@ const years = computed(() => {
 });
 
 const editedItem = ref({
-    firstname: '',
-    middlename: '',
-    lastname: '',
+    name: '',
     age: '',
     sex: '',
-    qualification: '',
     course_year: '',
+    qualification: '',
+    school: '',
     address: '',
+    actionprovided: '',
 })
 
 function getSnackbarText() {
