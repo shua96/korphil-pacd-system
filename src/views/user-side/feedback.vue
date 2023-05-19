@@ -72,22 +72,22 @@
             </v-carousel>
         </v-col>
         <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
+            <!-- <FeedbackRating></FeedbackRating> -->
             <h1 class="mb-5 mx-auto">Customer Feedback Form
             </h1>
 
+            CURRENT TAB: {{ tab }}
             <v-tabs v-model="tab" variant="outlined" class="elevation-0">
-                <v-tab value="one">Walkin Form</v-tab>
-                <v-tab value="two">Assessment Form</v-tab>
+                <v-tab value="walkin">Walkin Form</v-tab>
+                <v-tab value="assessment">Assessment Form</v-tab>
             </v-tabs>
 
             <v-card-text>
-                <v-window v-model="tab">
-
-                    <!-- WALK-IN FORM CODES -->
-
-                    <v-window-item value="one" v-model="page" v-if="page === 1">
+                CURRENT PAGE: {{ page }}
+                <v-window v-model="page">
+                    <v-window-item v-for="feedback in feedbacks" :value="feedback.page" v-model="page">
                         <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
+                            border rounded height="400" v-if="feedback.page === 1">
                             <v-form class="ml-15 mt-5">
                                 <v-row>
                                     <v-col cols="7">
@@ -128,295 +128,32 @@
                                 </v-row>
                             </v-form>
                         </v-sheet>
-                        <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="one" v-model="page" v-if="page === 2">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <div class="text-center">
-                                <h1>Mabilis na serbisyo</h1>
-                                <v-rating v-model="rating" bg-color="orange-lighten-1" color="blue" length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
 
-
-                    <v-window-item value="one" v-model="page" v-if="page === 3">
                         <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
+                            border rounded height="400" v-if="feedback.page != 1">
                             <div class="text-center">
-                                <h1>Mahusay at may malakasakit na serbisyo</h1>
-                                <v-rating v-model="rating1" bg-color="orange-lighten-1" color="blue" length="3"></v-rating>
+                                <h1>{{ feedback.question }}</h1>
+                                <FeedbackRating v-model="feedback.rating" color="primary"></FeedbackRating>
                             </div>
                         </v-sheet>
-                        <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-
-                    <v-window-item value="one" v-model="page" v-if="page === 4">
                         <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
+                            border rounded height="400" v-if="feedback.page === 8">
                             <div class="text-center">
-                                <h1>Magalang at tapat na serbisyo</h1>
-                                <v-rating v-model="rating2" bg-color="orange-lighten-1" color="blue" length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="one" v-model="page" v-if="page === 5">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <div class="text-center">
-                                <h1>Malinis at Maayos na tanggapan </h1>
-                                <v-rating v-model="rating3" bg-color="orange-lighten-1" color="blue" length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="one" v-model="page" v-if="page === 6">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <div class="text-center">
-                                <h1>Mapagkatiwalaan na serbisyo</h1>
-                                <v-rating v-model="rating4" bg-color="orange-lighten-1" color="blue" length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="one" v-model="page" v-if="page === 7">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <div class="text-center">
-                                <h1>Abot ang Lahat ang serbisyo ng TESDA</h1>
-                                <v-rating v-model="rating5" bg-color="orange-lighten-1" color="blue" length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="one" v-model="page" v-if="page === 8">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-
-                            <div class="text-center">
-                                <h1>Irerekomenda nyo po na ang TESDA sa inyong kamag-anak at kaibigan?</h1>
-                                <v-rating v-model="rating6" bg-color="orange-lighten-1" color="blue" length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="one" v-model="page" v-if="page === 9">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-
-                            <div class="text-center">
-                                <h1>Irerekomenda nyo po na ang TESDA sa inyong kamag-anak at kaibigan?</h1>
-                                <v-radio-group inline style="display: flex; justify-content: center;">
-                                    <v-radio label="Yes" value="1"></v-radio>
-                                    <v-radio label="No" value="2"></v-radio>
+                                <h1>Irerekomenda nyo po ba ang TESDA sa inyong kamag-anak at kaibigan?</h1>
+                                <v-radio-group v-model="recommend.rating" inline
+                                    style="display: flex; justify-content: center;">
+                                    <v-radio label="Yes" :value="0"></v-radio>
+                                    <v-radio label="No" :value="1"></v-radio>
                                 </v-radio-group>
                             </div>
+                            <v-btn @click="saveWalkin()">Submit</v-btn>
                         </v-sheet>
-                        <div class="text-center">
-                            <v-btn variant="outlined" color="primary" @click="dialog = true">Submit</v-btn>
-                        </div>
-                        <v-pagination v-if="value === one" v-model="page" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-
-                    <!-- ASSESSMENT FORM CODE  -->
-
-                    <v-window-item value="two" v-model="aformPage" v-if="aformPage === 1">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <v-form class="ml-15 mt-5">
-                                <v-row>
-                                    <v-col cols="7">
-                                        <v-text-field label="Pangalan(Optional)" variant="outlined"
-                                            v-model="assessmentItem.name"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="2">
-                                        <v-text-field label="Edad" variant="outlined" type="number"
-                                            v-model="assessmentItem.age"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="2">
-                                        <v-select clearable label="Kasarian" :items="['Lalaki', 'Babae']" variant="outlined"
-                                            v-model="assessmentItem.sex">
-                                        </v-select>
-                                    </v-col>
-                                </v-row>
-                                <v-row>
-                                    <v-col cols="5">
-
-                                        <v-text-field label="Kurso/Taon" variant="outlined"
-                                            v-model="assessmentItem.course_year"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="6">
-
-                                        <v-text-field label="Qualification" variant="outlined"
-                                            v-model="assessmentItem.qualification"></v-text-field>
-                                    </v-col>
-                                </v-row>
-                                <v-row>
-
-                                    <v-col cols="11">
-
-                                        <v-text-field label="Paaralan/Institusyon" variant="outlined"
-                                            v-model="assessmentItem.school"></v-text-field>
-                                    </v-col>
-                                </v-row>
-                                <v-row>
-                                    <v-col cols="8">
-                                        <v-text-field label="Tirahan/Tanggapan" variant="outlined"
-                                            v-model="assessmentItem.address"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="3">
-                                        <v-text-field label="Action/Service" variant="outlined"
-                                            v-model="assessmentItem.actionprovided"></v-text-field>
-                                    </v-col>
-                                </v-row>
-                                <v-row>
-                                </v-row>
-                            </v-form>
-                        </v-sheet>
-                        <v-pagination v-if="value === two" v-model="aformPage" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="two" v-model="aformPage" v-if="aformPage === 2">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <div class="text-center">
-                                <h1>Mabilis na serbisyo</h1>
-                                <v-rating v-model="aformRating" bg-color="orange-lighten-1" color="blue"
-                                    length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === two" v-model="aformPage" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-
-
-                    <v-window-item value="two" v-model="aformPage" v-if="aformPage === 3">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <div class="text-center">
-                                <h1>Mahusay at may malakasakit na serbisyo</h1>
-                                <v-rating v-model="aformRating1" bg-color="orange-lighten-1" color="blue"
-                                    length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === two" v-model="aformPage" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-
-                    <v-window-item value="two" v-model="aformPage" v-if="aformPage === 4">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <div class="text-center">
-                                <h1>Magalang at tapat na serbisyo</h1>
-                                <v-rating v-model="aformRating2" bg-color="orange-lighten-1" color="blue"
-                                    length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === two" v-model="aformPage" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="two" v-model="aformPage" v-if="aformPage === 5">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <div class="text-center">
-                                <h1>Malinis at Maayos na tanggapan </h1>
-                                <v-rating v-model="aformRating3" bg-color="orange-lighten-1" color="blue"
-                                    length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === two" v-model="aformPage" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="two" v-model="aformPage" v-if="aformPage === 6">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <div class="text-center">
-                                <h1>Mapagkatiwalaan na serbisyo</h1>
-                                <v-rating v-model="aformRating4" bg-color="orange-lighten-1" color="blue"
-                                    length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === two" v-model="aformPage" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="two" v-model="aformPage" v-if="aformPage === 7">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-                            <div class="text-center">
-                                <h1>Abot ang Lahat ang serbisyo ng TESDA</h1>
-                                <v-rating v-model="aformRating5" bg-color="orange-lighten-1" color="blue"
-                                    length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === two" v-model="aformPage" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="two" v-model="aformPage" v-if="aformPage === 8">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-
-                            <div class="text-center">
-                                <h1>Irerekomenda nyo po na ang TESDA sa inyong kamag-anak at kaibigan?</h1>
-                                <v-rating v-model="aformRating6" bg-color="orange-lighten-1" color="blue"
-                                    length="3"></v-rating>
-                            </div>
-                        </v-sheet>
-                        <v-pagination v-if="value === two" v-model="aformPage" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
-                    </v-window-item>
-                    <v-window-item value="two" v-model="aformPage" v-if="aformPage === 9">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
-
-                            <div class="text-center">
-                                <h1>Irerekomenda nyo po na ang TESDA sa inyong kamag-anak at kaibigan?</h1>
-                                <v-radio-group inline style="display: flex; justify-content: center;">
-                                    <v-radio label="Yes" value="1"></v-radio>
-                                    <v-radio label="No" value="2"></v-radio>
-                                </v-radio-group>
-                            </div>
-                        </v-sheet>
-                        <div class="text-center">
-                            <v-btn variant="outlined" color="primary" @click="saveAssessment()">Submit</v-btn>
-                        </div>
-                        <v-pagination v-if="value === two" v-model="aformPage" :length="9" class="hide-numbers"
-                            next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left">
-                        </v-pagination>
                     </v-window-item>
                 </v-window>
+                <v-pagination v-model="page" :length="8" class="hide-numbers" next-icon="mdi-chevron-right"
+                    prev-icon="mdi-chevron-left">
+                </v-pagination>
             </v-card-text>
-
-
         </v-col>
     </v-row>
     <v-dialog v-model="dialog" persistent width="auto">
@@ -436,6 +173,9 @@
                     </template></v-checkbox-btn>
                 <v-card-actions>
                     <v-spacer></v-spacer>
+                    <v-btn color="green-darken-1" variant="text" @click="dialog = false">
+                        Disagree
+                    </v-btn>
                     <v-btn color="green-darken-1" variant="text" type="submit" :disabled="!enabled">
                         Agree
                     </v-btn>
@@ -443,18 +183,21 @@
             </v-card>
         </v-form>
     </v-dialog>
-    <v-dialog v-model="snackbar" style="display: flex; flex-direction: column; align-items: center;" :timeout="timeout">
-        <v-card max-width="500">
-            <v-img height="325" width="485" src="@/assets/thanks.jpeg"></v-img>
+    <v-dialog v-model="snackbar" style="display: flex; flex-direction: column; align-items: center;">
+        <v-card>
+            <v-card-text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+            </v-card-text>
+            <v-card-actions>
+                <v-btn color="primary" block @click="snackbar = false">Close Dialog</v-btn>
+            </v-card-actions>
         </v-card>
-        <v-card-actions>
-
-            <v-btn to="/">Okay</v-btn>
-        </v-card-actions>
 
     </v-dialog>
 </template>
 <script setup>
+import FeedbackRating from '@/layouts/comps/FeedbackRating.vue';
 import router from '@/router';
 import { useAppStore } from '@/stores/app';
 import axios from 'axios';
@@ -464,6 +207,9 @@ let timeout = ref(1500)
 let enabled = ref(false)
 let dialog = ref(false)
 let snackbar = ref(false)
+const recommend = ref({
+    rating: '',
+})
 const walkinItem = ref({
     name: '',
     age: '',
@@ -482,9 +228,12 @@ const assessmentItem = ref({
     address: '',
     actionprovided: '',
 })
-
+const feedback = ref({
+    rating: '',
+})
 async function saveWalkin() {
     await axios.post("/api/createclient", walkinItem.value);
+    await axios.post("/api/createfeedback", feedback.value);
     this.dialog = false;
     this.snackbar = true;
 }
@@ -494,22 +243,7 @@ async function saveAssessment() {
     router.push('/feedback');
 }
 
-let page = ref(1)
-let aformPage = ref(1)
-let rating = ref(null)
-let rating1 = ref(null)
-let rating2 = ref(null)
-let rating3 = ref(null)
-let rating4 = ref(null)
-let rating5 = ref(null)
-let rating6 = ref(null)
-let aformRating = ref(null)
-let aformRating1 = ref(null)
-let aformRating2 = ref(null)
-let aformRating3 = ref(null)
-let aformRating4 = ref(null)
-let aformRating5 = ref(null)
-let aformRating6 = ref(null)
+let page = ref(1);
 let app = useAppStore()
 
 const tab = ref(null)
@@ -530,6 +264,45 @@ const items = ref([
         href: '/departments-list'
     },
 ])
+
+const feedbacks = ref([
+    {
+        page: 1,
+    },
+    {
+        question: 'Mabilis na serbisyo',
+        rating: null,
+        page: 2,
+    },
+    {
+        question: 'Mahusay at may malakasakit na serbisyo',
+        rating: null,
+        page: 3,
+    },
+    {
+        question: 'Magalang at tapat na serbisyo',
+        rating: null,
+        page: 4,
+    },
+    {
+        question: 'Malinis at Maayos na tanggapan',
+        rating: null,
+        page: 5,
+    },
+    {
+        question: 'Mapagkatiwalaan na serbisyo',
+        rating: null,
+        page: 6,
+    },
+    {
+        question: 'Abot ang Lahat ang serbisyo ng TESDA',
+        rating: null,
+        page: 7,
+    },
+    {
+        page: 8,
+    },
+]);
 
 </script>
 
