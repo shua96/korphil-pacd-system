@@ -38,12 +38,21 @@
 
             <v-row justify="center" style="margin-right: 50px;">
                 <v-col cols="4" class="mt-4 mb-2">
-
                     <v-expansion-panels variant="accordion">
                         <v-expansion-panel v-for="i in 1" :key="i" title="What are the current programs offered?"
-                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                            text="3 YEAR DIPLOMA PROGRAMS: 1. Diploma in Industrial Automation and Mechatronics Technology (DIAMT)
+                        2. Diploma in Civil Engineering Technology (DCET)
+                        3. Diploma in Automotive Technology (DAT)
+                        4. Diploma in Agricultural and Biosystems Engineering Technology (DABET)
+                        5.Diploma in Hotel and Restaurant Technology (DHRT)
+                        6. Diploma in Information Technology (DIT)
+                        7.Diploma in Heating, Ventilating, Air-Conditioning / Refrigeration Technology (DHVACT)
+                        8. Diploma in Mechanical Engineering Technology (DMET )
+                        9. DMET Major in Welding Technology (Short term Programs available https://www.korphildavao.site/courses/)">
+
+                        </v-expansion-panel>
                     </v-expansion-panels>
+
                 </v-col>
 
                 <v-col cols="4" class="mt-4 mb-2 ">
@@ -52,7 +61,8 @@
                         <v-expansion-panel v-for="i in 1" :key="i"
                             title="Filling Up and Submission Comptency Assessment Application Form"
                             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
+                        </v-expansion-panel>
                     </v-expansion-panels>
                 </v-col>
             </v-row>
@@ -144,8 +154,15 @@ const items = ref([
     },
 ])
 
-
-
+</script>
+<script>
+export default {
+    data() {
+        return {
+            dialog: false,
+        }
+    },
+}
 </script>
 
 <style>
