@@ -2,11 +2,11 @@
     <v-btn @click="printReport">Print</v-btn>
     <div class="container">
         <v-sheet class="elevation-1">
-            <div class="text-center" style="margin-bottom: -180px; margin-top: 20px;">
+            <div class="text-center">
                 <h4>CUSTOMER FEEDBACK STATISTICAL REPORT</h4>
                 <h5>For the period covered of JANUARY 2023</h5>
             </div>
-            <v-table class="table fixed-table">
+            <v-table class="table fixed-table" style="border-bottom: 1px solid;">
                 <thead>
                     <tr>
                         <th style="font-weight: 900;height: 100px; font-size: 14px;">
@@ -37,7 +37,7 @@
                     <th></th>
                 </tbody>
             </v-table>
-            <v-table class="table fixed-table" style="margin-top: -20px; font-size: 14px;">
+            <v-table class="table fixed-table" style="margin-top: -20px; font-size: 14px; border-bottom: 1px solid;">
                 <thead>
                     <tr>
                         <th style="font-weight: 900;height: 100px;">
@@ -132,9 +132,11 @@ const getTotalAges = computed(() => {
     return total;
 });
 
-const printReport = () => {
+
+function printReport() {
     window.print()
-}
+};
+
 </script>
   
 <style>

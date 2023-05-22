@@ -21,6 +21,14 @@ const routes = [
     path: '/feedback',
     component: () => import('@/views/user-side/feedback'),
   },
+  {
+    path: '/walkinfeedback',
+    component: () => import('@/components/feedback/walkinForm.vue'),
+  },
+  {
+    path: '/assessmentfeedback',
+    component: () => import('@/components/feedback/assessmentForm.vue'),
+  },
 
   // USER-SIDE ROUTES ENDS HERE
 
