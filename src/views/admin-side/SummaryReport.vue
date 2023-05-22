@@ -6,6 +6,7 @@
                 <h4>CUSTOMER FEEDBACK STATISTICAL REPORT</h4>
                 <h5>For the period covered of JANUARY 2023</h5>
             </div>
+
             <v-table class="table fixed-table">
                 <thead>
                     <tr>
@@ -37,6 +38,7 @@
                     <th></th>
                 </tbody>
             </v-table>
+
             <v-table class="table fixed-table" style="margin-top: -20px; font-size: 14px;">
                 <thead>
                     <tr>
@@ -64,6 +66,147 @@
                             Total
                         </th>
                         <td>{{ getTotalAges }}</td>
+                    </tr>
+                    <th></th>
+                </tbody>
+            </v-table>
+
+            <v-table class="table fixed-table" style="margin-top: -20px; font-size: 14px;">
+                <thead>
+                    <tr>
+                        <th style="font-weight: 900;height: 100px;">
+                            C. Total Number of Clients by Reason of Visit
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th style="font-weight: bold;" class="text-center divider">
+                            Reason for Visit
+                        </th>
+                        <th style="font-weight: bold;" class="text-center">
+                            No. of Clients
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="text">
+                    <tr v-for="visit in visits" :key="visit.name">
+                        <td class="text-center divider">{{ visit.reason }}</td>
+                        <td>{{ visit.clients }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center divider">
+                            Total
+                        </th>
+                        <td>{{ getTotalvisits }}</td>
+                    </tr>
+                    <th></th>
+                </tbody>
+            </v-table>
+
+            <v-table class="table fixed-table" style="margin-top: -20px; font-size: 14px;">
+                <thead>
+                    <tr>
+                        <th style="font-weight: 900;height: 100px;">
+                            D. Action Provided Relative to Purpose of Visit
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th style="font-weight: bold;" class="text-center divider">
+                            Action Provided
+                        </th>
+                        <th style="font-weight: bold;" class="text-center">
+                            No. of Clients
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="text">
+                    <tr v-for="action in actions" :key="action.name">
+                        <td class="text-center divider">{{ action.provided }}</td>
+                        <td>{{ action.clients }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center divider">
+                            Total
+                        </th>
+                        <td>{{ getTotalactions }}</td>
+                    </tr>
+                    <th></th>
+                </tbody>
+            </v-table>
+
+            <v-table class="table fixed-table" style="margin-top: -20px; font-size: 14px;">
+                <thead>
+                    <tr>
+                        <th style="font-weight: 900;height: 100px;">
+                            E. Drivers of Satisfaction
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th style="font-weight: bold;" class="text-center divider">
+                            Other Areas Related
+                        </th>
+                        <th style="font-weight: bold;" class="text-center">
+                            VS
+                        </th>
+                        <th style="font-weight: bold;" class="text-center">
+                            S
+                        </th>
+
+                        <th style="padding-left: 190px;"></th>
+
+                        <th style="font-weight: bold;" class="text-center">
+                            P
+                        </th>
+                        <th style="padding-left: 190px;"></th>
+
+                        <th class="text-center divider">
+                            Total
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="text">
+                    <tr v-for="area in areas" :key="area.provided" class="divider">
+                        <td class="text-center divider">{{ area.provided }}</td>
+                        <td class="divider">{{ area.vsatisfied }}</td>
+                        <td>{{ area.satisfied }}</td>
+                        <th class="divider"></th>
+                        <td>{{ area.poor }}</td>
+                        <th class="divider"></th>
+                        <td>{{ getTotalFeedbacks }}</td>
+                    </tr>
+                </tbody>
+            </v-table>
+            <th class="divider"></th>
+
+            <v-table class="table fixed-table" style="margin-top: -20px; font-size: 14px;">
+                <thead>
+                    <tr>
+                        <th style="font-weight: 900;height: 100px;">
+                            F. Overall Rating
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th style="font-weight: bold;" class="text-center divider">
+                            Rating
+                        </th>
+                        <th style="font-weight: bold;" class="text-center">
+                            No. of Clients
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="text">
+                    <tr v-for="rate in rating" :key="rate.provided">
+                        <td class="text-center divider">{{ rate.provided }}</td>
+                        <td>{{ rate.clients }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center divider">
+                            Total
+                        </th>
+                        <td>{{ getTotalratings }}</td>
                     </tr>
                     <th></th>
                 </tbody>
@@ -123,6 +266,143 @@ let ages = ref([
         clients: 305,
     },
 ]);
+
+let visits = ref([
+    {
+        reason: 'Assessment & Certification',
+        clients: 1,
+    },
+    {
+        reason: 'Registrar',
+        clients: 1,
+    },
+    {
+        reason: 'Training',
+        clients: 1,
+    },
+    {
+        reason: 'Others (Procurement, Finance and Admin, Scholarship)',
+        clients: 2,
+    },
+]);
+
+let actions = ref([
+    {
+        provided: 'Assisted Client for Assessment Application',
+        clients: 305,
+    },
+    {
+        provided: 'For Entrance Exam',
+        clients: 305,
+    },
+    {
+        provided: 'Provided Information on Scholarship',
+        clients: 305,
+    },
+    {
+        provided: 'Provided Information on Competency Assessment',
+        clients: 305,
+    },
+    {
+        provided: 'For Registration on Short Term Course',
+        clients: 305,
+    },
+    {
+        provided: 'For Registration on Diploma Program',
+        clients: 305,
+    },
+    {
+        provided: 'Referred to PO',
+        clients: 305,
+    },
+    {
+        provided: 'Released CARS',
+        clients: 305,
+    },
+    {
+        provided: 'Provided Information on Program Registration',
+        clients: 305,
+    },
+]);
+
+let areas = ref([
+    {
+        provided: 'Assisted Client for Assessment Application',
+        vsatisfied: 305,
+        satisfied: 302,
+        poor: 2,
+    },
+    {
+        provided: 'For Entrance Exam',
+        vsatisfied: 305,
+        satisfied: 302,
+        poor: 2,
+    },
+    {
+        provided: 'Provided Information on Scholarship',
+        vsatisfied: 305,
+        satisfied: 302,
+        poor: 2,
+    },
+    {
+        provided: 'Provided Information on Competency Assessment',
+        vsatisfied: 305,
+        satisfied: 302,
+        poor: 2,
+    },
+]);
+
+let rating = ref([
+    {
+        reason: 'Assessment & Certification',
+        clients: 1,
+    },
+    {
+        reason: 'Registrar',
+        clients: 1,
+    },
+    {
+        reason: 'Training',
+        clients: 1,
+    },
+    {
+        reason: 'Others (Procurement, Finance and Admin, Scholarship)',
+        clients: 2,
+    },
+]);
+
+const getTotalratings = computed(() => {
+    let total = 0;
+    for (let rate of rating.value) {
+        total = rate.vsatisfied + rate.satisfied + rate.poor;
+    }
+    return total;
+});
+
+
+const getTotalFeedbacks = computed(() => {
+    let total = 0;
+    for (let area of areas.value) {
+        total = area.vsatisfied + area.satisfied + area.poor;
+    }
+    return total;
+});
+
+const getTotalactions = computed(() => {
+    let total = 0;
+    for (let action of actions.value) {
+        total += action.clients;
+    }
+    return total;
+});
+
+const getTotalvisits = computed(() => {
+    let total = 0;
+    for (let visit of visits.value) {
+        total += visit.clients;
+    }
+    return total;
+});
 
 const getTotalAges = computed(() => {
     let total = 0;

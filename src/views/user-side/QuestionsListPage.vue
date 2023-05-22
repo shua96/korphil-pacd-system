@@ -112,6 +112,7 @@
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
                     </v-expansion-panels>
                 </v-col>
+
             </v-row>
 
             <v-btn icon="mdi-arrow-left" color="white" style="margin-left: 900px; margin-top: 40px"
