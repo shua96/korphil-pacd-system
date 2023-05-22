@@ -92,6 +92,7 @@
                 {{ getSnackbarText() }}
 
                 <template v-slot:actions>
+
                     <v-btn color="white" variant="text" @click="EditSnackbar = false">
                         Close
                     </v-btn>
