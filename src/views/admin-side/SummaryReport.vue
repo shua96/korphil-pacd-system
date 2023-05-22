@@ -1,19 +1,53 @@
 <template>
-    <v-layout class="container">
-        <v-sheet class="elevation-1 ">
-            <h1 style="text-align: center;">This is Header</h1>
+    <v-btn @click="printReport">Print</v-btn>
+    <div class="container">
+        <v-sheet class="elevation-1">
+            <div class="text-center" style="margin-bottom: -180px; margin-top: 20px;">
+                <h4>CUSTOMER FEEDBACK STATISTICAL REPORT</h4>
+                <h5>For the period covered of JANUARY 2023</h5>
+            </div>
             <v-table class="table fixed-table">
                 <thead>
                     <tr>
-
+                        <th style="font-weight: 900;height: 100px; font-size: 14px;">
+                            A. Total Number of Clients Served by Gender
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th style="font-weight: bold; font-size: 14px;" class="text-center divider">
+                            Gender
+                        </th>
+                        <th style="font-weight: bold; font-size: 14px;" class="text-center">
+                            No. of Clients
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="text" style="font-size: 14px;">
+                    <tr v-for="gender in genders" :key="gender.name">
+                        <td class="text-center divider">{{ gender.name }}</td>
+                        <td>{{ gender.clients }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center divider">
+                            Total
+                        </th>
+                        <td>{{ getTotalGenders }}</td>
+                    </tr>
+                    <th></th>
+                </tbody>
+            </v-table>
+            <v-table class="table fixed-table" style="margin-top: -20px; font-size: 14px;">
+                <thead>
+                    <tr>
                         <th style="font-weight: 900;height: 100px;">
-                            A. Total Number of Clients Server by Gender
+                            B. Distribution of Clients Served by Age Group
                         </th>
                         <th></th>
                     </tr>
                     <tr>
                         <th style="font-weight: bold;" class="text-center divider">
-                            Gender
+                            Age Group
                         </th>
                         <th style="font-weight: bold;" class="text-center">
                             No. of Clients
@@ -21,65 +55,86 @@
                     </tr>
                 </thead>
                 <tbody class="text">
-                    <tr v-for="item in app.items" :key="item.name">
-                        <td class="text-center divider">{{ item.name }}</td>
-                        <td>{{ item.calories }}</td>
+                    <tr v-for="age in ages" :key="age.name">
+                        <td class="text-center divider">{{ age.name }}</td>
+                        <td>{{ age.clients }}</td>
                     </tr>
                     <tr>
                         <th class="text-center divider">
                             Total
                         </th>
-                        <td>{{ app.items.total }}</td>
+                        <td>{{ getTotalAges }}</td>
                     </tr>
                     <th></th>
                 </tbody>
             </v-table>
         </v-sheet>
-    </v-layout>
-
-    <v-layout class="container">
-        <v-sheet class="elevation-1 ">
-            <h1 style="text-align: center; margin-top: 50px;">This is Header </h1>
-            <v-table class="table fixed-table">
-                <thead>
-
-                    <tr>
-
-                        <th style="font-weight: 900;height: 100px;">
-                            B. Total Number of Clients Server by Gender
-                        </th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th style="font-weight: bold;" class="text-center divider">
-                            Gender
-                        </th>
-                        <th style="font-weight: bold;" class="text-center">
-                            No. of Clients
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="text">
-                    <tr v-for="item in app.items" :key="item.name">
-                        <td class="text-center divider">{{ item.name }}</td>
-                        <td>{{ item.calories }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-center divider">
-                            Total
-                        </th>
-                        <td>{{ app.items.total }}</td>
-                    </tr>
-                    <th></th>
-                </tbody>
-            </v-table>
-        </v-sheet>
-    </v-layout>
+    </div>
 </template>
   
 <script setup>
-import { useAppStore } from '@/stores/app';
-let app = useAppStore();
+import { ref, computed } from 'vue';
+
+let genders = ref([
+    {
+        name: 'Male',
+        clients: 305,
+    },
+    {
+        name: 'Female',
+        clients: 305,
+    },
+]);
+
+const getTotalGenders = computed(() => {
+    let total = 0;
+    for (let gender of genders.value) {
+        total += gender.clients;
+    }
+    return total;
+});
+let ages = ref([
+    {
+        name: '15-25',
+        clients: 305,
+    },
+    {
+        name: '26-35',
+        clients: 305,
+    },
+    {
+        name: '36-45',
+        clients: 305,
+    },
+    {
+        name: '46-55',
+        clients: 305,
+    },
+    {
+        name: '56-65',
+        clients: 305,
+    },
+    {
+        name: '66 and Above',
+        clients: 305,
+    },
+    {
+        name: 'Age not indicated',
+        clients: 305,
+    },
+]);
+
+const getTotalAges = computed(() => {
+    let total = 0;
+    for (let age of ages.value) {
+        total += age.clients;
+    }
+    return total;
+});
+
+const printReport = () => {
+    window.print()
+}
 </script>
   
 <style>
