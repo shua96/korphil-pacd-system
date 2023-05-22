@@ -21,6 +21,14 @@ const routes = [
     path: '/feedback',
     component: () => import('@/views/user-side/feedback'),
   },
+  {
+    path: '/about-us',
+    component: () => import('@/views/user-side/about-us'),
+  },
+  {
+    path: '/registrar',
+    component: () => import('@/views/user-side/registrar'),
+  },
 
   // USER-SIDE ROUTES ENDS HERE
 

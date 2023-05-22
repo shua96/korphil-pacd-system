@@ -62,19 +62,16 @@
                     </template>
                 </v-app-bar>
             </v-layout>
-            <v-carousel hide-delimiters cycle height="100vh" class="mb-n10" :show-arrows="false" overflow="hidden"
-                style=" width:100%; top:0;">
-                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
 
-                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
+            <v-img cycle height="100vh" style=" width:100%;  margin-bottom: -80px;" src="@/assets/korphil.jpg"
+                cover></v-img>
 
-                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
-            </v-carousel>
         </v-col>
         <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
             <!-- <FeedbackRating></FeedbackRating> -->
-            <h1 class="mb-5 mx-auto">Customer Feedback Form
+            <h1 class="mx-auto mt-16">Customer Feedback Form
             </h1>
+
 
             CURRENT TAB: {{ tab }}
             <v-tabs v-model="tab" variant="outlined" class="elevation-0">
@@ -257,6 +254,7 @@ const items = ref([
     {
         title: 'About',
         disabled: false,
+        href: '/about-us'
     },
     {
         title: 'FAQ',
