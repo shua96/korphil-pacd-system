@@ -229,37 +229,37 @@ const walkinItem = ref({
     feedbacks: [
         {
             question: 'Mabilis na serbisyo',
-            rating: 1,
+            rating: null,
             page: 2,
         },
         {
             question: 'Mahusay at may malakasakit na serbisyo',
-            rating: 1,
+            rating: null,
             page: 3,
         },
         {
             question: 'Magalang at tapat na serbisyo',
-            rating: 1,
+            rating: null,
             page: 4,
         },
         {
             question: 'Malinis at Maayos na tanggapan',
-            rating: -1,
+            rating: null,
             page: 5,
         },
         {
             question: 'Mapagkatiwalaan na serbisyo',
-            rating: 1,
+            rating: null,
             page: 6,
         },
         {
             question: 'Abot ang Lahat ang serbisyo ng TESDA',
-            rating: 1,
+            rating: null,
             page: 7,
         },
         {
             question: 'Irerekomenda mo ba ang TESDA?',
-            rating: 1,
+            rating: null,
             page: 8,
             type: 'trulse'
         },

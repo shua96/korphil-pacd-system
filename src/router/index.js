@@ -193,9 +193,13 @@ async function routeGuard(to) {
 
   switch (to.href) {
     case '/':
+    case '/walkinfeedback':
+    case '/assessmentfeedback':
     case '/departments-list':
     case '/questions-list':
     case '/feedback':
+    case '/walkinForm':
+    case '/assessmentForm':
       return true;
       break;
   }
