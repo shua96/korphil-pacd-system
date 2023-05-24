@@ -94,7 +94,7 @@
                 <v-window v-model="page">
                     <v-window-item :value="1" v-model="page">
                         <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
+                            border rounded height="420">
                             <v-form class="ml-15 mt-5">
                                 <v-row>
                                     <v-col cols="7">
@@ -106,7 +106,7 @@
                                             v-model="walkinItem.age"></v-text-field>
                                     </v-col>
                                     <v-col cols="2">
-                                        <v-select label="Kasarian" :items="['Lalaki', 'Babae']" variant="outlined"
+                                        <v-select label="Kasarian" :items="['Male', 'Female']" variant="outlined"
                                             v-model="walkinItem.sex">
                                         </v-select>
                                     </v-col>
@@ -118,15 +118,22 @@
                                     </v-col>
                                 </v-row>
                                 <v-row>
-                                    <v-col cols="4">
+                                    <v-col cols="5">
                                         <v-text-field label="Telepono/CP #" variant="outlined" type="number" maxlength="11"
                                             v-model="walkinItem.contact"></v-text-field>
                                     </v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="6">
                                         <v-text-field label="Email Address" variant="outlined"
                                             v-model="walkinItem.email"></v-text-field>
                                     </v-col>
-                                    <v-col cols="3">
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="5">
+                                        <v-select label="Reason For Visit" :items="['Assessment & Certification', 'Registrar', 'Training ', 'Others (Procurement, Finance and Admin, Scholarship)']" variant="outlined"
+                                            v-model="walkinItem.reason">
+                                        </v-select>
+                                    </v-col>
+                                    <v-col cols="6">
                                         <v-text-field label="Action/Service" variant="outlined"
                                             v-model="walkinItem.actionprovided"></v-text-field>
                                     </v-col>
@@ -218,65 +225,60 @@ let snackbar = ref(false)
 const recommend = ref({
     rating: '',
 })
+
+const reasonForVisit = ref([
+    {text: 'Assessment & Certification'},
+    {text: 'Registrar'},
+    {text: 'Training '},
+    {text: 'Others (Procurement, Finance and Admin, Scholarship) '},
+])
 const walkinItem = ref({
     name: 'Juan Dela Cruz',
-    age: '96',
-    sex: 'Babae',
+    age: '',
+    sex: '',
     contact: '09123457890',
     email: 'qwer@qwer.com',
     address: 'Davao City',
     actionprovided: 'Training',
+    reason: '',
     feedbacks: [
         {
             question: 'Mabilis na serbisyo',
-            rating: null,
+            rating: 1,
             page: 2,
         },
         {
             question: 'Mahusay at may malakasakit na serbisyo',
-            rating: null,
+            rating: 1,
             page: 3,
         },
         {
             question: 'Magalang at tapat na serbisyo',
-            rating: null,
+            rating: 1,
             page: 4,
         },
         {
             question: 'Malinis at Maayos na tanggapan',
-            rating: null,
+            rating: 1,
             page: 5,
         },
         {
             question: 'Mapagkatiwalaan na serbisyo',
-            rating: null,
+            rating: 1,
             page: 6,
         },
         {
             question: 'Abot ang Lahat ang serbisyo ng TESDA',
-            rating: null,
+            rating: 1,
             page: 7,
         },
         {
             question: 'Irerekomenda mo ba ang TESDA?',
-            rating: null,
+            rating: 1,
             page: 8,
             type: 'trulse'
         },
     ]
-})
-const assessmentItem = ref({
-    name: '',
-    age: '',
-    sex: '',
-    course_year: '',
-    qualification: '',
-    school: '',
-    address: '',
-    actionprovided: '',
-})
-const feedback = ref({
-    rating: '',
 })
 async function saveWalkin() {
     console.log('walkinitem', walkinItem.value);
@@ -294,7 +296,7 @@ async function saveAssessment() {
 let page = ref(1);
 let app = useAppStore()
 
-const tab = ref(null)
+const tab = ref(1)
 
 const items = ref([
     {
