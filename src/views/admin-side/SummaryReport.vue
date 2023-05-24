@@ -1,11 +1,10 @@
 <template>
-  <h1>Hello</h1>
   <div class="main-container">
     <v-btn class="print-button" @click="printSummary">Print</v-btn>
     <table class="summary-table">
       <thead>
         <tr>
-          <th>A. Total Number of Clients Served by Sex</th>
+          <th class="text-left">A. Total Number of Clients Served by Sex</th>
           <th></th>
         </tr>
         <tr>
@@ -16,22 +15,22 @@
       <tbody>
         <tr>
           <td class="text-center divider">Male</td>
-          <td>{{ sexes[1].clients }}</td>
+          <td class="text-center">{{ sexes[1].clients }}</td>
         </tr>
         <tr>
           <td class="text-center divider">Female</td>
-          <td>{{ sexes[0].clients }}</td>
+          <td class="text-center">{{ sexes[0].clients }}</td>
         </tr>
         <tr>
           <th class="text-center divider">Total</th>
-          <td>{{ getTotalSexes }}</td>
+          <td class="text-center">{{ getTotalSexes }}</td>
         </tr>
       </tbody>
     </table>
     <table class="summary-table">
       <thead>
         <tr>
-          <th>B. Distribution of Clients Served by Age Group</th>
+          <th class="text-left">B. Distribution of Clients Served by Age Group</th>
           <th></th>
         </tr>
         <tr>
@@ -42,20 +41,20 @@
       <tbody>
         <tr v-for="age in ages" :key="age.name">
           <td class="text-center divider">{{ age.name }}</td>
-          <td>{{ age.clients }}</td>
+          <td class="text-center">{{ age.clients }}</td>
         </tr>
         <tr>
           <th class="text-center divider">
             Total
           </th>
-          <td>{{ getTotalAges }}</td>
+          <td class="text-center">{{ getTotalAges }}</td>
         </tr>
       </tbody>
     </table>
     <table class="summary-table">
       <thead>
         <tr>
-          <th>C. Total Number of Clients by Reason of Visit</th>
+          <th class="text-left">C. Total Number of Clients by Reason of Visit</th>
           <th></th>
         </tr>
         <tr>
@@ -65,21 +64,21 @@
       </thead>
       <tbody>
         <tr v-for="reason in reasons" :key="reason.name">
-          <td class="text-center divider">{{ reason.name }}</td>
-          <td>{{ reason.clients }}</td>
+          <td class="divider">{{ reason.name }}</td>
+          <td class="text-center">{{ reason.clients }}</td>
         </tr>
         <tr>
           <th class="text-center divider">
             Total
           </th>
-          <td>{{ getTotalReasons }}</td>
+          <td class="text-center">{{ getTotalReasons }}</td>
         </tr>
       </tbody>
     </table>
     <table class="summary-table">
       <thead>
         <tr>
-          <th>D. Action Provided Relative to Purpose of Visit </th>
+          <th class="text-left">D. Action Provided Relative to Purpose of Visit </th>
           <th></th>
         </tr>
         <tr>
@@ -89,21 +88,21 @@
       </thead>
       <tbody>
         <tr v-for="action in actions" :key="action.name">
-          <td class="text-center divider">{{ action.name }}</td>
-          <td>{{ action.clients }}</td>
+          <td class="divider">{{ action.name }}</td>
+          <td class="text-center">{{ action.clients }}</td>
         </tr>
         <tr>
           <th class="text-center divider">
             Total
           </th>
-          <td>{{ getTotalActions }}</td>
+          <td class="text-center">{{ getTotalActions }}</td>
         </tr>
       </tbody>
     </table>
     <table class="summary-table">
       <thead>
         <tr>
-          <th>E. Drivers of Satisfaction</th>
+          <th class="text-left">E. Drivers of Satisfaction</th>
           <th></th>
           <th></th>
           <th></th>
@@ -119,11 +118,11 @@
       </thead>
       <tbody>
         <tr v-for="feedback in feedbacks" :key="feedback.name">
-          <td class="text-center divider">{{ feedback.name }}</td>
-          <td>{{ feedback.vsatisfied }}</td>
-          <td>{{ feedback.satisfied }}</td>
-          <td>{{ feedback.poor }}</td>
-          <td>{{ getTotalFeedbacks }}</td>
+          <td class="divider">{{ feedback.name }}</td>
+          <td class="text-center">{{ feedback.vsatisfied }}</td>
+          <td class="text-center">{{ feedback.satisfied }}</td>
+          <td class="text-center">{{ feedback.poor }}</td>
+          <td class="text-center">{{ getTotalFeedbacks }}</td>
         </tr>
       </tbody>
     </table>
@@ -318,6 +317,7 @@ function printSummary() {
   border: black solid;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 50px;
 }
 
 .print-button {
@@ -333,6 +333,6 @@ function printSummary() {
 .summary-table th,
 .summary-table td {
   border: 1px solid #ccc;
-  padding: 0.5rem;
+  padding: 0.02rem 0.1rem;
 }
 </style>

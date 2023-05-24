@@ -129,13 +129,17 @@
                                 </v-row>
                                 <v-row>
                                     <v-col cols="5">
-                                        <v-select label="Reason For Visit" :items="['Assessment & Certification', 'Registrar', 'Training ', 'Others (Procurement, Finance and Admin, Scholarship)']" variant="outlined"
-                                            v-model="walkinItem.reason">
+                                        <v-select label="Reason For Visit"
+                                            :items="['Assessment & Certification', 'Registrar', 'Training ', 'Others (Procurement, Finance and Admin, Scholarship)']"
+                                            variant="outlined" v-model="walkinItem.reason">
                                         </v-select>
                                     </v-col>
                                     <v-col cols="6">
-                                        <v-text-field label="Action/Service" variant="outlined"
-                                            v-model="walkinItem.actionprovided"></v-text-field>
+                                        <!-- <v-text-field label="Action/Service" variant="outlined"
+                                            v-model="walkinItem.actionprovided"></v-text-field> -->
+                                        <v-select label="Action Provided" :items="[]" variant="outlined"
+                                            v-model="walkinItem.actionprovided">
+                                        </v-select>
                                     </v-col>
                                 </v-row>
                                 <v-row style="display: flex; justify-content: center;">
@@ -185,7 +189,8 @@
                         pinagkaloob ang mga hinihinging impormasyon ng
                         form na ito. Pinapayagan ko ang TESDA na isama sa kanilang database bilang bahagi ng
                         kanilang records at monitoring ang mga detalyeng ito.
-                    </template></v-checkbox-btn>
+                    </template>
+                </v-checkbox-btn>
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="green-darken-1" variant="text" @click="dialog = false">
@@ -213,12 +218,10 @@
 </template>
 <script setup>
 import FeedbackRating from '@/layouts/comps/FeedbackRating.vue';
-import router from '@/router';
 import { useAppStore } from '@/stores/app';
 import axios from 'axios';
 import { ref } from 'vue';
 
-let timeout = ref(1500)
 let enabled = ref(false)
 let dialog = ref(false)
 let snackbar = ref(false)
@@ -227,10 +230,10 @@ const recommend = ref({
 })
 
 const reasonForVisit = ref([
-    {text: 'Assessment & Certification'},
-    {text: 'Registrar'},
-    {text: 'Training '},
-    {text: 'Others (Procurement, Finance and Admin, Scholarship) '},
+    { text: 'Assessment & Certification' },
+    { text: 'Registrar' },
+    { text: 'Training ' },
+    { text: 'Others (Procurement, Finance and Admin, Scholarship) ' },
 ])
 const walkinItem = ref({
     name: 'Juan Dela Cruz',
@@ -239,7 +242,7 @@ const walkinItem = ref({
     contact: '09123457890',
     email: 'qwer@qwer.com',
     address: 'Davao City',
-    actionprovided: 'Training',
+    actionprovided: '',
     reason: '',
     feedbacks: [
         {
@@ -281,17 +284,11 @@ const walkinItem = ref({
     ]
 })
 async function saveWalkin() {
-    console.log('walkinitem', walkinItem.value);
     await axios.post("/api/createclient", walkinItem.value);
-    // await axios.post("/api/createfeedback", feedback.value);
     this.dialog = false;
     this.snackbar = true;
 }
 
-async function saveAssessment() {
-    await axios.post("/api/createassessmentclient", assessmentItem.value);
-    router.push('/feedback');
-}
 
 let page = ref(1);
 let app = useAppStore()
