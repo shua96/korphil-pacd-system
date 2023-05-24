@@ -1,6 +1,34 @@
 <template>
+  <v-btn class="print-button" @click="printSummary">Print</v-btn>
+  <h1 class="pl-10 mb-10 ">Summary Report</h1>
+  <v-sheet style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
+    <v-btn @click="count.countClients(clients)">
+      COUNT CLIENT
+    </v-btn>
+    <v-btn @click="count.countMale(clients)">
+      Male Count
+    </v-btn>
+
+    <v-row no-gutters>
+      <v-col cols="1">
+        <div class="my-5">Sort by:</div>
+      </v-col>
+      <v-col cols="5" class="mr-1">
+        <v-combobox label="Month"
+          :items="['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', ' September', 'October', 'November', 'December']"
+          variant="solo" clearable v-model="sortByMonth">
+        </v-combobox>
+      </v-col>
+      <v-col cols="5">
+        <v-combobox label="Year" v-model="sortByYear" :items="years" variant="solo" clearable>
+        </v-combobox>
+      </v-col>
+    </v-row>
+  </v-sheet>
   <div class="main-container">
-    <v-btn class="print-button" @click="printSummary">Print</v-btn>
+    <h4 class="mt-5">SUMMARY REPORT FOR FACE TO FACE TRANSACTION</h4>
+    <h5>(Customer Feedback Form TESDA-OP-AS-03-F01)</h5>
+    <h5>For the month of {{ sortByMonth }} {{ sortByYear }}</h5>
     <table class="summary-table">
       <thead>
         <tr>
@@ -15,7 +43,7 @@
       <tbody>
         <tr>
           <td class="text-center divider">Male</td>
-          <td class="text-center">{{ sexes[1].clients }}</td>
+          <td class="text-center">{{ count.countMale(clients) }}</td>
         </tr>
         <tr>
           <td class="text-center divider">Female</td>
@@ -126,12 +154,66 @@
         </tr>
       </tbody>
     </table>
+    <!-- <table class="summary-table">
+      <thead>
+        <tr>
+          <th class="text-left">F. Overall Rating </th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>Other Areas Rated</th>
+          <th>No. of </th>
+          <th>TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="feedback in feedbacks" :key="feedback.name">
+          <td class="divider">{{ feedback.name }}</td>
+          <td class="text-center">{{ getTotalFeedbacks }}</td>
+        </tr>
+      </tbody>
+    </table> -->
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th class="text-left">F. Overall Rating</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>Rating </th>
+          <th>No. of Clients</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="rate in rates" :key="rate.name">
+          <td class="text-center divider">{{ rate.name }}</td>
+          <td class="text-center">{{ rate.clients }}</td>
+        </tr>
+        <tr>
+          <th class="text-center divider">
+            Total
+          </th>
+          <td class="text-center">{{ getTotalRates }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
+import count from '@/helpers/count';
+
+const sortByMonth = ref('')
+const sortByYear = ref('');
+const years = computed(() => {
+  const year = new Date().getFullYear();
+  return Array.from({ length: year - 1900 }, (_, index) => 1901 + index);
+});
 
 let sexes = ref([
   {
@@ -281,26 +363,49 @@ const getTotalFeedbacks = computed(() => {
 });
 
 
-onMounted(async () => {
-  try {
-    const response = await axios.get('/api/getclients');
-    const { maleCount, femaleCount } = response.data;
-    const { assessmentCount, registrarCount, trainingCount, othersCount } = response.data;
+let rates = ref([
+  {
+    name: 'Very Satisfactory',
+    clients: '',
+  },
+  {
+    name: 'Female',
+    clients: '',
+  },
+]);
 
-    sexes.value[1].clients = maleCount;
-    sexes.value[0].clients = femaleCount;
-    reasons.value[0].clients = assessmentCount;
-    reasons.value[1].clients = registrarCount;
-    reasons.value[2].clients = trainingCount;
-    reasons.value[3].clients = othersCount;
-    const ageCounts = response.data;
-
-    ages.value.forEach((age) => {
-      age.clients = ageCounts[age.name] || 0;
-    });
-  } catch (error) {
-    console.error('Failed to fetch age group counts:', error);
+const getTotalRates = computed(() => {
+  let total = 0;
+  for (let rate of rates.value) {
+    total += rate.clients;
   }
+  return total;
+});
+
+let clients = ref([]);
+onMounted(async () => {
+  const response = await axios.get('/api/getClients');
+  clients.value = response.data;
+  console.log(clients.value);
+  // try {
+  //   // const response = await axios.get('/api/getclients');
+  //   // const { maleCount, femaleCount } = response.data;
+  //   // const { assessmentCount, registrarCount, trainingCount, othersCount } = response.data;
+
+  //   sexes.value[1].clients = maleCount;
+  //   sexes.value[0].clients = femaleCount;
+  //   reasons.value[0].clients = assessmentCount;
+  //   reasons.value[1].clients = registrarCount;
+  //   reasons.value[2].clients = trainingCount;
+  //   reasons.value[3].clients = othersCount;
+  //   const ageCounts = response.data;
+
+  //   ages.value.forEach((age) => {
+  //     age.clients = ageCounts[age.name] || 0;
+  //   });
+  // } catch (error) {
+  //   console.error('Failed to fetch age group counts:', error);
+  // }
 });
 
 function printSummary() {
