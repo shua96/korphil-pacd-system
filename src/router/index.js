@@ -21,6 +21,14 @@ const routes = [
     path: '/feedback',
     component: () => import('@/views/user-side/feedback'),
   },
+  {
+    path: '/walkinfeedback',
+    component: () => import('@/components/feedback/walkinForm.vue'),
+  },
+  {
+    path: '/assessmentfeedback',
+    component: () => import('@/components/feedback/assessmentForm.vue'),
+  },
 
   // USER-SIDE ROUTES ENDS HERE
 
@@ -185,9 +193,13 @@ async function routeGuard(to) {
 
   switch (to.href) {
     case '/':
+    case '/walkinfeedback':
+    case '/assessmentfeedback':
     case '/departments-list':
     case '/questions-list':
     case '/feedback':
+    case '/walkinForm':
+    case '/assessmentForm':
       return true;
       break;
   }
