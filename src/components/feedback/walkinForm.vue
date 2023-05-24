@@ -94,7 +94,7 @@
                 <v-window v-model="page">
                     <v-window-item :value="1" v-model="page">
                         <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
+                            border rounded height="420">
                             <v-form class="ml-15 mt-5">
                                 <v-row>
                                     <v-col cols="7">
@@ -118,15 +118,22 @@
                                     </v-col>
                                 </v-row>
                                 <v-row>
-                                    <v-col cols="4">
+                                    <v-col cols="5">
                                         <v-text-field label="Telepono/CP #" variant="outlined" type="number" maxlength="11"
                                             v-model="walkinItem.contact"></v-text-field>
                                     </v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="6">
                                         <v-text-field label="Email Address" variant="outlined"
                                             v-model="walkinItem.email"></v-text-field>
                                     </v-col>
-                                    <v-col cols="3">
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="5">
+                                        <v-select label="Reason For Visit" :items="['Assessment & Certification', 'Registrar', 'Training ', 'Others (Procurement, Finance and Admin, Scholarship)']" variant="outlined"
+                                            v-model="walkinItem.reason">
+                                        </v-select>
+                                    </v-col>
+                                    <v-col cols="6">
                                         <v-text-field label="Action/Service" variant="outlined"
                                             v-model="walkinItem.actionprovided"></v-text-field>
                                     </v-col>
@@ -218,6 +225,13 @@ let snackbar = ref(false)
 const recommend = ref({
     rating: '',
 })
+
+const reasonForVisit = ref([
+    {text: 'Assessment & Certification'},
+    {text: 'Registrar'},
+    {text: 'Training '},
+    {text: 'Others (Procurement, Finance and Admin, Scholarship) '},
+])
 const walkinItem = ref({
     name: 'Juan Dela Cruz',
     age: '',
@@ -226,6 +240,7 @@ const walkinItem = ref({
     email: 'qwer@qwer.com',
     address: 'Davao City',
     actionprovided: 'Training',
+    reason: '',
     feedbacks: [
         {
             question: 'Mabilis na serbisyo',
