@@ -159,7 +159,7 @@
                     <v-window-item :value="9" v-model="page">
                         <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
                             border rounded height="400">
-                            <div>
+                            <div class="my-auto">
                                 <h1 class="text-center">Irerekomenda nyo po na ang TESDA sa inyong kamag-anak at kaibigan?
                                 </h1>
                                 <v-radio-group inline style="display: flex; justify-content: center;">
