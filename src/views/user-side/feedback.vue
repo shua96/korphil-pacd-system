@@ -63,13 +63,12 @@
                 </v-app-bar>
             </v-layout>
 
-            <v-img cycle height="100vh" style=" width:100%;  margin-bottom: -80px;" src="@/assets/korphil.jpg"
-                cover></v-img>
+            <v-img cycle height="100vh" style=" width:100%;" src="@/assets/FEEDBACK IMAGE.jpg" cover></v-img>
 
         </v-col>
         <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
             <!-- <FeedbackRating></FeedbackRating> -->
-            <h1 class="mx-auto mt-16">Customer Feedback Form
+            <h1 class="mx-auto  ">Customer Feedback Form
             </h1>
 
 
