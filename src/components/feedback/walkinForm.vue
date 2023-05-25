@@ -152,19 +152,24 @@
                             border rounded height="400">
                             <div class="text-center">
                                 <h1>{{ feedback.question }}</h1>
-                                <div v-if="feedback.type == 'trulse'">
-                                    <v-radio-group v-model="recommend.rating" inline
-                                        style="display: flex; justify-content: center;">
-                                        <v-radio label="Yes" :value="0"></v-radio>
-                                        <v-radio label="No" :value="1"></v-radio>
-                                    </v-radio-group>
-                                </div>
-                                <FeedbackRating v-else v-model="feedback.rating" color="primary"></FeedbackRating>
+                                <FeedbackRating v-model="feedback.rating" color="primary"></FeedbackRating>
+                            </div>
+                        </v-sheet>
+                    </v-window-item>
+                    <v-window-item :value="9" v-model="page">
+                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
+                            border rounded height="400">
+                            <div class="my-auto">
+                                <h1 class="text-center">Irerekomenda nyo po na ang TESDA sa inyong kamag-anak at kaibigan?
+                                </h1>
+                                <v-radio-group inline style="display: flex; justify-content: center;">
+                                    <v-radio label="Yes" :value="0"></v-radio>
+                                    <v-radio label="No" :value="1"></v-radio>
+                                </v-radio-group>
                             </div>
                         </v-sheet>
                         <div style="margin-left: 45%">
-                            <v-btn v-if="index == walkinItem.feedbacks.length - 1" @click="saveWalkin()"
-                                color="primary">Submit</v-btn>
+                            <v-btn v-if="page == 9" @click="saveWalkin()" color="primary">Submit</v-btn>
                         </div>
                     </v-window-item>
 
@@ -221,6 +226,7 @@ import FeedbackRating from '@/layouts/comps/FeedbackRating.vue';
 import { useAppStore } from '@/stores/app';
 import axios from 'axios';
 import { ref } from 'vue';
+import count from '@/helpers/count';
 
 let enabled = ref(false)
 let dialog = ref(false)
@@ -237,58 +243,22 @@ const reasonForVisit = ref([
 ])
 const walkinItem = ref({
     name: 'Juan Dela Cruz',
-    age: '',
-    sex: '',
+    age: 29,
+    sex: 'Female',
     contact: '09123457890',
     email: 'qwer@qwer.com',
     address: 'Davao City',
-    actionprovided: 'Trainingg',
-    reason: '',
-    feedbacks: [
-        {
-            question: 'Mabilis na serbisyo',
-            rating: 1,
-            page: 2,
-        },
-        {
-            question: 'Mahusay at may malakasakit na serbisyo',
-            rating: 1,
-            page: 3,
-        },
-        {
-            question: 'Magalang at tapat na serbisyo',
-            rating: 1,
-            page: 4,
-        },
-        {
-            question: 'Malinis at Maayos na tanggapan',
-            rating: 1,
-            page: 5,
-        },
-        {
-            question: 'Mapagkatiwalaan na serbisyo',
-            rating: 1,
-            page: 6,
-        },
-        {
-            question: 'Abot ang Lahat ang serbisyo ng TESDA',
-            rating: 1,
-            page: 7,
-        },
-        {
-            question: 'Kabuuang antas ng kasiyahan sa serbisyong natanggap',
-            rating: 1,
-            page: 8,
-        },
-        {
-            question: 'Irerekomenda mo ba ang TESDA?',
-            rating: 1,
-            page: 9,
-            type: 'trulse'
-        },
-    ]
+    actionprovided: 'Training',
+    reason: 'Training',
+    feedbacks: JSON.parse(JSON.stringify(count.feedbacks)),
 })
 async function saveWalkin() {
+    let feedbacks = walkinItem.value.feedbacks;
+    for (let i = 0; i < feedbacks.length; i++) {
+        delete feedbacks[i].question;
+        delete feedbacks[i].type;
+    }
+    walkinItem.value.feedbacks = feedbacks;
     await axios.post("/api/createclient", walkinItem.value);
     this.dialog = false;
     this.snackbar = true;
