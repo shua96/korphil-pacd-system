@@ -169,7 +169,7 @@
                     </v-window-item>
 
                 </v-window>
-                <v-pagination v-model="page" :length="8" class="hide-numbers" next-icon="mdi-chevron-right"
+                <v-pagination v-model="page" :length="9" class="hide-numbers" next-icon="mdi-chevron-right"
                     prev-icon="mdi-chevron-left">
                 </v-pagination>
             </v-card-text>
@@ -242,7 +242,7 @@ const walkinItem = ref({
     contact: '09123457890',
     email: 'qwer@qwer.com',
     address: 'Davao City',
-    actionprovided: '',
+    actionprovided: 'Trainingg',
     reason: '',
     feedbacks: [
         {
@@ -276,9 +276,14 @@ const walkinItem = ref({
             page: 7,
         },
         {
-            question: 'Irerekomenda mo ba ang TESDA?',
+            question: 'Kabuuang antas ng kasiyahan sa serbisyong natanggap',
             rating: 1,
             page: 8,
+        },
+        {
+            question: 'Irerekomenda mo ba ang TESDA?',
+            rating: 1,
+            page: 9,
             type: 'trulse'
         },
     ]
