@@ -2,12 +2,6 @@
   <v-btn class="print-button" @click="printSummary">Print</v-btn>
   <h1 class="pl-10 mb-10 ">Summary Report</h1>
   <v-sheet style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
-    <v-btn @click="count.countClients(clients)">
-      COUNT CLIENT
-    </v-btn>
-    <v-btn @click="count.countMale(clients)">
-      Male Count
-    </v-btn>
 
     <v-row no-gutters>
       <v-col cols="1">
@@ -32,8 +26,7 @@
     <table class="summary-table">
       <thead>
         <tr>
-          <th class="text-left">A. Total Number of Clients Served by Sex</th>
-          <th></th>
+          <th class="text-left" colspan="2">A. Total Number of Clients Served by Sex</th>
         </tr>
         <tr>
           <th>Gender</th>
@@ -47,19 +40,18 @@
         </tr>
         <tr>
           <td class="text-center divider">Female</td>
-          <td class="text-center">{{ sexes[0].clients }}</td>
+          <td class="text-center">{{ count.countFemale(clients) }}</td>
         </tr>
         <tr>
           <th class="text-center divider">Total</th>
-          <td class="text-center">{{ getTotalSexes }}</td>
+          <td class="text-center">{{ count.getTotalSexes(clients) }}</td>
         </tr>
       </tbody>
     </table>
     <table class="summary-table">
       <thead>
         <tr>
-          <th class="text-left">B. Distribution of Clients Served by Age Group</th>
-          <th></th>
+          <th class="text-left" colspan="2">B. Distribution of Clients Served by Age Group</th>
         </tr>
         <tr>
           <th>Age Group</th>
@@ -82,8 +74,7 @@
     <table class="summary-table">
       <thead>
         <tr>
-          <th class="text-left">C. Total Number of Clients by Reason of Visit</th>
-          <th></th>
+          <th class="text-left" colspan="2">C. Total Number of Clients by Reason of Visit</th>
         </tr>
         <tr>
           <th>Reason for Visit</th>
@@ -92,7 +83,7 @@
       </thead>
       <tbody>
         <tr v-for="reason in reasons" :key="reason.name">
-          <td class="divider">{{ reason.name }}</td>
+          <td class="text-center divider">{{ reason.name }}</td>
           <td class="text-center">{{ reason.clients }}</td>
         </tr>
         <tr>
@@ -130,11 +121,7 @@
     <table class="summary-table">
       <thead>
         <tr>
-          <th class="text-left">E. Drivers of Satisfaction</th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th class="text-left" colspan="5">E. Drivers of Satisfaction</th>
         </tr>
         <tr>
           <th>Other Areas Rated</th>
@@ -145,60 +132,36 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="feedback in feedbacks" :key="feedback.name">
-          <td class="divider">{{ feedback.name }}</td>
-          <td class="text-center">{{ feedback.vsatisfied }}</td>
-          <td class="text-center">{{ feedback.satisfied }}</td>
-          <td class="text-center">{{ feedback.poor }}</td>
-          <td class="text-center">{{ getTotalFeedbacks }}</td>
+        <tr v-for="feedback in count.feedbacks" :key="feedback.id">
+          <td class="divider">{{ feedback.id }}. {{ feedback.question }}</td>
+          <td class="text-center">{{ count.getRating(clients, feedback.id, 1) }}</td>
+          <td class="text-center">{{ count.getRating(clients, feedback.id, 0) }}</td>
+          <td class="text-center">{{ count.getRating(clients, feedback.id, -1) }}</td>
+          <td class="text-center">{{ count.getTotalFeedbacks(clients, feedback.id) }}</td>
         </tr>
       </tbody>
     </table>
-    <!-- <table class="summary-table">
-      <thead>
-        <tr>
-          <th class="text-left">F. Overall Rating </th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>Other Areas Rated</th>
-          <th>No. of </th>
-          <th>TOTAL</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="feedback in feedbacks" :key="feedback.name">
-          <td class="divider">{{ feedback.name }}</td>
-          <td class="text-center">{{ getTotalFeedbacks }}</td>
-        </tr>
-      </tbody>
-    </table> -->
     <table class="summary-table">
       <thead>
         <tr>
-          <th class="text-left">F. Overall Rating</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>Rating </th>
-          <th>No. of Clients</th>
+          <th class="text-left" colspan="5">F. Overall Rating</th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="rate in rates" :key="rate.name">
-          <td class="text-center divider">{{ rate.name }}</td>
-          <td class="text-center">{{ rate.clients }}</td>
-        </tr>
-        <tr>
-          <th class="text-center divider">
-            Total
-          </th>
-          <td class="text-center">{{ getTotalRates }}</td>
-        </tr>
-      </tbody>
+      <tr>
+        <th colspan="4">Would you recommend TESDA to you relatives and friends?</th>
+      </tr>
+      <tr class="text-center">
+        <td>Yes</td>
+        <td>No</td>
+        <td>No Answer</td>
+        <td style="font-weight: bold;">Total</td>
+      </tr>
+      <tr>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No Answer</td>
+        <td>Total</td>
+      </tr>
     </table>
   </div>
 </template>
@@ -213,25 +176,6 @@ const sortByYear = ref('');
 const years = computed(() => {
   const year = new Date().getFullYear();
   return Array.from({ length: year - 1900 }, (_, index) => 1901 + index);
-});
-
-let sexes = ref([
-  {
-    name: 'Male',
-    clients: '',
-  },
-  {
-    name: 'Female',
-    clients: '',
-  },
-]);
-
-const getTotalSexes = computed(() => {
-  let total = 0;
-  for (let sex of sexes.value) {
-    total += sex.clients;
-  }
-  return total;
 });
 
 let reasons = ref([
@@ -252,7 +196,6 @@ let reasons = ref([
     clients: '',
   },
 ])
-
 const getTotalReasons = computed(() => {
   let total = 0;
   for (let reason of reasons.value) {
@@ -261,36 +204,37 @@ const getTotalReasons = computed(() => {
   return total;
 });
 
+
 let ages = ref([
   {
     name: '15-25',
-    clients: '',
+    clients: 0,
   },
   {
     name: '26-35',
-    clients: '',
+    clients: 0,
   },
   {
     name: '36-45',
-    clients: '',
+    clients: 0,
   },
   {
     name: '46-55',
-    clients: '',
+    clients: 0,
   },
   {
     name: '56-65',
-    clients: '',
+    clients: 0,
   },
   {
     name: '66 and Above',
-    clients: '',
+    clients: 0,
   },
   {
     name: 'Age not indicated',
-    clients: '',
+    clients: 0,
   },
-]);
+])
 
 const getTotalAges = computed(() => {
   let total = 0;
@@ -315,97 +259,36 @@ const getTotalActions = computed(() => {
   return total;
 });
 
-let feedbacks = ref([
-  {
-    name: '1. Mabilis na serbisyo',
-    vsatisfied: 0,
-    satisfied: 0,
-    poor: 0,
-  },
-  {
-    name: '2. Mahusay at may malakasakit na serbisyo',
-    vsatisfied: 0,
-    satisfied: 0,
-    poor: 0,
-  },
-  {
-    name: '3. Magalang at tapat na serbisyo',
-    vsatisfied: 0,
-    satisfied: 0,
-    poor: 0,
-  },
-  {
-    name: '4. Malinis at Maayos na tanggapan',
-    vsatisfied: 0,
-    satisfied: 0,
-    poor: 0,
-  },
-  {
-    name: '5. Mapagkatiwalaan na serbisyo',
-    vsatisfied: 0,
-    satisfied: 0,
-    poor: 0,
-  },
-  {
-    name: '6. Abot ang Lahat ang serbisyo ng TESDA',
-    vsatisfied: 0,
-    satisfied: 0,
-    poor: 0,
-  },
-]);
 
-const getTotalFeedbacks = computed(() => {
-  let total = 0;
-  for (let feedback of feedbacks.value) {
-    total += feedback.vsatisfied + feedback.satisfied + feedback.poor;
-  }
-  return total;
-});
-
-
-let rates = ref([
-  {
-    name: 'Very Satisfactory',
-    clients: '',
-  },
-  {
-    name: 'Female',
-    clients: '',
-  },
-]);
-
-const getTotalRates = computed(() => {
-  let total = 0;
-  for (let rate of rates.value) {
-    total += rate.clients;
-  }
-  return total;
-});
+// const getTotalRates = computed(() => {
+//   let total = 0;
+//   for (let rate of rates.value) {
+//     total += rate.clients;
+//   }
+//   return total;
+// });
 
 let clients = ref([]);
 onMounted(async () => {
   const response = await axios.get('/api/getClients');
   clients.value = response.data;
   console.log(clients.value);
-  // try {
-  //   // const response = await axios.get('/api/getclients');
-  //   // const { maleCount, femaleCount } = response.data;
-  //   // const { assessmentCount, registrarCount, trainingCount, othersCount } = response.data;
+  try {
+    const response = await axios.get('/api/getClientData');
+    const { assessmentCount, registrarCount, trainingCount, othersCount } = response.data;
 
-  //   sexes.value[1].clients = maleCount;
-  //   sexes.value[0].clients = femaleCount;
-  //   reasons.value[0].clients = assessmentCount;
-  //   reasons.value[1].clients = registrarCount;
-  //   reasons.value[2].clients = trainingCount;
-  //   reasons.value[3].clients = othersCount;
-  //   const ageCounts = response.data;
+    reasons.value[0].clients = assessmentCount;
+    reasons.value[1].clients = registrarCount;
+    reasons.value[2].clients = trainingCount;
+    reasons.value[3].clients = othersCount;
+    const ageCounts = response.data;
 
-  //   ages.value.forEach((age) => {
-  //     age.clients = ageCounts[age.name] || 0;
-  //   });
-  // } catch (error) {
-  //   console.error('Failed to fetch age group counts:', error);
-  // }
+    ages.value.forEach((age) => {
+      age.clients = ageCounts[age.name] || 0;
+    });
+  } catch (error) {
+    //   console.error('Failed to fetch age group counts:', error);
+  }
 });
 
 function printSummary() {
