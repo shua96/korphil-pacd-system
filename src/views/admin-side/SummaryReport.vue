@@ -19,10 +19,11 @@
       </v-col>
     </v-row>
   </v-sheet>
-  <div class="main-container">
-    <h4 class="mt-5">SUMMARY REPORT FOR FACE TO FACE TRANSACTION</h4>
-    <h5>(Customer Feedback Form TESDA-OP-AS-03-F01)</h5>
-    <h5>For the month of {{ sortByMonth }} {{ sortByYear }}</h5>
+  <div style="margin-left: 20%; margin-right: 20%; margin-bottom: 50px;">
+    <div class="main-container">
+    <h4 class="mt-5 text-center">SUMMARY REPORT FOR FACE TO FACE TRANSACTION</h4>
+    <h5 class="text-center">(Customer Feedback Form TESDA-OP-AS-03-F01)</h5>
+    <h5 class="text-center">For the month of {{ sortByMonth }} {{ sortByYear }}</h5>
     <table class="summary-table">
       <thead>
         <tr>
@@ -157,12 +158,49 @@
         <td style="font-weight: bold;">Total</td>
       </tr>
       <tr>
-        <td>Yes</td>
-        <td>No</td>
-        <td>No Answer</td>
-        <td>Total</td>
+        <td>{{ yesCount }}</td>
+        <td>{{ noCount }}</td>
+        <td>{{ noAnswerCount }}</td>
+        <td>{{getTotalReco}}</td>
       </tr>
     </table>
+    <table>
+<tr>
+  <th class="mt-10 text-left">Prepared by:</th>
+  <th class="mt-10 text-left">Noted by:</th>
+  
+  <!-- <p class="mt-16 ml-16">JASMINNE N. OMALZA</p>
+    <p class="mb-n1 ml-16">TESD Specialist II</p>
+    <p class="mb-n1 ml-16">Customer Satisfaction Focal</p> -->
+  </tr>
+  <tr>
+
+</tr>
+    </table>
+    <table class="signatures">
+  <tr>
+    <th >Prepared by:</th>
+    <th>Noted by:</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>JASMINNE N. OMALZA</td>
+    <td>ENGR. CONSTANTINO B. PANES, Jr. Ed.D</td>
+  </tr>
+  <tr class="text-center">
+    <td style=" padding: 0.01rem 0.01rem;">TESD Specialist II</td>
+    <td> Center Administrator</td>
+  </tr>
+  <tr>
+  <td>Customer Satisfaction Focal</td>
+  </tr>
+</table>
+  </div>
   </div>
 </template>
 
@@ -196,6 +234,9 @@ let reasons = ref([
     clients: '',
   },
 ])
+
+
+
 const getTotalReasons = computed(() => {
   let total = 0;
   for (let reason of reasons.value) {
@@ -292,20 +333,46 @@ onMounted(async () => {
 });
 
 function printSummary() {
+  const printContent = document.querySelector('.main-container');
+  const originalContents = document.body.innerHTML;
+  const printElement = printContent.cloneNode(true);
+
+  document.body.innerHTML = '';
+  document.body.appendChild(printElement);
+
+  const printStyle = document.createElement('style');
+  printStyle.innerHTML = `
+    @media print {
+      .main-container {
+        width: 100%;
+        border: none;
+
+      }
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      @page {
+        size: auto;
+        margin: 0;
+      }
+    }
+  `;
+  document.head.appendChild(printStyle);
+
   window.print();
+
+  // Restore the original content after printing
+  document.body.innerHTML = originalContents;
 }
+
+
+
 </script>
 
 <style scoped>
 .main-container {
-  display: flex;
-  margin-left: 20%;
-  margin-right: 20%;
-  box-sizing: border-box;
-  border: black solid;
-  flex-direction: column;
   align-items: center;
-  margin-bottom: 50px;
 }
 
 .print-button {
@@ -323,4 +390,5 @@ function printSummary() {
   border: 1px solid #ccc;
   padding: 0.02rem 0.1rem;
 }
+
 </style>
