@@ -26,6 +26,10 @@ const routes = [
     component: () => import('@/views/user-side/QuestionsListPage'),
   },
   {
+    path: '/registrar-qs',
+    component: () => import('@/views/user-side/registrar.vue'),
+  },
+  {
     path: '/feedback',
     component: () => import('@/views/user-side/feedback'),
   },
@@ -207,6 +211,7 @@ async function routeGuard(to) {
     case '/questions-list':
     case '/feedback':
     case '/registrar-qs':
+    case '/about-us':
     case '/walkinForm':
     case '/assessmentForm':
       return true;
