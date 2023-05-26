@@ -14,6 +14,10 @@ const routes = [
     component: () => import('@/views/user-side/DepartmentsListPage.vue'),
   },
   {
+    path: '/about-us',
+    component: () => import('@/views/user-side/about-us.vue'),
+  },
+  {
     path: '/questions-list',
     component: () => import('@/views/user-side/QuestionsListPage'),
   },
