@@ -111,7 +111,8 @@
             <!-- line here -->
             <v-col cols="3" class="mr-16" align="left">
 
-                <v-card style="background-color: #EAEAEA;; border-radius: 25px; " width="350" height="350">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px; " width="350" height="350"
+                    to="/certification">
                     <v-img class="align-end text-white" height="200" src="@/assets/certification.jpeg"
                         style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Certification & Assessment</h2>

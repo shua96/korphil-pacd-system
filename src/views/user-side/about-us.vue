@@ -1,79 +1,127 @@
 <template>
-    <v-row>
-        <v-layout>
-            <v-navigation-drawer color="primary" permanent width="600" image="src/assets/PARALLAX.svg">
-                <v-row class="mt-11">
-                    <v-col cols="4">
-                        <v-avatar size="85" class="ml-16">
-                            <v-img src="@/assets/rtc1.png"> </v-img>
-                        </v-avatar>
+    <v-layout class="container">
+        <v-app-bar :elevation="0" color="transparent" class=" mt-7 pa-6">
+            <v-avatar size="110" class="ml-16">
+                <v-img src="@/assets/rtc1.png"> </v-img>
+            </v-avatar>
+
+            <v-breadcrumbs :items="items" style="margin-left:auto; color: white">
+                <template v-slot:divider>
+                </template>
+
+            </v-breadcrumbs>
+            <!-- <v-btn class="mr-2 ml-n3" variant="text" icon="mdi-account-outline" color="white" to="/login"></v-btn> -->
+            <v-menu :close-on-content-click="false" transition="scale-transition">
+                <template v-slot:activator="{ props }">
+                    <v-btn color="white" v-bind="props" icon="mdi-account-outline">
+                    </v-btn>
+                </template>
+
+                <v-form @submit.prevent="app.login()">
+
+                    <v-sheet min-width="300">
+                        <v-card-title style="display: flex; justify-content: center;">
+                            <v-icon icon="mdi-account-outline" size="x-large" />
+
+                        </v-card-title>
+                        <v-card-title style="display: flex; justify-content: center;">Login as Admin</v-card-title>
+                        <v-list>
+
+                            <v-list>
+                                <v-list-item>
+                                    <v-text-field label="Username" v-model="app.credentials.email"></v-text-field>
+                                </v-list-item>
+
+                                <v-list-item>
+                                    <v-text-field label="Password" v-model="app.credentials.password"
+                                        type="password"></v-text-field>
+                                </v-list-item>
+                            </v-list>
+
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+
+                                <v-btn variant="text" @click="menu = false">
+                                    Cancel
+                                </v-btn>
+                                <v-btn color="primary" variant="text" type="submit">
+                                    Login
+                                </v-btn>
+                            </v-card-actions>
+                        </v-list>
+                    </v-sheet>
+                </v-form>
+            </v-menu>
+
+            <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback">Feedback</v-btn>
+        </v-app-bar>
+        <!-- line here -->
+        <v-row style="margin-left: 500px;">
+            <v-col cols="8" style="margin-left: 300px; margin-top: 200px;">
+                <v-sheet class="title text-h4 ma-3 pa-3 font-weight-medium elevation-0" style="color:white; text-align: center; max-width: 200px; 
+                    background-image: linear-gradient(to bottom, #2A94F6, #2084E2);">About
+                    Us
+                </v-sheet>
+            </v-col>
+            <v-col style="margin-bottom: 190px;">
+                <v-sheet class="ma-n16 pa-8" style="outline: 10px solid #309CFF; width: 1017px; height: 500px;  
+                 background-image: linear-gradient(30deg, #0058A9, #309CFF); color: white; ">
+
+                    <v-col>
+                        <p class="font-weight-regular" style="text-align: justify; font-size: 1em; text-indent: 50px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat.</p>
                     </v-col>
-                    <v-col cols="6">
-                        <v-breadcrumbs :items="items" style="margin-left:auto; color: white">
-                            <template v-slot:divider>
-                            </template>
-                            <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback"
-                                class="ml-1">Feedback</v-btn>
-                        </v-breadcrumbs>
-
+                    <v-col>
+                        <p class="font-weight-regular" style="text-align: justify; font-size: 1em; text-indent: 50px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat.</p>
                     </v-col>
-                </v-row>
+                    <v-col>
+                        <p class="font-weight-regular" style="text-align: justify; font-size: 1em; text-indent: 50px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut
+                            labore et dolore magna aliqua. </p>
+                    </v-col>
+
+                </v-sheet></v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="6">
+                <v-img src="@/assets/ARA1.png" style="min-width:300px; margin-top:460px; margin-right: 300px;
+   "></v-img>
+
+            </v-col>
+        </v-row>
 
 
 
-            </v-navigation-drawer>
-
-        </v-layout>
-        <v-card class="elevation-3"
-            style=" background-color: #E6E6E6;  padding : 60px; margin-left: 60px; margin-right: 205px; margin-top: 10px;  width: 50%">
-            <h2 class="mb-7 font-weight-black" style="text-align:center; color: #003B74; font-size: 2em"> ABOUT US </h2>
-
-
-            <v-container style="color: #003B74; ">
-                <v-img src="@/assets/rtc1.png" width="306" height="306"
-                    style="margin-left: 250px; margin-top:140px; opacity: 30%;"></v-img>
-
-                <p
-                    style="  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: justify; text-inde">
-                    Lorem ipsum dolor
-                    sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor
-                    incididunt ut labore et
-                    dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.<v-spacer></v-spacer>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                    <v-spacer></v-spacer>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                </p>
-
-            </v-container>
-
-        </v-card>
-    </v-row>
+    </v-layout>
 </template>
 
-
 <script setup>
+import { useAppStore } from '@/stores/app';
 import { ref } from 'vue';
+
+let app = useAppStore()
+
+const menu = ref(false)
 
 
 const items = ref([
@@ -94,12 +142,19 @@ const items = ref([
     },
 ])
 
+
 </script>
+
+
+
+
+
+
 <style>
-.v-card {
-    min-height: 95vh;
-    border-bottom-right-radius: 320px !important;
-
-
+.container {
+    min-height: 100vh;
+    background-color: blanchedalmond;
+    overflow: hidden;
+    background-image: linear-gradient(30deg, #0058A9, #309CFF);
 }
 </style>

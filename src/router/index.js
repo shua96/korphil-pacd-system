@@ -29,6 +29,10 @@ const routes = [
     path: '/registrar',
     component: () => import('@/views/user-side/registrar'),
   },
+  {
+    path: '/certification',
+    component: () => import('@/views/user-side/certification'),
+  },
 
   // USER-SIDE ROUTES ENDS HERE
 
