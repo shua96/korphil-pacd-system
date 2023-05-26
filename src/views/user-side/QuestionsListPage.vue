@@ -1,3 +1,4 @@
+
 <template>
     <v-layout>
         <v-app-bar :elevation="0" color="teal-darken-4" class=" pa-6 py-10" scroll-behavior="collapse"
@@ -10,25 +11,7 @@
                 <template v-slot:divider>
                 </template>
             </v-breadcrumbs>
-            <!-- <v-menu open-on-hover>
-                <template v-slot:activator="{ props }">
-                    <v-btn v-bind="props" size="large" style="background-color: white; color: #2C96F8">
-                        Feedback
-                    </v-btn>
-                </template>
-
-                <v-list>
-                    <v-list-item>
-                        <v-list-item-title><v-btn to="/walkinfeedback" variant="plain">Walk-in
-                                Form</v-btn></v-list-item-title>
-                        <v-list-item-title><v-btn to="/assessmentfeedback" variant="plain">Assessment
-                                Form</v-btn></v-list-item-title>
-                    </v-list-item>
-                </v-list>
-            </v-menu> -->
-            <v-btn size="large" style="background-color: white; color: #2C96F8" to="/walkinfeedback">
-                Feedback
-            </v-btn>
+            <v-btn size="large" style="background-color: white; color: #2C96F8" to="/walkinFeedback">Feedback</v-btn>
 
         </v-app-bar>
 
@@ -54,7 +37,93 @@
 
             <!-- line here -->
 
-            <h1>{{ }}</h1>
+            <v-row justify="center" style="margin-right: 50px;">
+                <v-col cols="4" class="mt-4 mb-2">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="What are the current programs offered?"
+                            text="3 YEAR DIPLOMA PROGRAMS: 1. Diploma in Industrial Automation and Mechatronics Technology (DIAMT)
+                        2. Diploma in Civil Engineering Technology (DCET)
+                        3. Diploma in Automotive Technology (DAT)
+                        4. Diploma in Agricultural and Biosystems Engineering Technology (DABET)
+                        5.Diploma in Hotel and Restaurant Technology (DHRT)
+                        6. Diploma in Information Technology (DIT)
+                        7.Diploma in Heating, Ventilating, Air-Conditioning / Refrigeration Technology (DHVACT)
+                        8. Diploma in Mechanical Engineering Technology (DMET )
+                        9. DMET Major in Welding Technology (Short term Programs available https://www.korphildavao.site/courses/)">
+
+                        </v-expansion-panel>
+                    </v-expansion-panels>
+
+                </v-col>
+
+                <v-col cols="4" class="mt-4 mb-2 ">
+
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i"
+                            title="Filling Up and Submission Comptency Assessment Application Form"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
+                        </v-expansion-panel>
+                    </v-expansion-panels>
+                </v-col>
+            </v-row>
+
+            <!-- line here -->
+            <v-row justify="center" style="margin-right: 50px;">
+                <v-col cols="4" class="mt-4 mb-2 ">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="Claim Competency Assessment Result"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
+                </v-col>
+
+
+                <v-col cols="4" class="mt-4 mb-2 ">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="How long are the trainings for specific courses?"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
+                </v-col>
+            </v-row>
+
+            <!-- line here -->
+            <v-row justify="center" style="margin-right: 50px;">
+                <v-col cols="4" class="mt-4 mb-2">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="Claim TOR/other documents available in registrar"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
+                </v-col>
+
+                <v-col cols="4" class="mt-4 mb-2 ">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title=" Schedule of Competency Assessment"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
+                </v-col>
+            </v-row>
+            <!-- line here -->
+            <v-row justify="center" style="margin-right: 50px;">
+                <v-col cols="4" class="mt-4 mb-2 ">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="Are there tuition fees?"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
+                </v-col>
+
+                <v-col cols="4" class="mt-4 mb-2 ">
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel v-for="i in 1" :key="i" title="Schedule of Competency Assessment"
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></v-expansion-panel>
+                    </v-expansion-panels>
+                </v-col>
+            </v-row>
 
             <v-btn icon="mdi-arrow-left" color="white" style="margin-left: 900px; margin-top: 40px"
                 to="/departments-list"></v-btn>
@@ -65,14 +134,8 @@
 </template>
 
 <script setup>
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
-onMounted(printItems);
-async function printItems() {
-    let response = await axios.get("/api/gettrainingfaqs");
-    data.value = response.data;
-}
 
 const items = ref([
     {

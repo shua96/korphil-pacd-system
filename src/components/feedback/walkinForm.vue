@@ -286,6 +286,7 @@ const items = ref([
     {
         title: 'About',
         disabled: false,
+        href: '/about-us',
     },
     {
         title: 'FAQ',
