@@ -73,13 +73,6 @@ export default {
             rating: 1,
             page: 8,
         },
-        // {
-        //     id: 8,
-        //     question: 'Irerekomenda mo ba ang TESDA?',
-        //     rating: 1,
-        //     page: 9,
-        //     type: 'trulse'
-        // },
     ],
 
     rates: [
@@ -137,6 +130,52 @@ export default {
         return total;
     },
 
+    countYes(clients) {
+        let yesCount = 0;
+        for (let i = 0; i < clients.length; i++) {
+            if (clients[i].reco == 1) {
+                yesCount++;
+            }
+        }
+        return yesCount;
+    },
+    countNo(clients) {
+        let noCount = 0;
+        for (let i = 0; i < clients.length; i++) {
+            if (clients[i].reco == 0) {
+                noCount++;
+            }
+        }
+        return noCount;
+    },
+    countNoAnswer(clients) {
+        let noAnswerCount = 0;
+        for (let i = 0; i < clients.length; i++) {
+            if (clients[i].reco == null) {
+                noAnswerCount++;
+            }
+        }
+        return noAnswerCount;
+    },
+
+    getTotalReco(clients) {
+        let yesCount = this.countYes(clients);
+        let noCount = this.countNo(clients);
+        let noAnswerCount = this.countNoAnswer(clients);
+        let total = yesCount + noCount + noAnswerCount;
+        return total;
+    },
+
+    countActions(clients) {
+        let actionCount = 0;
+        for (let i = 0; i < clients.length; i++) {
+            if (clients[i].actionprovided == null) {
+                actionCount++;
+            }
+        }
+        return actionCount;
+    },
+
     getRating(clients, questionId, rating) {
         let total = 0;
         for (let i = 0; i < clients.length; i++) {
@@ -160,18 +199,10 @@ export default {
         return total;
     },
 
-    getVsTotal(clients, rating) {
+    getVsTotal(clients, questionId) {
         let total = 0;
-        for (let i = 0; i < clients.length; i++) {
-            let client = clients[i];
-            let feedbacks = client.feedbacks;
-            for (let j = 0; j < feedbacks.length; j++) {
-                let feedback = feedbacks[j];
-                if (feedback.rating == rating[1]) {
-                    total++;
-                }
-            }
-        }
+        let vsTotal = this.getRating(clients, questionId, 1);
+        total += vsTotal
         return total;
     },
 }

@@ -1,4 +1,5 @@
 <template>
+    {{ clients }}
     <h1 class="subtitle-1">Statistical View</h1>
     <div>
         <canvas id="myChart"></canvas>
@@ -9,8 +10,11 @@
 import Chart from 'chart.js/auto';
 import { onMounted } from 'vue';
 
-onMounted(() => {
+onMounted(async () => {
     const ctx = document.getElementById('myChart');
+
+    const response = await axios.get('/getclients');
+    const clients = response.data;
     new Chart(ctx, {
         type: 'bar',
         data: {
