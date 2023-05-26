@@ -120,7 +120,8 @@
             <!-- line here -->
             <v-col cols="3" align="center">
 
-                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350" to="/registrar">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350"
+                    to="/registrar-qs">
                     <v-img class="align-end text-white" height="200" src="@/assets/registrar.jpeg"
                         style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Registrar</h2>
