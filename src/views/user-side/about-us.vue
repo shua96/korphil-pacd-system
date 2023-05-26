@@ -55,89 +55,70 @@
 
             <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback">Feedback</v-btn>
         </v-app-bar>
-
-
-        <v-row>
-            <v-col cols="6" style="margin-left: 300px; margin-top: 300px">
-
-
-                <div>
-                    <div class="text-h2 mb-10 font-weight-medium" style="color: white">
-                        Public Assistance and Complaints Desk
-                    </div>
-                    <div class="text-h4 mb-3" style="color: white">
-                        I am Ara, your virtual PACD officer
-                    </div>
-                    <div class="text-h4 mt-3" style="color: white">How can I help you?</div>
-                    <v-card-actions class="link">
-                        <v-btn class="text-capitalize px-5 mt-5 ml-n2" variant="outlined" size="x-large" color="white"
-                            to="/departments-list">
-                            Get Started
-                        </v-btn>
-
-                    </v-card-actions>
-                </div>
-
+        <!-- line here -->
+        <v-row style="margin-left: 500px;">
+            <v-col cols="8" style="margin-left: 300px; margin-top: 200px;">
+                <v-sheet class="title text-h4 ma-3 pa-3 font-weight-medium elevation-0" style="color:white; text-align: center; max-width: 200px; 
+                    background-image: linear-gradient(to bottom, #2A94F6, #2084E2);">About
+                    Us
+                </v-sheet>
             </v-col>
+            <v-col style="margin-bottom: 190px;">
+                <v-sheet class="ma-n16 pa-8" style="outline: 10px solid #309CFF; width: 1017px; height: 500px;  
+                 background-image: linear-gradient(30deg, #0058A9, #309CFF); color: white; ">
+
+                    <v-col>
+                        <p class="font-weight-regular" style="text-align: justify; font-size: 1em; text-indent: 50px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat.</p>
+                    </v-col>
+                    <v-col>
+                        <p class="font-weight-regular" style="text-align: justify; font-size: 1em; text-indent: 50px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat.</p>
+                    </v-col>
+                    <v-col>
+                        <p class="font-weight-regular" style="text-align: justify; font-size: 1em; text-indent: 50px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut
+                            labore et dolore magna aliqua. </p>
+                    </v-col>
+
+                </v-sheet></v-col>
         </v-row>
+
         <v-row>
             <v-col cols="6">
-                <v-img class="ml-auto" src="@/assets/ARA-01.svg"
-                    style="min-width:600px; margin-top:150px; margin-right: 150px;"></v-img>
+                <v-img src="@/assets/ARA1.png" style="min-width:300px; margin-top:460px; margin-right: 300px;
+   "></v-img>
 
-<<<<<<< HEAD
             </v-col>
         </v-row>
+
+
+
     </v-layout>
-=======
-                        <v-menu open-on-hover>
-                            <template v-slot:activator="{ props }">
-                                <v-btn v-bind="props" size="large" style="background-color: white; color: #2C96F8">
-                                    Feedback
-                                </v-btn>
-                            </template>
-
-                            <v-list>
-                                <v-list-item>
-                                    <v-list-item-title><v-btn to="/dasboard" variant="plain">Walk-in
-                                            Form</v-btn></v-list-item-title>
-                                    <v-list-item-title><v-btn to="/dasboard" variant="plain">Assessment
-                                            Form</v-btn></v-list-item-title>
-                                </v-list-item>
-                            </v-list>
-                        </v-menu>
-                        <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback">Feedback</v-btn>
-                    </template>
-                </v-app-bar>
-            </v-layout>
-            <v-carousel hide-delimiters cycle height="100vh" class="mb-n10" :show-arrows="false" overflow="hidden"
-                style=" width:100%; top:0;">
-                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
-
-                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
-
-                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
-            </v-carousel>
-        </v-col>
-        <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
-            <h1 class="mb-5 mx-auto">Customer Feedback Form
-            </h1>
-
-            <v-btn to="/walkinfeedback">Walk-in Form</v-btn>
-            <v-btn to="assessmentfeedback">Assessment Form</v-btn>
-        </v-col>
-    </v-row>
->>>>>>> f3ee858880b1fd57436ff8573ed961b9e03ccaf8
 </template>
 
 <script setup>
 import { useAppStore } from '@/stores/app';
 import { ref } from 'vue';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f3ee858880b1fd57436ff8573ed961b9e03ccaf8
 let app = useAppStore()
 
 const menu = ref(false)
@@ -161,10 +142,7 @@ const items = ref([
     },
 ])
 
-<<<<<<< HEAD
 
-=======
->>>>>>> f3ee858880b1fd57436ff8573ed961b9e03ccaf8
 </script>
 
 
@@ -176,7 +154,6 @@ const items = ref([
 .container {
     min-height: 100vh;
     background-color: blanchedalmond;
-    border-bottom-left-radius: 400px !important;
     overflow: hidden;
     background-image: linear-gradient(30deg, #0058A9, #309CFF);
 }

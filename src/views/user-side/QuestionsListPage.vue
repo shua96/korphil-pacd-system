@@ -84,6 +84,7 @@ const items = ref([
     {
         title: 'About',
         disabled: false,
+        href: '/about-us'
     },
     {
         title: 'FAQ',
@@ -92,8 +93,15 @@ const items = ref([
     },
 ])
 
-
-
+</script>
+<script>
+export default {
+    data() {
+        return {
+            dialog: false,
+        }
+    },
+}
 </script>
 
 <style>
