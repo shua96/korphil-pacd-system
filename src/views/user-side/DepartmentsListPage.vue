@@ -120,7 +120,7 @@
             <!-- line here -->
             <v-col cols="3" align="center">
 
-                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350"
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="349" height="350"
                     to="/registrar-qs">
                     <v-img class="align-end text-white" height="200" src="@/assets/registrar.jpeg"
                         style="margin: 15px;"></v-img>

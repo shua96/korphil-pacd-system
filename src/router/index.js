@@ -14,6 +14,10 @@ const routes = [
     component: () => import('@/views/user-side/DepartmentsListPage.vue'),
   },
   {
+    path: '/registrar-qs',
+    component: () => import('@/views/user-side/registrar.vue'),
+  },
+  {
     path: '/about-us',
     component: () => import('@/views/user-side/about-us.vue'),
   },
@@ -206,6 +210,7 @@ async function routeGuard(to) {
     case '/departments-list':
     case '/questions-list':
     case '/feedback':
+    case '/registrar-qs':
     case '/about-us':
     case '/walkinForm':
     case '/assessmentForm':
