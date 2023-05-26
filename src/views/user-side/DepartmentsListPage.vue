@@ -112,7 +112,7 @@
 
             <v-col cols="3" class="ml-16" align="right">
                 <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="350" height="350"
-                    to="questions-list">
+                    to="/questions-list">
                     <v-img height="200" src="@/assets/training.jpeg" style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Training</h2>
                 </v-card>
@@ -120,7 +120,8 @@
             <!-- line here -->
             <v-col cols="3" align="center">
 
-                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350" to="/registrar">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350"
+                    to="/registrar-qs">
                     <v-img class="align-end text-white" height="200" src="@/assets/registrar.jpeg"
                         style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Registrar</h2>
