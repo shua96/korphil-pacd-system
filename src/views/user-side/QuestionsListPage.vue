@@ -25,9 +25,9 @@
                             Training FAQs
                         </div>
                     </div>
-                    <v-text-field class="search-bar mt-10" hide-details prepend-inner-icon="mdi-magnify"
+                    <!-- <v-text-field class="search-bar mt-10" hide-details prepend-inner-icon="mdi-magnify"
                         label="Search for category, name, keyword, etc." single-line variant="outlined"
-                        style="background-color: white;"></v-text-field>
+                        style="background-color: white;"></v-text-field> -->
 
                     <div class="text-h5 mt-10 font-weight-medium" style="color: white; text-align: center;">
                         Select Questions:
