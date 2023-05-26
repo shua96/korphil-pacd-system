@@ -53,7 +53,7 @@
                 </v-form>
             </v-menu>
 
-            <v-menu open-on-hover>
+            <!-- <v-menu open-on-hover>
                 <template v-slot:activator="{ props }">
                     <v-btn v-bind="props" size="large" style="background-color: white; color: #2C96F8">
                         Feedback
@@ -68,7 +68,11 @@
                                 Form</v-btn></v-list-item-title>
                     </v-list-item>
                 </v-list>
-            </v-menu>
+            </v-menu> -->
+
+            <v-btn size="large" style="background-color: white; color: #2C96F8" to="/walkinfeedback">
+                Feedback
+            </v-btn>
         </v-app-bar>
 
 

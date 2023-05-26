@@ -57,7 +57,10 @@
                                 </v-sheet>
                             </v-form>
                         </v-menu>
-                        <v-menu open-on-hover>
+                        <v-btn size="large" style="background-color: white; color: #2C96F8" to="/walkinfeedback">
+                            Feedback
+                        </v-btn>
+                        <!-- <v-menu open-on-hover>
                             <template v-slot:activator="{ props }">
                                 <v-btn v-bind="props" size="large" style="background-color: white; color: #2C96F8">
                                     Feedback
@@ -72,7 +75,7 @@
                                             Form</v-btn></v-list-item-title>
                                 </v-list-item>
                             </v-list>
-                        </v-menu>
+                        </v-menu> -->
                     </template>
                 </v-app-bar>
             </v-layout>
@@ -84,10 +87,11 @@
         <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
             <h1 class="mb-5 mt-16 mx-auto">Customer Feedback Form
             </h1>
-            <v-btn class="text-capitalize elevation-0 mt-2 border-button" to="/assessmentfeedback"
-                prepend-icon="mdi-arrow-left-circle">Go to Assessment Feedback Form</v-btn>
+            <!-- <v-btn class="text-capitalize elevation-0 mt-2 border-button" to="/assessmentfeedback"
+                prepend-icon="mdi-arrow-left-circle">Go to Assessment Feedback Form</v-btn> -->
             <v-tabs v-model="tab" variant="outlined" class="elevation-0">
-                <v-tab value="walkin">Walkin Form</v-tab>
+                <!-- <v-tab value="walkin">Walkin Form</v-tab> -->
+                <v-tab value="walkin"></v-tab>
             </v-tabs>
 
             <v-card-text>
@@ -135,11 +139,11 @@
                                         </v-select>
                                     </v-col>
                                     <v-col cols="6">
-                                        <!-- <v-text-field label="Action/Service" variant="outlined"
-                                            v-model="walkinItem.actionprovided"></v-text-field> -->
-                                        <v-select label="Action Provided" :items="[]" variant="outlined"
+                                        <v-text-field label="Action/Service" variant="outlined"
+                                            v-model="walkinItem.actionprovided"></v-text-field>
+                                        <!-- <v-select label="Action Provided" :items="[]" variant="outlined"
                                             v-model="walkinItem.actionprovided">
-                                        </v-select>
+                                        </v-select> -->
                                     </v-col>
                                 </v-row>
                                 <v-row style="display: flex; justify-content: center;">
@@ -162,14 +166,16 @@
                             <div class="my-auto">
                                 <h1 class="text-center">Irerekomenda nyo po na ang TESDA sa inyong kamag-anak at kaibigan?
                                 </h1>
-                                <v-radio-group inline style="display: flex; justify-content: center;">
-                                    <v-radio label="Yes" :value="0"></v-radio>
-                                    <v-radio label="No" :value="1"></v-radio>
+                                <v-radio-group v-model="walkinItem.reco" inline
+                                    style="display: flex; justify-content: center;">
+                                    <v-radio label="Yes" value="1"></v-radio>
+                                    <v-radio label="No" value="0"></v-radio>
                                 </v-radio-group>
+
                             </div>
                         </v-sheet>
                         <div style="margin-left: 45%">
-                            <v-btn v-if="page == 9" @click="saveWalkin()" color="primary">Submit</v-btn>
+                            <v-btn v-if="page == 9" @click="dialog = true" color="primary">Submit</v-btn>
                         </div>
                     </v-window-item>
 
@@ -208,18 +214,15 @@
             </v-card>
         </v-form>
     </v-dialog>
-    <v-dialog v-model="snackbar" style="display: flex; flex-direction: column; align-items: center;">
-        <v-card>
-            <v-card-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-            </v-card-text>
-            <v-card-actions>
-                <v-btn color="primary" block @click="snackbar = false">Close Dialog</v-btn>
-            </v-card-actions>
-        </v-card>
+    <v-snackbar v-model="snackbar" :timeout="timeout">
+        {{ text }}
 
-    </v-dialog>
+        <template v-slot:actions>
+            <v-btn color="blue" variant="text" @click="snackbar = false">
+                Close
+            </v-btn>
+        </template>
+    </v-snackbar>
 </template>
 <script setup>
 import FeedbackRating from '@/layouts/comps/FeedbackRating.vue';
@@ -227,14 +230,13 @@ import { useAppStore } from '@/stores/app';
 import axios from 'axios';
 import { ref } from 'vue';
 import count from '@/helpers/count';
+import router from '@/router';
 
 let enabled = ref(false)
 let dialog = ref(false)
 let snackbar = ref(false)
-const recommend = ref({
-    rating: '',
-})
-
+let text = ref('Thank You For Your Time!')
+let timeout = ref(2000)
 const reasonForVisit = ref([
     { text: 'Assessment & Certification' },
     { text: 'Registrar' },
@@ -242,15 +244,16 @@ const reasonForVisit = ref([
     { text: 'Others (Procurement, Finance and Admin, Scholarship) ' },
 ])
 const walkinItem = ref({
-    name: 'Juan Dela Cruz',
+    name: 'John Doe',
     age: 29,
-    sex: 'Female',
+    sex: 'Male',
     contact: '09123457890',
     email: 'qwer@qwer.com',
     address: 'Davao City',
-    actionprovided: 'Training',
+    actionprovided: 'Sample Process',
     reason: 'Training',
     feedbacks: JSON.parse(JSON.stringify(count.feedbacks)),
+    reco: '',
 })
 async function saveWalkin() {
     let feedbacks = walkinItem.value.feedbacks;
@@ -259,9 +262,13 @@ async function saveWalkin() {
         delete feedbacks[i].type;
     }
     walkinItem.value.feedbacks = feedbacks;
+    walkinItem.value.reco = walkinItem.value.reco;
     await axios.post("/api/createclient", walkinItem.value);
-    this.dialog = false;
-    this.snackbar = true;
+    dialog.value = false
+    snackbar.value = true;
+    if (!dialog.value) {
+        router.push('/');
+    }
 }
 
 

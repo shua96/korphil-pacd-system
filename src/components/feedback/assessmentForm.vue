@@ -94,7 +94,7 @@
                 <v-window v-model="page">
                     <v-window-item :value="1" v-model="page">
                         <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
+                            border rounded height="420">
                             <v-form class="ml-15 mt-5">
                                 <v-row>
                                     <v-col cols="7">
@@ -148,24 +148,31 @@
                             border rounded height="400">
                             <div class="text-center">
                                 <h1>{{ feedback.question }}</h1>
-                                <div v-if="feedback.type == 'trulse'">
-                                    <v-radio-group v-model="recommend.rating" inline
-                                        style="display: flex; justify-content: center;">
-                                        <v-radio label="Yes" :value="0"></v-radio>
-                                        <v-radio label="No" :value="1"></v-radio>
-                                    </v-radio-group>
-                                </div>
-                                <FeedbackRating v-else v-model="feedback.rating" color="primary"></FeedbackRating>
+                                <FeedbackRating v-model="feedback.rating" color="primary"></FeedbackRating>
+                            </div>
+                        </v-sheet>
+                    </v-window-item>
+                    <v-window-item :value="9" v-model="page">
+                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
+                            border rounded height="400">
+                            <div class="my-auto">
+                                <h1 class="text-center">Irerekomenda nyo po na ang TESDA sa inyong kamag-anak at kaibigan?
+                                </h1>
+                                <v-radio-group v-model="assessmentItem.reco" inline
+                                    style="display: flex; justify-content: center;">
+                                    <v-radio label="Yes" value="1"></v-radio>
+                                    <v-radio label="No" value="0"></v-radio>
+                                </v-radio-group>
+
                             </div>
                         </v-sheet>
                         <div style="margin-left: 45%">
-                            <v-btn v-if="index == assessmentItem.feedbacks.length - 1" @click="saveAssessment()"
-                                color="primary">Submit</v-btn>
+                            <v-btn v-if="page == 9" @click="dialog = true" color="primary">Submit</v-btn>
                         </div>
                     </v-window-item>
 
                 </v-window>
-                <v-pagination v-model="page" :length="8" class="hide-numbers" next-icon="mdi-chevron-right"
+                <v-pagination v-model="page" :length="9" class="hide-numbers" next-icon="mdi-chevron-right"
                     prev-icon="mdi-chevron-left">
                 </v-pagination>
             </v-card-text>
@@ -185,7 +192,8 @@
                         pinagkaloob ang mga hinihinging impormasyon ng
                         form na ito. Pinapayagan ko ang TESDA na isama sa kanilang database bilang bahagi ng
                         kanilang records at monitoring ang mga detalyeng ito.
-                    </template></v-checkbox-btn>
+                    </template>
+                </v-checkbox-btn>
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="green-darken-1" variant="text" @click="dialog = false">
@@ -198,94 +206,68 @@
             </v-card>
         </v-form>
     </v-dialog>
-    <v-dialog v-model="snackbar" style="display: flex; flex-direction: column; align-items: center;">
-        <v-card>
-            <v-card-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-            </v-card-text>
-            <v-card-actions>
-                <v-btn color="primary" block @click="snackbar = false">Close Dialog</v-btn>
-            </v-card-actions>
-        </v-card>
+    <v-snackbar v-model="snackbar" :timeout="timeout">
+        {{ text }}
 
-    </v-dialog>
+        <template v-slot:actions>
+            <v-btn color="blue" variant="text" @click="snackbar = false">
+                Close
+            </v-btn>
+        </template>
+    </v-snackbar>
 </template>
 <script setup>
 import FeedbackRating from '@/layouts/comps/FeedbackRating.vue';
-import router from '@/router';
 import { useAppStore } from '@/stores/app';
 import axios from 'axios';
 import { ref } from 'vue';
+import count from '@/helpers/count';
+import router from '@/router';
 
-let timeout = ref(1500)
 let enabled = ref(false)
 let dialog = ref(false)
 let snackbar = ref(false)
-const recommend = ref({
-    rating: '',
-})
+let text = ref('Thank You For Your Time!')
+let timeout = ref(2000)
+const reasonForVisit = ref([
+    { text: 'Assessment & Certification' },
+    { text: 'Registrar' },
+    { text: 'Training ' },
+    { text: 'Others (Procurement, Finance and Admin, Scholarship) ' },
+])
 const assessmentItem = ref({
-    name: '',
-    age: '',
-    sex: '',
-    course_year: '',
-    qualification: '',
-    school: '',
-    address: '',
-    actionprovided: '',
-    feedbacks: [
-        {
-            question: 'Mabilis na serbisyo',
-            rating: 1,
-            page: 2,
-        },
-        {
-            question: 'Mahusay at may malakasakit na serbisyo',
-            rating: 1,
-            page: 3,
-        },
-        {
-            question: 'Magalang at tapat na serbisyo',
-            rating: 1,
-            page: 4,
-        },
-        {
-            question: 'Malinis at Maayos na tanggapan',
-            rating: -1,
-            page: 5,
-        },
-        {
-            question: 'Mapagkatiwalaan na serbisyo',
-            rating: 1,
-            page: 6,
-        },
-        {
-            question: 'Abot ang Lahat ang serbisyo ng TESDA',
-            rating: 1,
-            page: 7,
-        },
-        {
-            question: 'Irerekomenda mo ba ang TESDA?',
-            rating: 1,
-            page: 8,
-            type: 'trulse'
-        },
-    ]
-})
-const feedback = ref({
-    rating: '',
+    name: 'John Doe',
+    age: '25',
+    sex: 'Male',
+    course_year: 'DIT/2Y2S',
+    qualification: 'VGD NCIII',
+    school: 'Davao Sample School',
+    address: 'Davao City',
+    actionprovided: 'Provided Service',
+    feedbacks: JSON.parse(JSON.stringify(count.feedbacks)),
+    reco: '',
 })
 async function saveAssessment() {
+    let feedbacks = assessmentItem.value.feedbacks;
+    for (let i = 0; i < feedbacks.length; i++) {
+        delete feedbacks[i].question;
+        delete feedbacks[i].type;
+    }
+    assessmentItem.value.feedbacks = feedbacks;
+    assessmentItem.value.reco = assessmentItem.value.reco;
     await axios.post("/api/createassessmentclient", assessmentItem.value);
-    this.dialog = false;
-    this.snackbar = true;
+    dialog.value = false
+    snackbar.value = true;
+    if (!dialog.value) {
+        router.push('/');
+    }
 }
+
 
 let page = ref(1);
 let app = useAppStore()
 
-const tab = ref(null)
+const tab = ref(1)
 
 const items = ref([
     {

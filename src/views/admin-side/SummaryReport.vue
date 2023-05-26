@@ -1,21 +1,23 @@
 <template>
-  <v-btn class="print-button" @click="printSummary">Print</v-btn>
   <h1 class="pl-10 mb-10 ">Summary Report</h1>
-  <v-sheet style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
+  <v-sheet width="54%" style="background-color: white; margin-left: 370px;" class="px-16 pt-5 mb-5 elevation-1">
 
     <v-row no-gutters>
       <v-col cols="1">
         <div class="my-5">Sort by:</div>
       </v-col>
-      <v-col cols="5" class="mr-1">
+      <v-col cols="4" class="mr-1">
         <v-combobox label="Month"
           :items="['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', ' September', 'October', 'November', 'December']"
           variant="solo" clearable v-model="sortByMonth">
         </v-combobox>
       </v-col>
-      <v-col cols="5">
+      <v-col cols="4">
         <v-combobox label="Year" v-model="sortByYear" :items="years" variant="solo" clearable>
         </v-combobox>
+      </v-col>
+      <v-col cols="2" class="mt-n2">
+        <v-btn class="print-button mt-3 ml-1" color="primary" @click="printSummary" size="x-large">Print</v-btn>
       </v-col>
     </v-row>
   </v-sheet>
@@ -107,8 +109,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="action in actions" :key="action.name">
-            <td class="divider">{{ action.name }}</td>
+          <tr v-for="action in count.actions" :key="action.name">
+            <td class="divider">{{ count.getTotalActions(clients) }}</td>
             <td class="text-center">{{ action.clients }}</td>
           </tr>
           <tr>
@@ -158,46 +160,29 @@
           <td style="font-weight: bold;">Total</td>
         </tr>
         <tr>
-          <td>{{ yesCount }}</td>
-          <td>{{ noCount }}</td>
-          <td>{{ noAnswerCount }}</td>
-          <td>{{ getTotalReco }}</td>
+          <td class="text-center">{{ count.countYes(clients) }}</td>
+          <td class="text-center">{{ count.countNo(clients) }}</td>
+          <td class="text-center">{{ count.countNoAnswer(clients) }}</td>
+          <td class="text-center">{{ count.getTotalReco(clients) }}</td>
         </tr>
       </table>
+
       <table>
         <tr>
-          <th class="mt-10 text-left">Prepared by:</th>
-          <th class="mt-10 text-left">Noted by:</th>
-
-          <!-- <p class="mt-16 ml-16">JASMINNE N. OMALZA</p>
-    <p class="mb-n1 ml-16">TESD Specialist II</p>
-    <p class="mb-n1 ml-16">Customer Satisfaction Focal</p> -->
+          <td>Prepared by:</td>
+          <td style="padding-left: 100px;">Noted by:</td>
         </tr>
         <tr>
-
-        </tr>
-      </table>
-      <table class="signatures">
-        <tr>
-          <th>Prepared by:</th>
-          <th>Noted by:</th>
+          <td class="text-center" style="padding-top: 50px; padding-left: 100px;">JASMINNE N. OMALZA </td>
+          <td class="text-center" style="padding-top: 50px; padding-left: 100px;">ENGR. CONSTANTINO B. PANES, Jr. Ed.D
+          </td>
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td class="text-center" style="padding-left: 100px;">TESD Specialist II</td>
+          <td class="text-center" style="padding-left: 100px;">Center Administrator</td>
         </tr>
         <tr>
-          <td>JASMINNE N. OMALZA</td>
-          <td>ENGR. CONSTANTINO B. PANES, Jr. Ed.D</td>
-        </tr>
-        <tr class="text-center">
-          <td style=" padding: 0.01rem 0.01rem;">TESD Specialist II</td>
-          <td> Center Administrator</td>
-        </tr>
-        <tr>
-          <td>Customer Satisfaction Focal</td>
+          <td class="text-center" style="padding-left: 100px;">Customer Satisfaction Focal</td>
         </tr>
       </table>
     </div>
@@ -311,7 +296,7 @@ const getTotalActions = computed(() => {
 
 let clients = ref([]);
 onMounted(async () => {
-  const response = await axios.get('/api/getClients');
+  const response = await axios.get('/api/getclients');
   clients.value = response.data;
   console.log(clients.value);
   try {
