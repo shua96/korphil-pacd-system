@@ -85,15 +85,59 @@
                 <v-img class="ml-auto" src="@/assets/ARA-01.svg"
                     style="min-width:600px; margin-top:150px; margin-right: 150px;"></v-img>
 
+<<<<<<< HEAD
             </v-col>
         </v-row>
     </v-layout>
+=======
+                        <v-menu open-on-hover>
+                            <template v-slot:activator="{ props }">
+                                <v-btn v-bind="props" size="large" style="background-color: white; color: #2C96F8">
+                                    Feedback
+                                </v-btn>
+                            </template>
+
+                            <v-list>
+                                <v-list-item>
+                                    <v-list-item-title><v-btn to="/dasboard" variant="plain">Walk-in
+                                            Form</v-btn></v-list-item-title>
+                                    <v-list-item-title><v-btn to="/dasboard" variant="plain">Assessment
+                                            Form</v-btn></v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
+                        <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback">Feedback</v-btn>
+                    </template>
+                </v-app-bar>
+            </v-layout>
+            <v-carousel hide-delimiters cycle height="100vh" class="mb-n10" :show-arrows="false" overflow="hidden"
+                style=" width:100%; top:0;">
+                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
+
+                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
+
+                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
+            </v-carousel>
+        </v-col>
+        <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
+            <h1 class="mb-5 mx-auto">Customer Feedback Form
+            </h1>
+
+            <v-btn to="/walkinfeedback">Walk-in Form</v-btn>
+            <v-btn to="assessmentfeedback">Assessment Form</v-btn>
+        </v-col>
+    </v-row>
+>>>>>>> f3ee858880b1fd57436ff8573ed961b9e03ccaf8
 </template>
 
 <script setup>
 import { useAppStore } from '@/stores/app';
 import { ref } from 'vue';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f3ee858880b1fd57436ff8573ed961b9e03ccaf8
 let app = useAppStore()
 
 const menu = ref(false)
@@ -117,7 +161,10 @@ const items = ref([
     },
 ])
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f3ee858880b1fd57436ff8573ed961b9e03ccaf8
 </script>
 
 
