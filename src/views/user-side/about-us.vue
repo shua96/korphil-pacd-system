@@ -53,7 +53,9 @@
                 </v-form>
             </v-menu>
 
-            <v-btn size="large" style="background-color: white; color: #2C96F8" to="/feedback">Feedback</v-btn>
+            <v-btn size="large" style="background-color: white; color: #2C96F8" to="/walkinfeedback">
+                Feedback
+            </v-btn>
         </v-app-bar>
         <!-- line here -->
         <v-row style="margin-left: 500px;">

@@ -42,7 +42,7 @@
                         <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;" v-bind="props">
                             New Item
                         </v-btn>
-                        <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;"
+                        <v-btn class="mb-2 elevation-1 ml-1" style="background-color: #3C59A6; color: white;"
                             @click="printItems()">
                             Refresh
                         </v-btn>

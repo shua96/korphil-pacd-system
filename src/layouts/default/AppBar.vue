@@ -14,6 +14,7 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav style="color: white;">
+      <v-list-item prepend-icon="mdi-home" title="HOME" to="/" style="color: white;"></v-list-item>
       <v-list-item prepend-icon="mdi-view-dashboard" title="DASHBOARD" to="/dashboard"
         style="color: white;"></v-list-item>
       <v-list-item prepend-icon="mdi-frequently-asked-questions" title="FAQ LIST" to="/faqlist"

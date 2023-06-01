@@ -18,9 +18,6 @@
                         Access: {{ app.user?.access }}
                     </p>
                     <v-divider class="my-3"></v-divider>
-                    <v-btn rounded variant="text">
-                        Edit Account
-                    </v-btn>
                     <v-divider class="my-3"></v-divider>
                     <v-btn @click="app.logout()">Logout</v-btn>
 
