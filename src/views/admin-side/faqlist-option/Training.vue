@@ -1,6 +1,7 @@
 <template>
     <h1 class="pl-10 mb-10 ">
         <v-btn size="2em" to="/faqlist" icon="mdi-arrow-left" variant="plain" />
+        {{ data }}
         {{ $route.name }}
     </h1>
     <v-sheet style="border-radius: 15px; background-color: white;" class="px-16 pt-5 mx-10 mb-5 elevation-1">
@@ -42,7 +43,7 @@
                         <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;" v-bind="props">
                             New Item
                         </v-btn>
-                        <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;"
+                        <v-btn class="mb-2 elevation-1 ml-1" style="background-color: #3C59A6; color: white;"
                             @click="printItems()">
                             Refresh
                         </v-btn>

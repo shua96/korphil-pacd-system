@@ -41,6 +41,9 @@ export const useAppStore = defineStore('app', {
             await axios.post('/api/logout',);
             this.user = null;
             router.push('/')
+            setTimeout(() => {
+                location.reload();
+            }, 50);
         },
 
         async loginCheck() {

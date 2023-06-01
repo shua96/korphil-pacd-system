@@ -36,9 +36,9 @@
                 <v-spacer></v-spacer>
                 <v-dialog v-model="dialog" max-width="500px" persistent>
                     <template v-slot:activator="{ props }">
-                        <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;" v-bind="props">
+                        <!-- <v-btn class="mb-2 elevation-1" style="background-color: #3C59A6; color: white;" v-bind="props">
                             New Item
-                        </v-btn>
+                        </v-btn> -->
                     </template>
                     <v-sheet>
                         <v-card-title>

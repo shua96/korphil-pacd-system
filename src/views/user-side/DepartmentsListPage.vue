@@ -112,7 +112,7 @@
 
             <v-col cols="3" class="ml-16" align="right">
                 <v-card style="background-color: #EAEAEA; border-radius: 25px; " width="350" height="350"
-                    to="/questions-list">
+                    to="/training-list">
                     <v-img height="200" src="@/assets/training.jpeg" style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Training</h2>
                 </v-card>
@@ -121,7 +121,7 @@
             <v-col cols="3" align="center">
 
                 <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="349" height="350"
-                    to="/registrar-qs">
+                    to="/registrar-list">
                     <v-img class="align-end text-white" height="200" src="@/assets/registrar.jpeg"
                         style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Registrar</h2>
@@ -131,7 +131,7 @@
             <v-col cols="3" class="mr-16" align="left">
 
                 <v-card style="background-color: #EAEAEA;; border-radius: 25px; " width="350" height="350"
-                    to="/certification">
+                    to="/certification-list">
                     <v-img class="align-end text-white" height="200" src="@/assets/certification.jpeg"
                         style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Certification & Assessment</h2>
@@ -140,7 +140,8 @@
             <!-- line here -->
             <v-col cols="3" class="ml-16" align="right">
 
-                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350"
+                    to="/procurement-list">
                     <v-img class="align-end text-white" height="200" src="@/assets/procurement.jpeg"
                         style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Procurement</h2>
@@ -149,7 +150,8 @@
             <!-- line here -->
             <v-col cols="3" align="center">
 
-                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350"
+                    to="/accounting-list">
                     <v-img class="align-end text-white" height="200" src="@/assets/accounting.jpeg"
                         style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Accounting</h2>
@@ -158,7 +160,7 @@
             <!-- line here -->
             <v-col cols="3" class="mr-16" align="left">
 
-                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350">
+                <v-card style="background-color: #EAEAEA;; border-radius: 25px;" width="350" height="350" to="/admin-list">
                     <v-img class="align-end text-white" height="200" src="@/assets/admin.jpeg"
                         style="margin: 15px;"></v-img>
                     <h2 class="mt-10" style="text-align: center;">Admin</h2>

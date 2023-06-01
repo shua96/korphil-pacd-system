@@ -6,18 +6,21 @@
       <v-col cols="1">
         <div class="my-5">Sort by:</div>
       </v-col>
-      <v-col cols="4" class="mr-1">
+      <v-col cols="3" class="mr-1">
         <v-combobox label="Month"
-          :items="['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', ' September', 'October', 'November', 'December']"
+          :items="['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
           variant="solo" clearable v-model="sortByMonth">
         </v-combobox>
       </v-col>
-      <v-col cols="4">
+      <v-col cols="3">
         <v-combobox label="Year" v-model="sortByYear" :items="years" variant="solo" clearable>
         </v-combobox>
       </v-col>
       <v-col cols="2" class="mt-n2">
-        <v-btn class="print-button mt-3 ml-1" color="primary" @click="printSummary" size="x-large">Print</v-btn>
+        <v-btn class="mt-3 ml-6" color="primary" @click="filterData" size="x-large">Filter</v-btn>
+      </v-col>
+      <v-col cols="2" class="mt-n2">
+        <v-btn class="mt-3 ml-5" color="primary" @click="printSummary" size="x-large">Print</v-btn>
       </v-col>
     </v-row>
   </v-sheet>
@@ -135,7 +138,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="feedback in count.feedbacks" :key="feedback.id">
+          <tr v-for="(feedback, index) in count.feedbacks" :key="feedback.id">
             <td class="divider">{{ feedback.id }}. {{ feedback.question }}</td>
             <td class="text-center">{{ count.getRating(clients, feedback.id, 1) }}</td>
             <td class="text-center">{{ count.getRating(clients, feedback.id, 0) }}</td>
@@ -160,7 +163,7 @@
           <td style="font-weight: bold;">Total</td>
         </tr>
         <tr>
-          <td class="text-center">{{ count.countYes(clients) }}</td>
+          <td class="text-center"> {{ count.countYes(clients) }}</td>
           <td class="text-center">{{ count.countNo(clients) }}</td>
           <td class="text-center">{{ count.countNoAnswer(clients) }}</td>
           <td class="text-center">{{ count.getTotalReco(clients) }}</td>
@@ -194,8 +197,13 @@ import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import count from '@/helpers/count';
 
-const sortByMonth = ref('')
+const sortByMonth = ref('');
 const sortByYear = ref('');
+function filterData() {
+
+}
+
+
 const years = computed(() => {
   const year = new Date().getFullYear();
   return Array.from({ length: year - 1900 }, (_, index) => 1901 + index);
@@ -285,15 +293,6 @@ const getTotalActions = computed(() => {
   return total;
 });
 
-
-// const getTotalRates = computed(() => {
-//   let total = 0;
-//   for (let rate of rates.value) {
-//     total += rate.clients;
-//   }
-//   return total;
-// });
-
 let clients = ref([]);
 onMounted(async () => {
   const response = await axios.get('/api/getclients');
@@ -347,9 +346,11 @@ function printSummary() {
   document.head.appendChild(printStyle);
 
   window.print();
-
-  // Restore the original content after printing
   document.body.innerHTML = originalContents;
+  setTimeout(() => {
+    document.body.innerHTML = originalContents;
+    location.reload();
+  }, 50);
 }
 
 

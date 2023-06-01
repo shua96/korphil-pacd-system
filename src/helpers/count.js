@@ -199,7 +199,7 @@ export default {
         return total;
     },
 
-    getVsTotal(clients, questionId) {
+    getVsTotal(clients) {
         let total = 0;
         let vsTotal = this.getRating(clients, questionId, 1);
         total += vsTotal

@@ -22,12 +22,28 @@ const routes = [
     component: () => import('@/views/user-side/about-us.vue'),
   },
   {
-    path: '/questions-list',
-    component: () => import('@/views/user-side/QuestionsListPage'),
+    path: '/training-list',
+    component: () => import('@/views/user-side/department-pages/TrainingListPage.vue'),
   },
   {
-    path: '/registrar-qs',
-    component: () => import('@/views/user-side/registrar.vue'),
+    path: '/registrar-list',
+    component: () => import('@/views/user-side/department-pages/RegistrarListPage.vue'),
+  },
+  {
+    path: '/certification-list',
+    component: () => import('@/views/user-side/department-pages/CertificationListPage.vue'),
+  },
+  {
+    path: '/procurement-list',
+    component: () => import('@/views/user-side/department-pages/ProcurementListPage.vue'),
+  },
+  {
+    path: '/accounting-list',
+    component: () => import('@/views/user-side/department-pages/AccountingListPage.vue'),
+  },
+  {
+    path: '/admin-list',
+    component: () => import('@/views/user-side/department-pages/AdminListPage.vue'),
   },
   {
     path: '/feedback',
@@ -106,7 +122,7 @@ const routes = [
         name: 'Training',
         component: () => import('@/views/admin-side/faqlist-option/Training.vue'),
         meta: {
-          title: `FAQ List/`
+          title: `FAQ List/Training`
         }
       },
       {
@@ -114,7 +130,7 @@ const routes = [
         name: 'Registrar',
         component: () => import('@/views/admin-side/faqlist-option/Registrar.vue'),
         meta: {
-          title: `FAQ List/`
+          title: `FAQ List/Registrar`
         }
       },
       {
@@ -122,7 +138,7 @@ const routes = [
         name: 'Certification & Assessment',
         component: () => import('@/views/admin-side/faqlist-option/CertificationAssessment.vue'),
         meta: {
-          title: `FAQ List/`
+          title: `FAQ List/Certification & Assessment`
         }
       },
       {
@@ -130,7 +146,7 @@ const routes = [
         name: 'Procurement',
         component: () => import('@/views/admin-side/faqlist-option/Procurement.vue'),
         meta: {
-          title: `FAQ List/`
+          title: `FAQ List/Procurement`
         }
       },
       {
@@ -138,7 +154,7 @@ const routes = [
         name: 'Accounting',
         component: () => import('@/views/admin-side/faqlist-option/Accounting.vue'),
         meta: {
-          title: `FAQ List/`
+          title: `FAQ List/Accounting`
         }
       },
       {
@@ -146,7 +162,7 @@ const routes = [
         name: 'Admin',
         component: () => import('@/views/admin-side/faqlist-option/Admin.vue'),
         meta: {
-          title: `FAQ List/`
+          title: `FAQ List/Admin`
         }
       },
       // Ends Here
