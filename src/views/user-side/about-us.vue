@@ -11,7 +11,7 @@
 
             </v-breadcrumbs>
             <!-- <v-btn class="mr-2 ml-n3" variant="text" icon="mdi-account-outline" color="white" to="/login"></v-btn> -->
-            <v-menu :close-on-content-click="false" transition="scale-transition">
+            <v-menu :close-on-content-click="false" v-model="menu" transition="scale-transition">
                 <template v-slot:activator="{ props }">
                     <v-btn color="white" v-bind="props" icon="mdi-account-outline">
                     </v-btn>
@@ -52,6 +52,23 @@
                     </v-sheet>
                 </v-form>
             </v-menu>
+
+            <!-- <v-menu open-on-hover>
+                <template v-slot:activator="{ props }">
+                    <v-btn v-bind="props" size="large" style="background-color: white; color: #2C96F8">
+                        Feedback
+                    </v-btn>
+                </template>
+
+                <v-list>
+                    <v-list-item>
+                        <v-list-item-title><v-btn to="/walkinfeedback" variant="plain">Walk-in
+                                Form</v-btn></v-list-item-title>
+                        <v-list-item-title><v-btn to="/assessmentfeedback" variant="plain">Assessment
+                                Form</v-btn></v-list-item-title>
+                    </v-list-item>
+                </v-list>
+            </v-menu> -->
 
             <v-btn size="large" style="background-color: white; color: #2C96F8" to="/walkinfeedback">
                 Feedback
