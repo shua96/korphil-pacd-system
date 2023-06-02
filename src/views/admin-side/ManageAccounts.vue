@@ -178,7 +178,8 @@
             <v-icon size="small" class="me-2" @click="editItem(item.raw)">
                 mdi-square-edit-outline
             </v-icon>
-            <v-icon size="small" @click="deleteItem(item.raw)" color="error">
+            <v-icon size="small" @click="deleteItem(item.raw)" color="error"
+                v-if="app.user.access?.indexOf('superadmin') === -1">
                 mdi-trash-can-outline
             </v-icon>
         </template>
@@ -198,7 +199,9 @@ import { onMounted } from 'vue';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 import moment from 'moment';
+import { useAppStore } from '@/stores/app';
 
+let app = useAppStore()
 const router = useRouter();
 const headers = ref([
     { title: 'Account Created', align: 'start', sortable: false, key: '_created_at' },
