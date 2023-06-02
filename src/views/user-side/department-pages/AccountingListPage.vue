@@ -12,7 +12,7 @@
 
             </v-breadcrumbs>
             <!-- <v-btn class="mr-2 ml-n3" variant="text" icon="mdi-account-outline" color="white" to="/login"></v-btn> -->
-            <v-menu :close-on-content-click="false" transition="scale-transition">
+            <v-menu :close-on-content-click="false" v-model="menu" transition="scale-transition">
                 <template v-slot:activator="{ props }">
                     <v-btn color="white" v-bind="props" icon="mdi-account-outline">
                     </v-btn>
@@ -26,6 +26,11 @@
 
                         </v-card-title>
                         <v-card-title style="display: flex; justify-content: center;">Login as Admin</v-card-title>
+                        <div class="text-center">
+                            <v-btn to="/dashboard" variant="plain">
+                                <v-icon icon="mdi-view-dashboard" size="x-large" />
+                            </v-btn>
+                        </div>
                         <v-list>
 
                             <v-list>
@@ -119,6 +124,10 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
+import { useAppStore } from '@/stores/app';
+let app = useAppStore()
+
+let menu = ref(false)
 
 const faqs = ref([]);
 const search = ref('');

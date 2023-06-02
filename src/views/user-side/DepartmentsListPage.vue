@@ -25,6 +25,11 @@
 
                         </v-card-title>
                         <v-card-title style="display: flex; justify-content: center;">Login as Admin</v-card-title>
+                        <div class="text-center">
+                            <v-btn to="/dashboard" variant="plain">
+                                <v-icon icon="mdi-view-dashboard" size="x-large" />
+                            </v-btn>
+                        </div>
                         <v-list>
 
                             <v-list>
