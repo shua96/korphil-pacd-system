@@ -14,7 +14,7 @@
                             </template>
 
                         </v-breadcrumbs>
-                        <v-menu :close-on-content-click="false" transition="scale-transition">
+                        <v-menu :close-on-content-click="false" v-model="menu" transition="scale-transition">
                             <template v-slot:activator="{ props }">
                                 <v-btn color="white" v-bind="props" icon="mdi-account-outline">
                                 </v-btn>
@@ -232,6 +232,7 @@ import { ref } from 'vue';
 import count from '@/helpers/count';
 import router from '@/router';
 
+let menu = ref(false)
 let enabled = ref(false)
 let dialog = ref(false)
 let snackbar = ref(false)
