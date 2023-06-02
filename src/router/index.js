@@ -224,12 +224,16 @@ async function routeGuard(to) {
     case '/walkinfeedback':
     case '/assessmentfeedback':
     case '/departments-list':
-    case '/questions-list':
     case '/feedback':
-    case '/registrar-qs':
     case '/about-us':
     case '/walkinForm':
     case '/assessmentForm':
+    case '/training':
+    case '/registrar':
+    case '/certificationassessment':
+    case '/procurement':
+    case '/accounting':
+    case '/admin':
       return true;
       break;
   }
