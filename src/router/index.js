@@ -14,10 +14,6 @@ const routes = [
     component: () => import('@/views/user-side/DepartmentsListPage.vue'),
   },
   {
-    path: '/registrar-qs',
-    component: () => import('@/views/user-side/registrar.vue'),
-  },
-  {
     path: '/about-us',
     component: () => import('@/views/user-side/about-us.vue'),
   },
@@ -118,49 +114,49 @@ const routes = [
       },
       // FAQ List route
       {
-        path: '/training-list',
+        path: '/training',
         name: 'Training',
-        component: () => import('@/views/admin-side/faqlist-option/TrainingListPage.vue'),
+        component: () => import('@/views/admin-side/faqlist-option/Training.vue'),
         meta: {
           title: `FAQ List/Training`
         }
       },
       {
-        path: '/registrar-list',
+        path: '/registrar',
         name: 'Registrar',
-        component: () => import('@/views/admin-side/faqlist-option/RegistrarListPage.vue'),
+        component: () => import('@/views/admin-side/faqlist-option/Registrar.vue'),
         meta: {
           title: `FAQ List/Registrar`
         }
       },
       {
-        path: '/certification-list',
+        path: '/certificationassessment',
         name: 'Certification & Assessment',
-        component: () => import('@/views/admin-side/faqlist-option/CertificationListPage.vue'),
+        component: () => import('@/views/admin-side/faqlist-option/Certification.vue'),
         meta: {
           title: `FAQ List/Certification & Assessment`
         }
       },
       {
-        path: '/procurement-list',
+        path: '/procurement',
         name: 'Procurement',
-        component: () => import('@/views/admin-side/faqlist-option/ProcurementListPage.vue'),
+        component: () => import('@/views/admin-side/faqlist-option/Procurement.vue'),
         meta: {
           title: `FAQ List/Procurement`
         }
       },
       {
-        path: '/accounting-list',
+        path: '/accounting',
         name: 'Accounting',
-        component: () => import('@/views/admin-side/faqlist-option/AccountingListPage.vue'),
+        component: () => import('@/views/admin-side/faqlist-option/Accounting.vue'),
         meta: {
           title: `FAQ List/Accounting`
         }
       },
       {
-        path: '/admin-list',
+        path: '/admin',
         name: 'Admin',
-        component: () => import('@/views/admin-side/faqlist-option/AdminListPage.vue'),
+        component: () => import('@/views/admin-side/faqlist-option/Admin.vue'),
         meta: {
           title: `FAQ List/Admin`
         }
