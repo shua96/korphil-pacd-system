@@ -16,9 +16,9 @@
         <v-combobox label="Year" v-model="sortByYear" :items="years" variant="solo" clearable>
         </v-combobox>
       </v-col>
-      <v-col cols="2" class="mt-n2">
+      <!-- <v-col cols="2" class="mt-n2">
         <v-btn class="mt-3 ml-6" color="primary" @click="filterData" size="x-large">Filter</v-btn>
-      </v-col>
+      </v-col> -->
       <v-col cols="2" class="mt-n2">
         <v-btn class="mt-3 ml-5" color="primary" @click="printSummary" size="x-large">Print</v-btn>
       </v-col>
@@ -100,7 +100,7 @@
           </tr>
         </tbody>
       </table>
-      <table class="summary-table">
+      <!-- <table class="summary-table">
         <thead>
           <tr>
             <th class="text-left">D. Action Provided Relative to Purpose of Visit </th>
@@ -123,11 +123,11 @@
             <td class="text-center">{{ getTotalActions }}</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
       <table class="summary-table">
         <thead>
           <tr>
-            <th class="text-left" colspan="5">E. Drivers of Satisfaction</th>
+            <th class="text-left" colspan="5">D. Drivers of Satisfaction</th>
           </tr>
           <tr>
             <th>Other Areas Rated</th>
@@ -150,7 +150,7 @@
       <table class="summary-table">
         <thead>
           <tr>
-            <th class="text-left" colspan="5">F. Overall Rating</th>
+            <th class="text-left" colspan="5">E. Overall Rating</th>
           </tr>
         </thead>
         <tr>
@@ -170,7 +170,7 @@
         </tr>
       </table>
 
-      <table>
+      <table class="mt-16">
         <tr>
           <td>Prepared by:</td>
           <td style="padding-left: 100px;">Noted by:</td>

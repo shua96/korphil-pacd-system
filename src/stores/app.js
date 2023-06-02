@@ -38,12 +38,10 @@ export const useAppStore = defineStore('app', {
         },
 
         async logout() {
-            await axios.post('/api/logout',);
+            await axios.post('/api/logout');
             this.user = null;
-            router.push('/')
-            setTimeout(() => {
-                location.reload();
-            }, 100);
+            router.push('/');
+            window.location.reload();
         },
 
         async loginCheck() {
