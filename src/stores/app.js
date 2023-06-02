@@ -43,7 +43,7 @@ export const useAppStore = defineStore('app', {
             router.push('/')
             setTimeout(() => {
                 location.reload();
-            }, 50);
+            }, 100);
         },
 
         async loginCheck() {
