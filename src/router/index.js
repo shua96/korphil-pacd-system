@@ -132,7 +132,7 @@ const routes = [
       {
         path: '/certificationassessment',
         name: 'Certification & Assessment',
-        component: () => import('@/views/admin-side/faqlist-option/Certification.vue'),
+        component: () => import('@/views/admin-side/faqlist-option/CertificationAssessment.vue'),
         meta: {
           title: `FAQ List/Certification & Assessment`
         }
