@@ -1,10 +1,33 @@
 <template>
-    <v-col>
-        <v-btn @click="rate(-1)" :color="getColor(-1)" icon="mdi-emoticon-sad-outline" size="x-large"></v-btn>
-        <v-btn @click="rate(0)" :color="getColor(0)" icon="mdi-emoticon-neutral-outline" size="x-large"></v-btn>
-        <v-btn @click="rate(1)" :color="getColor(1)" icon="mdi-emoticon-happy-outline" size="x-large"></v-btn>
-    </v-col>
+    <v-row class="mt-10">
+        <v-col class="ml-16 mr-n16">
+            <v-btn @click="rate(-1)" :color="getColor(-1)" icon="mdi-emoticon-sad-outline" class="icon-button"
+                size="x-large"></v-btn>
+            <h3>Poor</h3>
+        </v-col>
+        <v-col class="mx-n16">
+            <v-btn @click="rate(0)" :color="getColor(0)" icon="mdi-emoticon-neutral-outline" class="icon-button"
+                size="x-large"></v-btn>
+            <h3>Satisfactory</h3>
+        </v-col>
+        <v-col class="ml-n16 mr-16">
+            <v-btn @click="rate(1)" :color="getColor(1)" icon="mdi-emoticon-happy-outline" class="icon-button"
+                size="x-large"></v-btn>
+            <h3>Very Satisfactory</h3>
+        </v-col>
+    </v-row>
 </template>
+
+<style>
+.icon-button {
+    font-size: 50px;
+}
+
+.v-btn--icon.v-btn--density-default {
+    width: calc(var(--v-btn-height) + 25px);
+    height: calc(var(--v-btn-height) + 25px);
+}
+</style>
 
 <script setup>
 let props = defineProps(['modelValue', 'color']);
