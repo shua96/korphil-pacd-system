@@ -88,7 +88,7 @@
             </v-carousel>
         </v-col>
         <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
-            <h1 class="mb-5 mx-auto">Customer Feedback Form
+            <h1 class="mb-5 mx-auto">Customer Feedback Forms
             </h1>
 
             <v-btn to="/walkinfeedback">Walk-in Form</v-btn>

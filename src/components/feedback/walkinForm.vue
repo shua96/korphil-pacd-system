@@ -122,8 +122,11 @@
                                 </v-row>
                                 <v-row>
                                     <v-col cols="11">
-                                        <v-text-field label="Tirahan/Tanggapan" variant="outlined"
-                                            v-model="walkinItem.address"></v-text-field>
+                                        <!-- <v-text-field label="Tirahan/Tanggapan" variant="outlined"
+                                            v-model="walkinItem.address"></v-text-field> -->
+                                        <v-select label="Tirahan/Tanggapan" :items="['Tibungco', 'Sasa']" variant="outlined"
+                                            v-model="walkinItem.address">
+                                        </v-select>
                                     </v-col>
                                 </v-row>
                                 <v-row>
@@ -243,6 +246,9 @@ let dialog = ref(false)
 let snackbar = ref(false)
 let text = ref('Thank You For Your Time!')
 let timeout = ref(2000)
+
+
+
 const reasonForVisit = ref([
     { text: 'Assessment & Certification' },
     { text: 'Registrar' },

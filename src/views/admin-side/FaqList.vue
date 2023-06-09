@@ -141,7 +141,7 @@ const data = ref([
 
 const timeout = ref(1500)
 
-const EditSnackbar = ref(false)
+const EditSnackbaz = ref(false)
 
 const search = ref('')
 
