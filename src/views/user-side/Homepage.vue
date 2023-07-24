@@ -156,6 +156,36 @@ const items = ref([
     background-color: blanchedalmond;
     border-bottom-left-radius: 400px !important;
     overflow: hidden;
-    background-image: linear-gradient(30deg, #0058A9, #309CFF);
+    background: linear-gradient(30deg, #0058A9, #00519d, #309CFF, #00519d, #23A6D5);
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+}
+
+@-webkit-keyframes gradient {
+    0% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 </style>

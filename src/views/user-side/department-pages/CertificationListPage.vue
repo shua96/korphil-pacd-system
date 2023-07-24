@@ -95,6 +95,13 @@
                     label="Search for question, keyword, etc." single-line variant="outlined"
                     style="background-color: white;" v-model="search"></v-text-field>
 
+                <div class="search">
+
+                    <label>
+                        <input type="text" placeholder="Search here">
+                    </label>
+                </div>
+
                 <div class="text-h5 mt-10 font-weight-medium" style="color: white; text-align: center;">
                     Select Questions:
                 </div>
@@ -182,5 +189,27 @@ const items = ref([
 .mdi-arrow-left {
     font-size: xx-large;
 
+}
+
+.search {
+    /* max-width: 50vw; */
+    display: flex;
+    margin-left: 250px;
+    padding: 0px 50px;
+}
+
+.search label {
+    width: 100%;
+}
+
+.search label input {
+    width: 100%;
+    height: 80px;
+    border-radius: 50px;
+    padding: 5px 20px;
+    padding-left: 35px;
+    font-size: 2rem;
+    outline: none;
+    border: 1px solid #999;
 }
 </style>

@@ -100,7 +100,7 @@
                 <v-col cols="8" style="margin: 0 auto;">
                     <v-row>
                         <v-col v-for="(faq, index) in filteredFaqs" :key="index" cols="6">
-                            <v-card class="mb-4" @click="showAnswerDialog(index)">
+                            <v-card class="mb-4" @click="showAnswerDialog(index)" elevation="2">
                                 <v-card-title style="white-space: normal !important;">{{ faq.question }}</v-card-title>
                                 <v-card-text>
                                 </v-card-text>
