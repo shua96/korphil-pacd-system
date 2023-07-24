@@ -85,9 +85,9 @@
                     <v-window-item :value="1" v-model="page">
                         <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
                             border rounded height="420">
-                            <v-form class="ml-15 mt-5">
+                            <v-form class="mx-5 mt-5">
                                 <v-row>
-                                    <v-col cols="7">
+                                    <v-col cols="8">
                                         <v-text-field label="Pangalan(Optional)" variant="outlined"
                                             v-model="walkinItem.name"></v-text-field>
                                     </v-col>
@@ -102,13 +102,24 @@
                                     </v-col>
                                 </v-row>
                                 <v-row>
-                                    <v-col cols="11">
-                                        <v-text-field label="Tirahan/Tanggapan" variant="outlined"
-                                            v-model="walkinItem.address"></v-text-field>
+                                    <v-col cols="3">
+                                        <v-select label="Region" variant="outlined" v-model="walkinItem.region"></v-select>
+                                    </v-col>
+                                    <v-col cols="3">
+                                        <v-select label="Province" variant="outlined"
+                                            v-model="walkinItem.province"></v-select>
+                                    </v-col>
+                                    <v-col cols="3">
+                                        <v-select label="Municipality/City" variant="outlined"
+                                            v-model="walkinItem.city"></v-select>
+                                    </v-col>
+                                    <v-col cols="3">
+                                        <v-select label="Barangay" variant="outlined"
+                                            v-model="walkinItem.barangay"></v-select>
                                     </v-col>
                                 </v-row>
                                 <v-row>
-                                    <v-col cols="5">
+                                    <v-col cols="6">
                                         <v-text-field label="Telepono/CP #" variant="outlined" type="number" maxlength="11"
                                             v-model="walkinItem.contact"></v-text-field>
                                     </v-col>
@@ -118,7 +129,7 @@
                                     </v-col>
                                 </v-row>
                                 <v-row>
-                                    <v-col cols="5">
+                                    <v-col cols="6">
                                         <v-select label="Reason For Visit"
                                             :items="['Assessment & Certification', 'Registrar', 'Training ', 'Others (Procurement, Finance and Admin, Scholarship)']"
                                             variant="outlined" v-model="walkinItem.reason">
