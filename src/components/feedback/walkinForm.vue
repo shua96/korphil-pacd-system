@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
     <v-row>
         <v-col>
             <v-layout>
@@ -99,20 +99,22 @@
                                 </v-row>
                                 <v-row>
                                     <v-col cols="3">
-                                        <v-select label="Region" variant="outlined" v-model="walkinItem.region"></v-select>
+                                        <v-select v-model="addressStore.selectedRegion" return-object label="Region"
+                                            :items="addressStore.regions" item-title="region_name"></v-select>
                                     </v-col>
                                     <v-col cols="3">
-                                        <v-select label="Province" variant="outlined"
-                                            v-model="walkinItem.province"></v-select>
+                                        <v-select v-model="addressStore.selectedProvince" return-object label="Province"
+                                            :items="addressStore.filteredProvinces()" item-title="province_name"></v-select>
                                     </v-col>
                                     <v-col cols="3">
-                                        <v-select label="Municipality/City" variant="outlined"
-                                            v-model="walkinItem.city"></v-select>
+                                        <v-select v-model="addressStore.selectedCity" return-object label="City"
+                                            :items="addressStore.filteredCities()" item-title="city_name"></v-select>
                                     </v-col>
                                     <v-col cols="3">
-                                        <v-select label="Barangay" variant="outlined"
-                                            v-model="walkinItem.barangay"></v-select>
+                                        <v-select v-model="addressStore.selectedBarangay" label="Barangay"
+                                            :items="addressStore.filteredBarangays()" item-title="brgy_name"></v-select>
                                     </v-col>
+
                                 </v-row>
                                 <v-row>
                                     <v-col cols="6">
@@ -177,7 +179,7 @@
             </v-card-text>
         </v-col>
     </v-row>
-    <v-dialog persistent width="auto" open>
+    <v-dialog persistent width="auto" v-model="dialog">
         <v-form @submit.prevent="saveWalkin()">
             <v-card height="450" width="400">
                 <v-icon>mdi-information-variant-box</v-icon>
@@ -222,6 +224,19 @@ import axios from 'axios';
 import { ref } from 'vue';
 import count from '@/helpers/count';
 import router from '@/router';
+import { onMounted } from 'vue';
+import { useAddressStore } from '@/stores/address';
+
+let addressStore = useAddressStore();
+
+
+onMounted(async () => {
+    addressStore.getAllRegions();
+    addressStore.getAllProvinces();
+    addressStore.getAllCities();
+    addressStore.getAllBarangays();
+});
+
 
 let menu = ref(false)
 let enabled = ref(false)
@@ -238,13 +253,18 @@ const reasonForVisit = ref([
     { text: 'Training ' },
     { text: 'Others (Procurement, Finance and Admin, Scholarship) ' },
 ])
+
+
 const walkinItem = ref({
     name: 'John Doe',
     age: 29,
     sex: 'Male',
     contact: '09123457890',
     email: 'qwer@qwer.com',
-    address: 'Davao City',
+    region: '',
+    province: '',
+    city: '',
+    barangay: '',
     actionprovided: 'Sample Process',
     reason: 'Training',
     feedbacks: JSON.parse(JSON.stringify(count.feedbacks)),
@@ -258,6 +278,14 @@ async function saveWalkin() {
     }
     walkinItem.value.feedbacks = feedbacks;
     walkinItem.value.reco = walkinItem.value.reco;
+
+
+    walkinItem.value.region = addressStore.selectedRegion.region_name;
+    walkinItem.value.province = addressStore.selectedProvince.province_name;
+    walkinItem.value.city = addressStore.selectedCity.city_name;
+    walkinItem.value.barangay = addressStore.selectedBarangay.brgy_name;
+
+    // console.log('walkinitem', walkinItem.value);
     await axios.post("/api/createclient", walkinItem.value);
     dialog.value = false
     snackbar.value = true;
@@ -306,9 +334,9 @@ const items = ref([
     background-size: cover;
     background-repeat: no-repeat;
 }
-</style> -->
+</style>
 
-<template>
+<!-- <template>
     <v-row>
         <v-col cols="3">
             <v-select v-model="addressStore.selectedRegion" return-object label="Region" :items="addressStore.regions"
@@ -343,7 +371,7 @@ onMounted(async () => {
     addressStore.getAllBarangays();
 });
 
-</script>
+</script> -->
 
 
 
