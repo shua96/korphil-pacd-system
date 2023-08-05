@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <v-row>
         <v-col>
             <v-layout>
@@ -68,10 +68,6 @@
                     </template>
                 </v-app-bar>
             </v-layout>
-            <v-carousel hide-delimiters cycle height="100vh" class="mb-n10" :show-arrows="false" overflow="hidden"
-                style=" width:100%; top:0;">
-                <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
-            </v-carousel>
         </v-col>
         <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
             <h1 class="mb-5 mt-16 mx-auto">Customer Feedback Form
@@ -310,4 +306,47 @@ const items = ref([
     background-size: cover;
     background-repeat: no-repeat;
 }
-</style>
+</style> -->
+
+<template>
+    <v-row>
+        <v-col cols="3">
+            <v-select v-model="addressStore.selectedRegion" return-object label="Region" :items="addressStore.regions"
+                item-title="region_name"></v-select>
+        </v-col>
+        <v-col cols="3">
+            <v-select v-model="addressStore.selectedProvince" return-object label="Province"
+                :items="addressStore.filteredProvinces()" item-title="province_name"></v-select>
+        </v-col>
+        <v-col cols="3">
+            <v-select v-model="addressStore.selectedCity" return-object label="City" :items="addressStore.filteredCities()"
+                item-title="city_name"></v-select>
+        </v-col>
+        <v-col cols="3">
+            <v-select v-model="addressStore.selectedBarangay" label="Barangay" :items="addressStore.filteredBarangays()"
+                item-title="brgy_name"></v-select>
+        </v-col>
+    </v-row>
+</template>
+
+<script setup>
+import { onMounted } from 'vue';
+import { useAddressStore } from '@/stores/address';
+
+let addressStore = useAddressStore();
+
+
+onMounted(async () => {
+    addressStore.getAllRegions();
+    addressStore.getAllProvinces();
+    addressStore.getAllCities();
+    addressStore.getAllBarangays();
+});
+
+</script>
+
+
+
+
+
+
