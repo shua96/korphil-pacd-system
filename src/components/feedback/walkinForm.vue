@@ -19,7 +19,7 @@
     </v-layout>
     <v-row class="main-container">
         <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
-            <h1 class="mb-5 mt-16 mx-auto">Customer Feedback Form
+            <h1 class="mb-5 mt-16 mx-auto" style="color: white; font-size: 2.85em;">Customer Feedback Form
             </h1>
 
             <v-card-text>
@@ -197,7 +197,7 @@ const nextPage = () => {
 }
 let snackbar = ref(false)
 let text = ref('Thank You For Your Time!')
-let timeout = ref(2000)
+let timeout = ref(1000)
 const reasonForVisit = ref([
     { text: 'Assessment & Certification' },
     { text: 'Registrar' },
@@ -207,17 +207,17 @@ const reasonForVisit = ref([
 
 
 const walkinItem = ref({
-    name: 'John Doe',
-    age: 29,
-    sex: 'Male',
-    contact: '09123457890',
-    email: 'qwer@qwer.com',
+    name: '',
+    age: 0,
+    sex: '',
+    contact: '',
+    email: '',
     region: '',
     province: '',
     city: '',
     barangay: '',
-    actionprovided: 'Sample Process',
-    reason: 'Training',
+    actionprovided: '',
+    reason: '',
     feedbacks: JSON.parse(JSON.stringify(count.feedbacks)),
     reco: '',
 })
@@ -242,7 +242,7 @@ async function saveWalkin() {
     await axios.post("/api/createclient", walkinItem.value);
     dialog.value = false
     snackbar.value = true;
-    if (!dialog.value) {
+    if (timeout === 1000) {
         router.push('/');
     }
 }
@@ -295,46 +295,3 @@ const items = ref([
     color: white;
 }
 </style>
-
-<!-- <template>
-    <v-row>
-        <v-col cols="3">
-            <v-select v-model="addressStore.selectedRegion" return-object label="Region" :items="addressStore.regions"
-                item-title="region_name"></v-select>
-        </v-col>
-        <v-col cols="3">
-            <v-select v-model="addressStore.selectedProvince" return-object label="Province"
-                :items="addressStore.filteredProvinces()" item-title="province_name"></v-select>
-        </v-col>
-        <v-col cols="3">
-            <v-select v-model="addressStore.selectedCity" return-object label="City" :items="addressStore.filteredCities()"
-                item-title="city_name"></v-select>
-        </v-col>
-        <v-col cols="3">
-            <v-select v-model="addressStore.selectedBarangay" label="Barangay" :items="addressStore.filteredBarangays()"
-                item-title="brgy_name"></v-select>
-        </v-col>
-    </v-row>
-</template>
-
-<script setup>
-import { onMounted } from 'vue';
-import { useAddressStore } from '@/stores/address';
-
-let addressStore = useAddressStore();
-
-
-onMounted(async () => {
-    addressStore.getAllRegions();
-    addressStore.getAllProvinces();
-    addressStore.getAllCities();
-    addressStore.getAllBarangays();
-});
-
-</script> -->
-
-
-
-
-
-
