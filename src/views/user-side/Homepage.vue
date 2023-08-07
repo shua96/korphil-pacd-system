@@ -5,13 +5,13 @@
                 <v-img src="@/assets/rtc1.png"> </v-img>
             </v-avatar>
 
-            <v-breadcrumbs :items="items" style="margin-left:auto; color: white; font-size: 2em; font-weight: bolder;">
+            <v-breadcrumbs :items="items" style="margin-left:auto; color: white; font-size: 1.5em; font-weight: bolder;">
                 <template v-slot:divider>
                 </template>
 
             </v-breadcrumbs>
 
-            <v-btn size="large" style="background-color: white; color: #2C96F8; font-size: 2em; font-weight: bolder;"
+            <v-btn size="large" style="background-color: white; color: #2C96F8; font-size: 1.5em; font-weight: bolder;"
                 to="/walkinfeedback">
                 Feedback
             </v-btn>

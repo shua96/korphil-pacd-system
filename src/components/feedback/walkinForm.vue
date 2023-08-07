@@ -1,86 +1,32 @@
 <template>
-    <v-row>
-        <v-col>
-            <v-layout>
-                <v-app-bar :elevation="0" color="primary" height="120" class="px-16">
-                    <template v-slot:prepend>
-                        <v-avatar size="80">
-                            <v-img src="@/assets/rtc1.png"> </v-img>
-                        </v-avatar>
-                    </template>
-                    <template v-slot:append>
-                        <v-breadcrumbs :items="items" style="margin-left:auto; color: white">
-                            <template v-slot:divider>
-                            </template>
+    <v-layout>
+        <v-app-bar :elevation="0" color="transparent" class=" mt-7 pa-6">
+            <v-avatar size="110" class="ml-16">
+                <v-img src="@/assets/rtc1.png"> </v-img>
+            </v-avatar>
 
-                        </v-breadcrumbs>
-                        <v-menu :close-on-content-click="false" v-model="menu" transition="scale-transition">
-                            <template v-slot:activator="{ props }">
-                                <v-btn color="white" v-bind="props" icon="mdi-account-outline">
-                                </v-btn>
-                            </template>
+            <v-breadcrumbs :items="items" style="margin-left:auto; color: white; font-size: 1.5em; font-weight: bolder;">
+                <template v-slot:divider>
+                </template>
 
-                            <v-form @submit.prevent="app.login()">
+            </v-breadcrumbs>
 
-                                <v-sheet min-width="300">
-                                    <v-card-title style="display: flex; justify-content: center;">
-                                        <v-icon icon="mdi-account-outline" size="x-large" />
-
-                                    </v-card-title>
-                                    <v-card-title style="display: flex; justify-content: center;">Login as
-                                        Admin</v-card-title>
-                                    <div class="text-center">
-                                        <v-btn to="/dashboard" variant="plain">
-                                            <v-icon icon="mdi-view-dashboard" size="x-large" />
-                                        </v-btn>
-                                    </div>
-                                    <v-list>
-
-                                        <v-list>
-                                            <v-list-item>
-                                                <v-text-field label="Username"
-                                                    v-model="app.credentials.email"></v-text-field>
-                                            </v-list-item>
-
-                                            <v-list-item>
-                                                <v-text-field label="Password" v-model="app.credentials.password"
-                                                    type="password"></v-text-field>
-                                            </v-list-item>
-                                        </v-list>
-
-                                        <v-card-actions>
-                                            <v-spacer></v-spacer>
-
-                                            <v-btn variant="text" @click="menu = false">
-                                                Cancel
-                                            </v-btn>
-                                            <v-btn color="primary" variant="text" type="submit">
-                                                Login
-                                            </v-btn>
-                                        </v-card-actions>
-                                    </v-list>
-                                </v-sheet>
-                            </v-form>
-                        </v-menu>
-                        <v-btn size="large" style="background-color: white; color: #2C96F8" to="/walkinfeedback">
-                            Feedback
-                        </v-btn>
-                    </template>
-                </v-app-bar>
-            </v-layout>
-        </v-col>
+            <v-btn size="large" style="background-color: white; color: #2C96F8; font-size: 1.5em; font-weight: bolder;"
+                to="/walkinfeedback">
+                Feedback
+            </v-btn>
+        </v-app-bar>
+    </v-layout>
+    <v-row class="main-container">
         <v-col style="display: flex; flex-direction: column; justify-content: center;" class="my-auto">
             <h1 class="mb-5 mt-16 mx-auto">Customer Feedback Form
             </h1>
-            <v-tabs v-model="tab" variant="outlined" class="elevation-0">
-                <v-tab value="walkin"></v-tab>
-            </v-tabs>
 
             <v-card-text>
                 <v-window v-model="page">
                     <v-window-item :value="1" v-model="page">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="420">
+                        <v-sheet class="mx-auto" style="display: flex; flex-direction: column; justify-content: center;"
+                            border rounded height="500" width="900">
                             <v-form class="mx-5 mt-5">
                                 <v-row>
                                     <v-col cols="8">
@@ -100,19 +46,24 @@
                                 <v-row>
                                     <v-col cols="3">
                                         <v-select v-model="addressStore.selectedRegion" return-object label="Region"
-                                            :items="addressStore.regions" item-title="region_name"></v-select>
+                                            :items="addressStore.regions" item-title="region_name"
+                                            variant="outlined"></v-select>
                                     </v-col>
                                     <v-col cols="3">
                                         <v-select v-model="addressStore.selectedProvince" return-object label="Province"
-                                            :items="addressStore.filteredProvinces()" item-title="province_name"></v-select>
+                                            :items="addressStore.filteredProvinces()" item-title="province_name"
+                                            variant="outlined"></v-select>
                                     </v-col>
                                     <v-col cols="3">
                                         <v-select v-model="addressStore.selectedCity" return-object label="City"
-                                            :items="addressStore.filteredCities()" item-title="city_name"></v-select>
+                                            :items="addressStore.filteredCities()" item-title="city_name"
+                                            variant="outlined"></v-select>
                                     </v-col>
                                     <v-col cols="3">
+                                        {{ addressStore.selectedBarangay }}
                                         <v-select v-model="addressStore.selectedBarangay" label="Barangay"
-                                            :items="addressStore.filteredBarangays()" item-title="brgy_name"></v-select>
+                                            :items="addressStore.filteredBarangays()" item-title="brgy_name"
+                                            variant="outlined"></v-select>
                                     </v-col>
 
                                 </v-row>
@@ -144,8 +95,8 @@
                         </v-sheet>
                     </v-window-item>
                     <v-window-item v-for="(feedback, index) in walkinItem.feedbacks" :value="feedback.page" v-model="page">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
+                        <v-sheet class="mx-auto" style="display: flex; flex-direction: column; justify-content: center;"
+                            border rounded height="500" width="900">
                             <div class="text-center">
                                 <h1>{{ feedback.question }}</h1>
                                 <FeedbackRating v-model="feedback.rating" color="primary" @click="nextPage">
@@ -154,8 +105,8 @@
                         </v-sheet>
                     </v-window-item>
                     <v-window-item :value="9" v-model="page">
-                        <v-sheet class="mb-10" style="display: flex; flex-direction: column; justify-content: center;"
-                            border rounded height="400">
+                        <v-sheet class="mx-auto" style="display: flex; flex-direction: column; justify-content: center;"
+                            border rounded height="500" width="900">
                             <div class="my-auto">
                                 <h1 class="text-center">Irerekomenda nyo po ba ang TESDA sa inyong kamag-anak at kaibigan?
                                 </h1>
@@ -166,15 +117,15 @@
                                 </v-radio-group>
 
                             </div>
+                            <div class="mx-auto mb-5">
+                                <v-btn v-if="page == 9" @click="dialog = true" color="primary" size="x-large">Submit</v-btn>
+                            </div>
                         </v-sheet>
-                        <div style="margin-left: 45%">
-                            <v-btn v-if="page == 9" @click="dialog = true" color="primary">Submit</v-btn>
-                        </div>
                     </v-window-item>
 
                 </v-window>
-                <v-pagination v-model="page" :length="9" class="hide-numbers" next-icon="mdi-chevron-right"
-                    prev-icon="mdi-chevron-left">
+                <v-pagination v-model="page" :length="9" class="hide-numbers" next-icon="mdi-chevron-right-circle"
+                    prev-icon="mdi-chevron-left-circle">
                 </v-pagination>
             </v-card-text>
         </v-col>
@@ -282,10 +233,12 @@ async function saveWalkin() {
 
     walkinItem.value.region = addressStore.selectedRegion.region_name;
     walkinItem.value.province = addressStore.selectedProvince.province_name;
+    console.log(addressStore.selectedCity)
     walkinItem.value.city = addressStore.selectedCity.city_name;
-    walkinItem.value.barangay = addressStore.selectedBarangay.brgy_name;
+    console.log('Barangay value is: ', addressStore.selectedBarangay)
+    walkinItem.value.barangay = addressStore.selectedBarangay;
 
-    // console.log('walkinitem', walkinItem.value);
+    console.log('walkinitem', walkinItem.value);
     await axios.post("/api/createclient", walkinItem.value);
     dialog.value = false
     snackbar.value = true;
@@ -307,11 +260,6 @@ const items = ref([
         href: '/'
     },
     {
-        title: 'About',
-        disabled: false,
-        href: '/about-us',
-    },
-    {
         title: 'FAQ',
         disabled: false,
         href: '/departments-list'
@@ -326,13 +274,25 @@ const items = ref([
     display: none;
 }
 
-.container {
+.main-container {
     min-height: 100vh;
-    background-image: url(../../assets/feedback.jpg);
+    background-image: url(../../assets/bg-feedback.jpg);
     background-position: center;
     background-position-x: 25%;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.mdi-chevron-right-circle::before {
+    content: "\F0B2A";
+    font-size: 2.5em;
+    color: white;
+}
+
+.mdi-chevron-left-circle::before {
+    content: "\F0B28";
+    font-size: 2.5em;
+    color: white;
 }
 </style>
 
