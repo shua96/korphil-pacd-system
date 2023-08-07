@@ -41,10 +41,10 @@ const routes = [
     path: '/admin-list',
     component: () => import('@/views/user-side/department-pages/AdminListPage.vue'),
   },
-  {
-    path: '/feedback',
-    component: () => import('@/views/user-side/feedback'),
-  },
+  // {
+  //   path: '/feedback',
+  //   component: () => import('@/views/user-side/feedback'),
+  // },
   {
     path: '/walkinfeedback',
     component: () => import('@/components/feedback/walkinForm.vue'),
@@ -67,6 +67,25 @@ const routes = [
       },
     ]
   },
+
+  // {
+  //   path: '/user',
+  //   component: () => import('@/layouts/user/User.vue'),
+  //   children: [
+  //     {
+  //       path: '/',
+  //       component: () => import('@/views/user-side/Homepage.vue'),
+  //     },
+  //     {
+  //       path: '/feedback',
+  //       component: () => import('@/views/user-side/feedback'),
+  //     },
+  //     {
+  //       path: '/walkinfeedback',
+  //       component: () => import('@/components/feedback/walkinForm.vue'),
+  //     },
+  //   ],
+  // },
 
   {
     path: '/default',
