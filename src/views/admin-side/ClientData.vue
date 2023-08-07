@@ -70,9 +70,9 @@
                                     <v-col cols="12" sm="6" md="4">
                                         <v-text-field v-model="editedItem.email" label="Email Address"></v-text-field>
                                     </v-col>
-                                    <v-col cols="12" sm="6" md="4">
+                                    <!-- <v-col cols="12" sm="6" md="4">
                                         <v-text-field v-model="editedItem.address" label="Address"></v-text-field>
-                                    </v-col>
+                                    </v-col> -->
 
                                 </v-row>
                                 <v-row cols="12">
@@ -133,10 +133,10 @@
                             Sex
                             <p class="color" style="margin-left: -15;"> {{ editedItem.sex }}</p>
                         </v-card-text>
-                        <v-card-text style="font-size:18px">
+                        <!-- <v-card-text style="font-size:18px">
                             Address
                             <p class="color" style=" margin-left: 15px">{{ editedItem.address }}</p>
-                        </v-card-text>
+                        </v-card-text> -->
                         <v-card-text style="font-size:18px">
                             Contact
                             <p class="color" style="margin-left: 15px ">{{ editedItem.contact }}</p>
@@ -174,6 +174,9 @@
 
         <template v-slot:item._created_at="{ item }">
             {{ moment(item.raw.created_at).format('YYYY-MM-DD') }}
+        </template>
+        <template v-slot:item.address="{ item }">
+            {{ item.raw.region }}, {{ item.raw.province }}, {{ item.raw.city }}, {{ item.raw.barangay }}
         </template>
 
         <template v-slot:item.actions="{ item }">
@@ -236,7 +239,6 @@ const editedItem = ref({
     sex: '',
     contact: '',
     email: '',
-    address: '',
 })
 
 // function getSnackbarText() {

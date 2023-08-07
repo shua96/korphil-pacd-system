@@ -19,7 +19,7 @@
       <!-- <v-col cols="2" class="mt-n2">
         <v-btn class="mt-3 ml-6" color="primary" @click="filterData" size="x-large">Filter</v-btn>
       </v-col> -->
-      <v-col cols="2" class="mt-n2">
+      <v-col cols="2" class="mx-auto">
         <v-btn class="mt-3 ml-5" color="primary" @click="printSummary" size="x-large">Print</v-btn>
       </v-col>
     </v-row>
@@ -360,6 +360,7 @@ function printSummary() {
 <style scoped>
 .main-container {
   align-items: center;
+  margin: auto;
 }
 
 .print-button {

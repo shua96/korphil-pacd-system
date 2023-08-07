@@ -197,7 +197,7 @@ const nextPage = () => {
 }
 let snackbar = ref(false)
 let text = ref('Thank You For Your Time!')
-let timeout = ref(1000)
+let timeout = ref(5000)
 const reasonForVisit = ref([
     { text: 'Assessment & Certification' },
     { text: 'Registrar' },
@@ -241,10 +241,12 @@ async function saveWalkin() {
     console.log('walkinitem', walkinItem.value);
     await axios.post("/api/createclient", walkinItem.value);
     dialog.value = false
-    snackbar.value = true;
-    if (timeout === 1000) {
-        router.push('/');
-    }
+    // setTimeout(() => {
+    //     alert('Hello');
+    // }, timeout.value);
+    // snackbar.value = true;
+    location.href = '/'
+
 }
 
 
